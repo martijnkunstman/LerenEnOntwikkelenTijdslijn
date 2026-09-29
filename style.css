@@ -161,7 +161,7 @@ main { padding-block: 28px 64px; }
 .jaarblok.is-huidig .jaarknoop span { background: var(--inkt); color: var(--papier); }
 .jaarblok.is-gedimd .jaarknoop { opacity: .35; }
 
-.groep { position: relative; min-width: 0; }
+.groep { position: relative; min-width: 0; container-type: inline-size; }
 .jaarblok[data-kant="links"] .groep { grid-column: 1; grid-row: 1; }
 .jaarblok[data-kant="rechts"] .groep { grid-column: 3; grid-row: 1; }
 .groep::before {
@@ -169,17 +169,29 @@ main { padding-block: 28px 64px; }
 }
 .jaarblok[data-kant="links"] .groep::before { right: -50px; }
 .jaarblok[data-kant="rechts"] .groep::before { left: -50px; }
-.groep-gedeeld::before { background: var(--accent); }
 
 .groep-kaarten { display: flex; flex-direction: column; gap: 22px; }
 
-/* Meerdere begrippen in één jaar: een horizontale lijn met de begrippen eronder */
+/* Meerdere begrippen in één jaar: een korte grijze lijn met de begrippen eronder.
+   De lijn loopt vanaf de verbinding met de tijdlijn tot het verste begrip, niet tot de rand. */
 .groep-gedeeld .groep-kaarten {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px 12px;
-  margin-top: 12px; padding-top: 16px; border-top: 2px solid var(--accent);
+  position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px;
+  margin-top: 12px; padding-top: 16px;
 }
+.groep-gedeeld .groep-kaarten::before {
+  content: ""; position: absolute; top: 0; height: 2px; width: calc(50% + 30px); background: var(--lijn-sterk);
+}
+.jaarblok[data-kant="rechts"] .groep-gedeeld .groep-kaarten::before { left: 0; }
+.jaarblok[data-kant="links"] .groep-gedeeld .groep-kaarten::before { right: 0; }
 .groep-gedeeld .kaart::before {
-  content: ""; position: absolute; top: -18px; left: 22px; width: 2px; height: 18px; background: var(--accent);
+  content: ""; position: absolute; top: -16px; width: 2px; height: 16px; background: var(--lijn-sterk);
+}
+.jaarblok[data-kant="rechts"] .groep-gedeeld .kaart::before { left: 22px; }
+.jaarblok[data-kant="links"] .groep-gedeeld .kaart::before { right: 22px; }
+/* Te smal voor twee kolommen: begrippen onder elkaar, lijn wordt een kort haakje */
+@container (max-width: 420px) {
+  .groep-gedeeld .groep-kaarten { grid-template-columns: minmax(0, 1fr); }
+  .groep-gedeeld .groep-kaarten::before { width: 24px; }
 }
 /* Kaart */
 .kaart {
@@ -369,6 +381,8 @@ main { padding-block: 28px 64px; }
   .jaarknoop { grid-column: 1; }
   .jaarblok[data-kant] .groep { grid-column: 2; }
   .jaarblok[data-kant] .groep::before { left: -28px; right: auto; width: 28px; }
+  .jaarblok[data-kant] .groep-gedeeld .groep-kaarten::before { left: 0; right: auto; }
+  .jaarblok[data-kant] .groep-gedeeld .kaart::before { left: 22px; right: auto; }
   .jaarknoop span { font-size: 12px; padding: 4px 7px 3px; }
   .decennium { justify-content: flex-start; }
   .decennium span { padding-left: 4px; }

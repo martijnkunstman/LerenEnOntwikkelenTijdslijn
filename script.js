@@ -420,7 +420,8 @@
     const it = M.itemMap.get(staat.open);
     const kaart = document.getElementById(it.id);
     if (kaart) kaart.classList.add('is-actief');
-    const verwant = new Set(M.buren.get(it.id).map((b) => b.ander));
+    // Alleen andere begrippen van dezelfde denker(s) lichten mee op, niet de begrippen uit hetzelfde jaar.
+    const verwant = new Set();
     it.personen.forEach((pid) => (M.perPersoon.get(pid) || []).forEach((o) => verwant.add(o.id)));
     verwant.delete(it.id);
     verwant.forEach((id) => { const k = document.getElementById(id); if (k) k.classList.add('is-verwant'); });
