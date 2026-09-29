@@ -56,7 +56,7 @@ button { cursor: pointer; }
 .skip { position: absolute; left: 12px; top: -60px; background: var(--inkt); color: var(--papier); padding: 8px 12px; border-radius: 4px; z-index: 50; }
 .skip:focus { top: 12px; }
 
-.wrap { max-width: var(--maat); margin-inline: auto; padding-inline: var(--gutter); transition: padding-right .25s ease; }
+.wrap { max-width: var(--maat); margin-inline: auto; padding-inline: var(--gutter); }
 
 /* ---------- Kop ---------- */
 .kop { padding-block: clamp(28px, 6vw, 64px) 20px; display: grid; gap: 10px; }
@@ -105,8 +105,6 @@ h1 {
 }
 .legenda li { display: flex; align-items: center; gap: 8px; }
 .legenda b { color: var(--inkt); font-weight: 600; margin-right: 4px; }
-.lg-lijn { stroke: var(--accent); stroke-width: 2; fill: none; }
-.lg-kaart { fill: var(--vlak); stroke: var(--lijn-sterk); stroke-width: 1; }
 
 .label {
   display: inline-block; font: 500 10.5px/1 var(--f-cijfer); letter-spacing: .08em; text-transform: uppercase;
@@ -171,11 +169,11 @@ main { padding-block: 28px 64px; }
 }
 .jaarblok[data-kant="links"] .groep::before { right: -50px; }
 .jaarblok[data-kant="rechts"] .groep::before { left: -50px; }
-.groep-keten::before, .groep-gedeeld::before { background: var(--accent); }
+.groep-gedeeld::before { background: var(--accent); }
 
 .groep-kaarten { display: flex; flex-direction: column; gap: 22px; }
 
-/* Gedeelde lijn: een horizontale lijn met de begrippen eronder */
+/* Meerdere begrippen in één jaar: een horizontale lijn met de begrippen eronder */
 .groep-gedeeld .groep-kaarten {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px 12px;
   margin-top: 12px; padding-top: 16px; border-top: 2px solid var(--accent);
@@ -183,22 +181,6 @@ main { padding-block: 28px 64px; }
 .groep-gedeeld .kaart::before {
   content: ""; position: absolute; top: -18px; left: 22px; width: 2px; height: 18px; background: var(--accent);
 }
-.groep-label {
-  position: absolute; top: 5px; z-index: 1; padding: 0 6px; background: var(--papier);
-  font: 500 10.5px/16px var(--f-cijfer); letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
-}
-.jaarblok[data-kant="links"] .groep-label { right: 16px; }
-.jaarblok[data-kant="rechts"] .groep-label { left: 40px; }
-
-/* Keten: begrippen hangen onder elkaar aan één lijn */
-.groep-keten .kaart + .kaart::before {
-  content: ""; position: absolute; top: -23px; left: 22px; width: 2px; height: 22px; background: var(--accent);
-}
-.groep-keten .kaart + .kaart::after {
-  content: "keten"; position: absolute; top: -19px; left: 32px;
-  font: 500 10.5px/14px var(--f-cijfer); letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
-}
-
 /* Kaart */
 .kaart {
   position: relative; background: var(--vlak); border: 1px solid var(--lijn); border-radius: 6px;
@@ -354,8 +336,6 @@ main { padding-block: 28px 64px; }
 .p-meta { margin: 0; font: 12px var(--f-cijfer); color: var(--gedempt); font-variant-numeric: tabular-nums; }
 .p-functie { margin: 2px 0 0; font-size: 14px; }
 .p-ook { margin: 6px 0 0; font-size: 13px; color: var(--gedempt); display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
-.v-groep + .v-groep { margin-top: 10px; }
-.v-soort { margin: 0 0 4px; font-size: 13px; color: var(--gedempt); }
 .v-lijst { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .item-link {
   display: inline-flex; align-items: baseline; gap: 8px; border: 0; background: none; padding: 2px 0; text-align: left;
@@ -389,7 +369,6 @@ main { padding-block: 28px 64px; }
   .jaarknoop { grid-column: 1; }
   .jaarblok[data-kant] .groep { grid-column: 2; }
   .jaarblok[data-kant] .groep::before { left: -28px; right: auto; width: 28px; }
-  .jaarblok[data-kant] .groep-label { left: 40px; right: auto; }
   .jaarknoop span { font-size: 12px; padding: 4px 7px 3px; }
   .decennium { justify-content: flex-start; }
   .decennium span { padding-left: 4px; }

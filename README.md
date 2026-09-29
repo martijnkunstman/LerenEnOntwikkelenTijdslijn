@@ -7,14 +7,13 @@ Gemaakt met gewone HTML, CSS en JavaScript. Er zijn geen build-stap en geen afha
 ## Wat je ziet
 
 - **Tijdlijn**: alle begrippen hangen aan één verticale lijn met jaartallen, gegroepeerd per decennium.
-  - Begrippen met een **gedeelde lijn** hangen samen aan één horizontale lijn naar hetzelfde jaartal.
-  - Begrippen in een **keten** hangen direct onder elkaar.
+  - Begrippen uit hetzelfde jaar hangen samen aan één horizontale lijn naar dat jaartal.
   - **Duo's**, twee denkers bij één begrip, hebben een eigen label.
 - **Liniaal**: een balk bovenaan die blijft staan tijdens het scrollen. Hij toont alle begrippen op schaal en laat zien waar je bent. Klik op een stip om naar dat begrip te gaan.
 - **Detailpaneel**: klik op een begrip voor:
   - een korte omschrijving en wat het begrip betekent voor leren en ontwikkelen;
   - de denkers met levensjaren, functie en leeftijd in dat jaar;
-  - de begrippen op dezelfde lijn;
+  - de andere begrippen uit hetzelfde jaar;
   - andere begrippen van dezelfde persoon;
   - een knop naar het vorige en volgende begrip.
 - **Portretten**: alle denkers onder elkaar op de tijdlijn, met portretfoto en levensjaren, zonder begrippen. Klik op een portret voor het begrip.
@@ -57,9 +56,7 @@ Alle gegevens staan in `tijdlijn.json`, in drie lijsten:
   - `uitleg`: wat het begrip betekent voor leren en ontwikkelen.
 
   Beide teksten staan in het detailpaneel.
-- **`relaties`**: koppelingen tussen items via `van` en `naar` (item-id's). Er zijn twee typen:
-  - `keten`: het item `naar` hangt direct onder het item `van`.
-  - `gedeelde_lijn`: beide items hangen aan dezelfde lijn naar hetzelfde jaartal.
+- **`relaties`**: koppelingen tussen items via `van` en `naar` (item-id's). Alle relaties hebben het type `gedeelde_lijn`: beide items hangen aan dezelfde lijn naar hetzelfde jaartal. `van` en `naar` zijn uitwisselbaar.
 
 Voorbeeld:
 

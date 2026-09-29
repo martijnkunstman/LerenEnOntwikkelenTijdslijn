@@ -2,17 +2,13 @@
   "meta": {
     "titel": "Tijdlijn",
     "beschrijving": "Transcriptie van de tijdlijn uit het boek, zonder portretten. Personen, tijdlijn-items en relaties zijn gescheiden en gekoppeld via id's.",
-    "versie": "1.2",
+    "versie": "1.3",
     "structuur": {
       "personen": "Unieke personen. Eén persoon kan in meerdere items voorkomen (bijv. p-schon in 1974 en 1983). 'foto' verwijst naar een portret met vrije licentie op Wikimedia Commons (url, afmetingen, uitsnede via focus in procenten en zoom, en bron, maker en licentie voor de naamsvermelding), of is null als er geen vrij portret is gevonden.",
       "items": "Eén item = één portretblok op de tijdlijn: jaartal + begrip + één of meer persoon-id's. Een duo is een item met twee persoon-id's. 'omschrijving' zegt wat het begrip inhoudt, 'uitleg' wat het betekent voor leren en ontwikkelen.",
       "relaties": "Koppelingen tussen items. 'van' en 'naar' verwijzen naar item-id's."
     },
     "relatietypes": {
-      "keten": {
-        "richting": "eenweg",
-        "betekenis": "Het item 'naar' hangt direct onder het item 'van' op dezelfde verbindingslijn."
-      },
       "gedeelde_lijn": {
         "richting": "tweeweg",
         "betekenis": "Beide items hangen aan dezelfde verbindingslijn naar hetzelfde jaartal. 'van' en 'naar' zijn uitwisselbaar."
@@ -364,7 +360,7 @@
   ],
 
   "relaties": [
-    { "id": "r-01", "type": "keten", "richting": "eenweg", "van": "t-1933-lewin", "naar": "t-1933-dewey" },
+    { "id": "r-01", "type": "gedeelde_lijn", "richting": "tweeweg", "van": "t-1933-lewin", "naar": "t-1933-dewey" },
     { "id": "r-02", "type": "gedeelde_lijn", "richting": "tweeweg", "van": "t-1958-polanyi", "naar": "t-1958-berne" },
     { "id": "r-03", "type": "gedeelde_lijn", "richting": "tweeweg", "van": "t-1960-menzies-lyth", "naar": "t-1960-berlyne" },
     { "id": "r-04", "type": "gedeelde_lijn", "richting": "tweeweg", "van": "t-1985-schein", "naar": "t-1985-deci-ryan" },
@@ -376,11 +372,12 @@
     { "id": "r-10", "type": "gedeelde_lijn", "richting": "tweeweg", "van": "t-1991-lave", "naar": "t-1991-pedler" },
     { "id": "r-11", "type": "gedeelde_lijn", "richting": "tweeweg", "van": "t-1991-seligman", "naar": "t-1991-pedler" },
     { "id": "r-12", "type": "gedeelde_lijn", "richting": "tweeweg", "van": "t-1996-ericsson", "naar": "t-1996-kessels" },
-    { "id": "r-13", "type": "keten", "richting": "eenweg", "van": "t-1999-wierdsma", "naar": "t-1999-isaacs" },
-    { "id": "r-14", "type": "keten", "richting": "eenweg", "van": "t-1999-isaacs", "naar": "t-1999-edmondson" },
+    { "id": "r-13", "type": "gedeelde_lijn", "richting": "tweeweg", "van": "t-1999-wierdsma", "naar": "t-1999-isaacs" },
+    { "id": "r-14", "type": "gedeelde_lijn", "richting": "tweeweg", "van": "t-1999-isaacs", "naar": "t-1999-edmondson" },
     { "id": "r-15", "type": "gedeelde_lijn", "richting": "tweeweg", "van": "t-2004-schwartz", "naar": "t-2004-spillane" },
-    { "id": "r-16", "type": "keten", "richting": "eenweg", "van": "t-2006-dweck", "naar": "t-2006-shaffer" },
-    { "id": "r-17", "type": "keten", "richting": "eenweg", "van": "t-2007-scharmer", "naar": "t-2007-hattie" },
-    { "id": "r-18", "type": "keten", "richting": "eenweg", "van": "t-2008-brown", "naar": "t-2008-sennett" }
+    { "id": "r-16", "type": "gedeelde_lijn", "richting": "tweeweg", "van": "t-2006-dweck", "naar": "t-2006-shaffer" },
+    { "id": "r-17", "type": "gedeelde_lijn", "richting": "tweeweg", "van": "t-2007-scharmer", "naar": "t-2007-hattie" },
+    { "id": "r-18", "type": "gedeelde_lijn", "richting": "tweeweg", "van": "t-2008-brown", "naar": "t-2008-sennett" },
+    { "id": "r-19", "type": "gedeelde_lijn", "richting": "tweeweg", "van": "t-1999-wierdsma", "naar": "t-1999-edmondson" }
   ]
 }

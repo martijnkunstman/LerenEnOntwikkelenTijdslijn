@@ -1,6 +1,6 @@
 /* Tijdlijn leren en ontwikkelen
    Leest tijdlijn.json (personen, items, relaties) en tekent:
-   - een verticale tijdlijn met jaarknopen, groepen (keten / gedeelde lijn) en kaarten
+   - een verticale tijdlijn met jaarknopen, groepen begrippen per verbindingslijn en kaarten
    - een proportionele liniaal met alle jaartallen
    - levenslijnen per denker
    - een detailpaneel per begrip */
@@ -64,9 +64,7 @@
     });
     relaties.forEach((r) => groepMap.get(vind(r.van)).relaties.push(r));
     const groepen = [...groepMap.values()].map((g) => {
-      const types = new Set(g.relaties.map((r) => r.type));
-      g.type = g.items.length === 1 ? 'los' : (types.has('gedeelde_lijn') ? 'gedeeld' : 'keten');
-      if (g.type === 'keten') g.items = ketenVolgorde(g);
+      g.type = g.items.length === 1 ? 'los' : 'gedeeld';
       g.jaar = Math.min(...g.items.map((i) => i.jaar));
       g.eerste = Math.min(...g.items.map((i) => i.volg));
       return g;
@@ -80,20 +78,6 @@
     }));
 
     return { meta: data.meta || {}, personen, items, itemMap, relaties, buren, groepen, perPersoon };
-  }
-
-  function ketenVolgorde(g) {
-    const keten = g.relaties.filter((r) => r.type === 'keten');
-    const inkomend = new Set(keten.map((r) => r.naar));
-    const volgende = new Map(keten.map((r) => [r.van, r.naar]));
-    const start = g.items.find((i) => !inkomend.has(i.id)) || g.items[0];
-    const map = new Map(g.items.map((i) => [i.id, i]));
-    const uit = [];
-    const gezien = new Set();
-    let cur = start.id;
-    while (cur && !gezien.has(cur) && map.has(cur)) { gezien.add(cur); uit.push(map.get(cur)); cur = volgende.get(cur); }
-    g.items.forEach((i) => { if (!gezien.has(i.id)) uit.push(i); });
-    return uit;
   }
 
   /* ---------- Hulpjes ---------- */
@@ -180,11 +164,9 @@
         html += `<div class="decennium" aria-hidden="true"><span>${decLabel(dec)}</span></div>`;
       }
       const kant = gi % 2 === 0 ? 'links' : 'rechts';
-      const label = g.type === 'keten' ? 'keten' : g.type === 'gedeeld' ? 'gedeelde lijn' : '';
       html += `<section class="jaarblok" data-kant="${kant}" data-jaar="${g.jaar}" aria-label="${g.jaar}">
         <div class="jaarknoop"><span>${g.jaar}</span></div>
         <div class="groep groep-${g.type}">
-          ${g.type === 'gedeeld' ? `<span class="groep-label">${label}</span>` : ''}
           <div class="groep-kaarten">${g.items.map(kaartHTML).join('')}</div>
         </div>
       </section>`;
@@ -398,16 +380,17 @@
       </div>`;
     }).join('');
 
-    const soorten = new Map();
+    // Begrippen aan dezelfde verbindingslijn, gegroepeerd per jaartal
+    const perJaar = new Map();
     M.buren.get(it.id).forEach((b) => {
-      let soort;
-      if (b.rel.type === 'keten') soort = b.rol === 'van' ? 'Hangt hier direct onder' : 'Hangt direct onder';
-      else soort = 'Deelt de lijn met';
-      if (!soorten.has(soort)) soorten.set(soort, []);
-      soorten.get(soort).push(M.itemMap.get(b.ander));
+      const o = M.itemMap.get(b.ander);
+      if (!perJaar.has(o.jaar)) perJaar.set(o.jaar, new Map());
+      perJaar.get(o.jaar).set(o.id, o);
     });
-    const verbanden = [...soorten].map(([soort, lijst]) => `<div class="v-groep"><p class="v-soort">${soort}</p>
-      <ul class="v-lijst">${lijst.sort((a, b) => a.volg - b.volg).map((o) => `<li>${itemLink(o)}</li>`).join('')}</ul></div>`).join('');
+    const verbanden = [...perJaar].sort((a, b) => a[0] - b[0]).map(([jaar, lijst]) => `<section>
+      <h3 class="p-sectie">Ook in ${jaar}</h3>
+      <ul class="v-lijst">${[...lijst.values()].sort((a, b) => a.volg - b.volg).map((o) => `<li>${itemLink(o)}</li>`).join('')}</ul>
+    </section>`).join('');
 
     const vorige = M.items[it.volg - 1];
     const volgende = M.items[it.volg + 1];
@@ -422,7 +405,7 @@
       ${it.omschrijving ? `<p class="p-omschrijving">${esc(it.omschrijving)}</p>` : ''}
       ${it.uitleg ? `<section class="p-uitleg-blok"><h3 class="p-sectie">Voor leren en ontwikkelen</h3><p class="p-tekst">${esc(it.uitleg)}</p></section>` : ''}
       <section><h3 class="p-sectie">${duo ? 'Denkers' : 'Denker'}</h3><div class="p-personen">${personen}</div></section>
-      ${verbanden ? `<section><h3 class="p-sectie">Op dezelfde lijn</h3>${verbanden}</section>` : ''}
+      ${verbanden}
       <nav class="p-nav" aria-label="Vorig en volgend begrip">
         ${vorige ? `<button type="button" data-open="${esc(vorige.id)}"><span class="richting">← ${vorige.jaar}</span><span class="doel">${esc(vorige.begrip)}</span></button>` : ''}
         ${volgende ? `<button type="button" class="volgende" data-open="${esc(volgende.id)}"><span class="richting">${volgende.jaar} →</span><span class="doel">${esc(volgende.begrip)}</span></button>` : ''}
