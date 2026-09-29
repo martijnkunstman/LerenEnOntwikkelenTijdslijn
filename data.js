@@ -1570,5 +1570,636 @@ window.TIJDLIJN = {
    "van": "t-1999-wierdsma",
    "naar": "t-1999-edmondson"
   }
- ]
+ ],
+ "begripsanalyse": {
+  "toelichting": "Inhoudelijke analyse van de verbanden tussen de begrippen, bedoeld voor een diagram met pijlen. Dit is een interpretatie door Claude op basis van de literatuur, geen weergave van het boek. 'van' en 'naar' verwijzen naar item-id's. Bij eenweg-relaties wijst de pijl van 'van' naar 'naar'; bij tweeweg-relaties zijn 'van' en 'naar' uitwisselbaar.",
+  "relatietypes": {
+   "basis_voor": {
+    "label": "is basis voor",
+    "richting": "eenweg",
+    "betekenis": "Het begrip 'naar' bouwt inhoudelijk of historisch voort op het begrip 'van'."
+   },
+   "voorwaarde_voor": {
+    "label": "is voorwaarde voor",
+    "richting": "eenweg",
+    "betekenis": "Het begrip 'van' is nodig om het begrip 'naar' te laten ontstaan of werken."
+   },
+   "versterkt": {
+    "label": "versterkt",
+    "richting": "eenweg",
+    "betekenis": "Het begrip 'van' bevordert of versterkt het begrip 'naar'."
+   },
+   "belemmert": {
+    "label": "belemmert",
+    "richting": "eenweg",
+    "betekenis": "Het begrip 'van' kan het begrip 'naar' in de weg staan."
+   },
+   "sluit_aan_bij": {
+    "label": "sluit aan bij",
+    "richting": "tweeweg",
+    "betekenis": "De begrippen zijn verwant of vullen elkaar aan, zonder dat het ene op het andere voortbouwt."
+   }
+  },
+  "themas": [
+   {
+    "id": "thema-reflectie",
+    "naam": "Reflectie en professionaliteit",
+    "omschrijving": "Hoe professionals nadenken over hun handelen, kennis en waarden.",
+    "items": [
+     "t-1933-dewey",
+     "t-1958-polanyi",
+     "t-1967-freire",
+     "t-1970-freidson",
+     "t-1974-schon-argyris",
+     "t-1983-schon",
+     "t-2004-schwartz",
+     "t-2005-kunneman",
+     "t-2006-shaffer",
+     "t-2011-kahneman"
+    ]
+   },
+   {
+    "id": "thema-motivatie",
+    "naam": "Motivatie en persoonlijke groei",
+    "omschrijving": "Wat mensen drijft om te leren en hoe individuele ontwikkeling verloopt.",
+    "items": [
+     "t-1938-huizinga",
+     "t-1950-erikson",
+     "t-1956-bloom-shulman",
+     "t-1960-berlyne",
+     "t-1975-csikszentmihalyi",
+     "t-1978-mcclelland",
+     "t-1984-kolb",
+     "t-1985-deci-ryan",
+     "t-1990-caine",
+     "t-1991-seligman",
+     "t-1996-ericsson",
+     "t-2006-dweck",
+     "t-2007-hattie"
+    ]
+   },
+   {
+    "id": "thema-praktijk",
+    "naam": "Leren in de praktijk",
+    "omschrijving": "Leren op de werkplek, in gemeenschappen en tussen praktijken.",
+    "items": [
+     "t-1987-engestrom",
+     "t-1991-lave",
+     "t-1996-kessels",
+     "t-1998-wenger",
+     "t-2001-billett",
+     "t-2002-bereiter-scardamalia",
+     "t-2008-sennett"
+    ]
+   },
+   {
+    "id": "thema-relatie",
+    "naam": "Relatie, dialoog en team",
+    "omschrijving": "De kwaliteit van contact en gesprek als voorwaarde voor samen leren.",
+    "items": [
+     "t-1923-buber",
+     "t-1958-berne",
+     "t-1988-west-gersick",
+     "t-1999-wierdsma",
+     "t-1999-isaacs",
+     "t-1999-edmondson",
+     "t-2008-brown"
+    ]
+   },
+   {
+    "id": "thema-organisatie",
+    "naam": "Cultuur, organisatie en verandering",
+    "omschrijving": "Hoe organisaties leren en veranderen, en wat daarbij helpt of hindert.",
+    "items": [
+     "t-1933-lewin",
+     "t-1960-menzies-lyth",
+     "t-1969-weick",
+     "t-1977-bourdieu",
+     "t-1985-schein",
+     "t-1986-cooperrider",
+     "t-1990-checkland",
+     "t-1991-pierce",
+     "t-1991-pedler",
+     "t-1997-stacey",
+     "t-2000-smith-lewis",
+     "t-2004-spillane",
+     "t-2007-scharmer"
+    ]
+   }
+  ],
+  "relaties": [
+   {
+    "id": "b-01",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1933-dewey",
+    "naar": "t-1983-schon",
+    "toelichting": "Schön bouwde zijn reflectieve professional voort op Deweys idee van reflectief denken."
+   },
+   {
+    "id": "b-02",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1933-dewey",
+    "naar": "t-1984-kolb",
+    "toelichting": "Kolbs leercyclus is gebaseerd op het ervaringsleren van Dewey."
+   },
+   {
+    "id": "b-03",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1933-lewin",
+    "naar": "t-1984-kolb",
+    "toelichting": "Kolb ontleende de cyclus van ervaren, reflecteren en experimenteren mede aan Lewins actieonderzoek."
+   },
+   {
+    "id": "b-04",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1933-lewin",
+    "naar": "t-1974-schon-argyris",
+    "toelichting": "Argyris en Schön bouwden met hun 'action science' voort op Lewins actieonderzoek."
+   },
+   {
+    "id": "b-05",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1933-dewey",
+    "naar": "t-1967-freire",
+    "toelichting": "Kritische reflectie breidt reflectie uit met aandacht voor macht en maatschappelijke context."
+   },
+   {
+    "id": "b-06",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1958-polanyi",
+    "naar": "t-1983-schon",
+    "toelichting": "Schöns 'knowing-in-action' bouwt voort op Polanyi's stilzwijgende kennis."
+   },
+   {
+    "id": "b-07",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1958-polanyi",
+    "naar": "t-1996-kessels",
+    "toelichting": "Kennisproductiviteit draait om het benutten van stilzwijgende kennis in het werk."
+   },
+   {
+    "id": "b-08",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1974-schon-argyris",
+    "naar": "t-1983-schon",
+    "toelichting": "Na het onderzoek naar double-loop leren richtte Schön zich op de reflectie van professionals."
+   },
+   {
+    "id": "b-09",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1974-schon-argyris",
+    "naar": "t-1991-pedler",
+    "toelichting": "De lerende organisatie bouwt voort op theorieën over organisatieleren, zoals double-loop leren."
+   },
+   {
+    "id": "b-10",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1991-lave",
+    "naar": "t-1998-wenger",
+    "toelichting": "Wenger werkte het gesitueerd leren van Lave (en Wenger) uit tot praktijkgemeenschappen."
+   },
+   {
+    "id": "b-11",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1991-lave",
+    "naar": "t-2001-billett",
+    "toelichting": "Billetts werkplekleren bouwt voort op het idee dat leren gesitueerd is in de praktijk."
+   },
+   {
+    "id": "b-12",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1970-freidson",
+    "naar": "t-2005-kunneman",
+    "toelichting": "Normatieve professionaliteit voegt morele vragen toe aan het klassieke idee van professionaliteit."
+   },
+   {
+    "id": "b-13",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1983-schon",
+    "naar": "t-2006-shaffer",
+    "toelichting": "Shaffer baseerde professionele frames mede op Schöns reflectieve praktijk."
+   },
+   {
+    "id": "b-14",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1998-wenger",
+    "naar": "t-2006-shaffer",
+    "toelichting": "Een professioneel frame is de manier van kijken en denken van een beroepsgemeenschap."
+   },
+   {
+    "id": "b-15",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1923-buber",
+    "naar": "t-1999-isaacs",
+    "toelichting": "Dialoog als samen denken bouwt voort op Bubers idee van de echte ontmoeting."
+   },
+   {
+    "id": "b-16",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1933-lewin",
+    "naar": "t-1990-checkland",
+    "toelichting": "Checkland ontwikkelde de Soft Systems Methodology via actieonderzoek in organisaties."
+   },
+   {
+    "id": "b-17",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1933-lewin",
+    "naar": "t-1986-cooperrider",
+    "toelichting": "Appreciative Inquiry ontstond als waarderend alternatief voor probleemgericht actieonderzoek."
+   },
+   {
+    "id": "b-18",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1999-isaacs",
+    "naar": "t-2007-scharmer",
+    "toelichting": "Theory U bouwt voort op het werk aan dialoog binnen de beweging rond de lerende organisatie."
+   },
+   {
+    "id": "b-19",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1960-berlyne",
+    "naar": "t-1985-deci-ryan",
+    "toelichting": "Onderzoek naar motivatie van binnenuit bouwde voort op nieuwsgierigheid als aangeboren drijfveer."
+   },
+   {
+    "id": "b-20",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1991-seligman",
+    "naar": "t-2006-dweck",
+    "toelichting": "Seligmans onderzoek naar aangeleerde hulpeloosheid, waaruit aangeleerd optimisme voortkwam, was een startpunt voor Dwecks onderzoek naar mindset."
+   },
+   {
+    "id": "b-21",
+    "type": "voorwaarde_voor",
+    "richting": "eenweg",
+    "van": "t-1999-edmondson",
+    "naar": "t-1988-west-gersick",
+    "toelichting": "Zonder psychologische veiligheid durven teams niet samen te reflecteren en te leren."
+   },
+   {
+    "id": "b-22",
+    "type": "voorwaarde_voor",
+    "richting": "eenweg",
+    "van": "t-1999-edmondson",
+    "naar": "t-2008-brown",
+    "toelichting": "In een veilig team durven mensen zich kwetsbaar op te stellen."
+   },
+   {
+    "id": "b-23",
+    "type": "voorwaarde_voor",
+    "richting": "eenweg",
+    "van": "t-2007-hattie",
+    "naar": "t-1996-ericsson",
+    "toelichting": "Doelbewust oefenen werkt alleen met directe feedback."
+   },
+   {
+    "id": "b-24",
+    "type": "versterkt",
+    "richting": "eenweg",
+    "van": "t-1985-deci-ryan",
+    "naar": "t-1991-pierce",
+    "toelichting": "Autonomie en invloed versterken het gevoel van eigenaarschap."
+   },
+   {
+    "id": "b-25",
+    "type": "versterkt",
+    "richting": "eenweg",
+    "van": "t-2004-spillane",
+    "naar": "t-1991-pierce",
+    "toelichting": "Wie leiderschap deelt, geeft anderen invloed en daarmee eigenaarschap."
+   },
+   {
+    "id": "b-26",
+    "type": "versterkt",
+    "richting": "eenweg",
+    "van": "t-2006-dweck",
+    "naar": "t-1996-ericsson",
+    "toelichting": "Wie gelooft dat bekwaamheid te ontwikkelen is, houdt langer vol met oefenen."
+   },
+   {
+    "id": "b-27",
+    "type": "versterkt",
+    "richting": "eenweg",
+    "van": "t-2007-hattie",
+    "naar": "t-2006-dweck",
+    "toelichting": "Feedback op inzet en aanpak helpt een groeimindset te ontwikkelen."
+   },
+   {
+    "id": "b-28",
+    "type": "versterkt",
+    "richting": "eenweg",
+    "van": "t-1999-isaacs",
+    "naar": "t-1988-west-gersick",
+    "toelichting": "Dialoog helpt teams om samen stil te staan bij hun doelen en werkwijze."
+   },
+   {
+    "id": "b-29",
+    "type": "versterkt",
+    "richting": "eenweg",
+    "van": "t-1999-isaacs",
+    "naar": "t-1974-schon-argyris",
+    "toelichting": "In dialoog komen onderliggende aannames aan het licht, wat double-loop leren mogelijk maakt."
+   },
+   {
+    "id": "b-30",
+    "type": "versterkt",
+    "richting": "eenweg",
+    "van": "t-1999-edmondson",
+    "naar": "t-1974-schon-argyris",
+    "toelichting": "Veiligheid maakt het mogelijk om eigen aannames ter discussie te stellen."
+   },
+   {
+    "id": "b-31",
+    "type": "versterkt",
+    "richting": "eenweg",
+    "van": "t-1988-west-gersick",
+    "naar": "t-1991-pedler",
+    "toelichting": "Teamleren is een bouwsteen van de lerende organisatie."
+   },
+   {
+    "id": "b-32",
+    "type": "belemmert",
+    "richting": "eenweg",
+    "van": "t-1960-menzies-lyth",
+    "naar": "t-1974-schon-argyris",
+    "toelichting": "Afweermechanismen houden aannames buiten beeld en blokkeren zo double-loop leren."
+   },
+   {
+    "id": "b-33",
+    "type": "belemmert",
+    "richting": "eenweg",
+    "van": "t-1977-bourdieu",
+    "naar": "t-1967-freire",
+    "toelichting": "Ingesleten patronen lijken vanzelfsprekend en staan kritische reflectie daardoor in de weg."
+   },
+   {
+    "id": "b-34",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1923-buber",
+    "naar": "t-1958-berne",
+    "toelichting": "Beide gaan over gelijkwaardig contact tussen mensen."
+   },
+   {
+    "id": "b-35",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1923-buber",
+    "naar": "t-2008-brown",
+    "toelichting": "Echte ontmoeting vraagt de moed om je kwetsbaar op te stellen."
+   },
+   {
+    "id": "b-36",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1938-huizinga",
+    "naar": "t-1975-csikszentmihalyi",
+    "toelichting": "Spel en flow zijn allebei activiteiten die mensen om zichzelf doen, met volle overgave."
+   },
+   {
+    "id": "b-37",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1950-erikson",
+    "naar": "t-2008-sennett",
+    "toelichting": "De generativiteit uit het middenleven zie je terug in de overdracht van meester op gezel."
+   },
+   {
+    "id": "b-38",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1956-bloom-shulman",
+    "naar": "t-2007-hattie",
+    "toelichting": "Heldere leerdoelen zijn het vertrekpunt van goede feedback."
+   },
+   {
+    "id": "b-39",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1958-polanyi",
+    "naar": "t-2008-sennett",
+    "toelichting": "Vakmanschap bestaat voor een groot deel uit stilzwijgende kennis in hand en hoofd."
+   },
+   {
+    "id": "b-40",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1960-menzies-lyth",
+    "naar": "t-1985-schein",
+    "toelichting": "Schein zag cultuur, net als Menzies Lyth haar afweermechanismen, als bescherming tegen angst en onzekerheid."
+   },
+   {
+    "id": "b-41",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1960-berlyne",
+    "naar": "t-1975-csikszentmihalyi",
+    "toelichting": "Beide wijzen op een optimale mate van uitdaging: niet te weinig en niet te veel."
+   },
+   {
+    "id": "b-42",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1967-freire",
+    "naar": "t-1974-schon-argyris",
+    "toelichting": "Beide stellen de onderliggende aannames van je handelen ter discussie."
+   },
+   {
+    "id": "b-43",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1969-weick",
+    "naar": "t-1997-stacey",
+    "toelichting": "Beide zien organisaties niet als machines, maar als losse, zich ontwikkelende verbanden."
+   },
+   {
+    "id": "b-44",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1969-weick",
+    "naar": "t-2004-spillane",
+    "toelichting": "In losjes gekoppelde organisaties zoals scholen ligt gespreid leiderschap voor de hand."
+   },
+   {
+    "id": "b-45",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1970-freidson",
+    "naar": "t-1983-schon",
+    "toelichting": "Schön bekritiseerde het beeld van de professional als toepasser van technische kennis."
+   },
+   {
+    "id": "b-46",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1974-schon-argyris",
+    "naar": "t-1985-schein",
+    "toelichting": "Double-loop leren vraagt dat de basisaannames uit de cultuur zichtbaar worden."
+   },
+   {
+    "id": "b-47",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1978-mcclelland",
+    "naar": "t-1985-deci-ryan",
+    "toelichting": "Beide verklaren motivatie vanuit psychologische behoeften, zoals de behoefte aan competentie."
+   },
+   {
+    "id": "b-48",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1978-mcclelland",
+    "naar": "t-2007-hattie",
+    "toelichting": "Mensen met een sterke prestatiebehoefte zoeken juist directe feedback."
+   },
+   {
+    "id": "b-49",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1986-cooperrider",
+    "naar": "t-1991-seligman",
+    "toelichting": "Beide vertrekken vanuit sterke kanten in plaats van vanuit problemen."
+   },
+   {
+    "id": "b-50",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1987-engestrom",
+    "naar": "t-1998-wenger",
+    "toelichting": "Leren vindt ook plaats op de grens tussen praktijkgemeenschappen."
+   },
+   {
+    "id": "b-51",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1987-engestrom",
+    "naar": "t-2001-billett",
+    "toelichting": "De grens tussen school en werkplek is een belangrijke plek om te leren."
+   },
+   {
+    "id": "b-52",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1990-checkland",
+    "naar": "t-1997-stacey",
+    "toelichting": "Beide benaderen organisaties als complexe systemen met meerdere perspectieven."
+   },
+   {
+    "id": "b-53",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1990-caine",
+    "naar": "t-1975-csikszentmihalyi",
+    "toelichting": "Ontspannen alertheid lijkt op flow: uitdaging zonder bedreiging."
+   },
+   {
+    "id": "b-54",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1991-pedler",
+    "naar": "t-1996-kessels",
+    "toelichting": "Beide maken leren tot onderdeel van het dagelijks werk in de organisatie."
+   },
+   {
+    "id": "b-55",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1991-pedler",
+    "naar": "t-2007-scharmer",
+    "toelichting": "Theory U komt voort uit de beweging rond de lerende organisatie."
+   },
+   {
+    "id": "b-56",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1996-kessels",
+    "naar": "t-2002-bereiter-scardamalia",
+    "toelichting": "Beide gaan over het gezamenlijk ontwikkelen van nieuwe kennis."
+   },
+   {
+    "id": "b-57",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1998-wenger",
+    "naar": "t-2002-bereiter-scardamalia",
+    "toelichting": "Kenniscreatie gebeurt in gemeenschappen die samen ideeën verbeteren."
+   },
+   {
+    "id": "b-58",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1997-stacey",
+    "naar": "t-2000-smith-lewis",
+    "toelichting": "Stacey beschrijft organisaties als paradoxaal: stabiliteit en verandering tegelijk."
+   },
+   {
+    "id": "b-59",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1999-wierdsma",
+    "naar": "t-1999-isaacs",
+    "toelichting": "Het lastige gesprek op de plek der moeite vraagt om dialoog."
+   },
+   {
+    "id": "b-60",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1999-wierdsma",
+    "naar": "t-2000-smith-lewis",
+    "toelichting": "Beide vragen om spanning niet te ontwijken, maar productief te maken."
+   },
+   {
+    "id": "b-61",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-2004-schwartz",
+    "naar": "t-2005-kunneman",
+    "toelichting": "Beide benadrukken het morele oordeel van de professional."
+   },
+   {
+    "id": "b-62",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-2004-schwartz",
+    "naar": "t-2008-sennett",
+    "toelichting": "Praktische wijsheid en vakmanschap groeien door ervaring en goede voorbeelden."
+   },
+   {
+    "id": "b-63",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1996-ericsson",
+    "naar": "t-2008-sennett",
+    "toelichting": "Vakmanschap vraagt langdurige, doelbewuste oefening."
+   },
+   {
+    "id": "b-64",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1933-dewey",
+    "naar": "t-2011-kahneman",
+    "toelichting": "Reflectie helpt om denkfouten te herkennen en te corrigeren."
+   }
+  ]
+ }
 };

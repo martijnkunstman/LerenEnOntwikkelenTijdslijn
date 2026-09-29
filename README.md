@@ -74,6 +74,28 @@ Pas je `tijdlijn.json` aan, zet de wijziging dan ook in `data.js`. Anders ziet d
 
 Zoeken, groeperen, duo's, personen die vaker voorkomen en de volgorde worden allemaal automatisch uit de gegevens afgeleid.
 
+## Begripsanalyse
+
+Onderaan `tijdlijn.json` staat het blok `begripsanalyse`. Daarin staan de inhoudelijke verbanden tussen de begrippen, als basis voor een diagram met pijlen. Het is een interpretatie op basis van de literatuur, niet overgenomen uit het boek.
+
+- **`relatietypes`**: de soorten verbanden.
+  - `basis_voor`: het ene begrip bouwt voort op het andere. De pijl wijst van de basis naar het begrip dat erop voortbouwt.
+  - `voorwaarde_voor`: het ene begrip is nodig om het andere te laten werken.
+  - `versterkt`: het ene begrip bevordert het andere.
+  - `belemmert`: het ene begrip kan het andere in de weg staan.
+  - `sluit_aan_bij`: de begrippen zijn verwant of vullen elkaar aan. Deze relatie werkt twee kanten op.
+- **`themas`**: vijf inhoudelijke groepen waarin elk begrip precies één keer voorkomt. Die helpen om een diagram overzichtelijk in te delen.
+- **`relaties`**: de verbanden zelf, met `van`, `naar`, `type`, `richting` en een korte `toelichting`.
+
+Voorbeeld:
+
+```json
+{ "id": "b-01", "type": "basis_voor", "richting": "eenweg", "van": "t-1933-dewey", "naar": "t-1983-schon",
+  "toelichting": "Schön bouwde zijn reflectieve professional voort op Deweys idee van reflectief denken." }
+```
+
+De pagina gebruikt dit blok nog niet.
+
 ## Portretfoto's
 
 De foto's komen van [Wikimedia Commons](https://commons.wikimedia.org) en hebben allemaal een vrije licentie of vallen in het publieke domein. De pagina laadt ze rechtstreeks van Wikimedia, dus je hebt internet nodig om ze te zien. Zonder foto, of zonder verbinding, toont de pagina de initialen.
