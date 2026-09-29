@@ -306,6 +306,34 @@
       <ul>${regels}</ul>`;
   }
 
+  /* ---------- Begrippen A–Z ---------- */
+  function renderBegrippen() {
+    const lijst = [...M.items].sort((a, b) => a.begrip.localeCompare(b.begrip, 'nl', { sensitivity: 'base' }));
+    const perLetter = new Map();
+    lijst.forEach((it) => {
+      const eerste = norm(it.begrip).charAt(0).toUpperCase();
+      const letter = /[A-Z]/.test(eerste) ? eerste : '#';
+      if (!perLetter.has(letter)) perLetter.set(letter, []);
+      perLetter.get(letter).push(it);
+    });
+    $('#az-index').innerHTML = [...perLetter.keys()]
+      .map((l) => `<button type="button" class="az-letter-knop" data-letter="${l}" aria-label="Naar ${l}">${l}</button>`).join('');
+    $('#az-lijst').innerHTML = [...perLetter].map(([l, items]) => `<section class="az-groep" id="az-${l}" data-letter="${l}" aria-labelledby="az-kop-${l}">
+        <h2 class="az-kop" id="az-kop-${l}">${l}</h2>
+        <ul class="az-items">${items.map((it) => {
+          const toonVertaling = it.begrip_vertaling && norm(it.begrip_vertaling) !== norm(it.begrip);
+          return `<li><button type="button" class="az-item" data-open="${esc(it.id)}" data-id="${esc(it.id)}">
+            <span class="az-begrip">${esc(it.begrip)}</span>
+            ${toonVertaling ? `<span class="az-vertaling">${esc(it.begrip_vertaling)}</span>` : ''}
+            ${it.omschrijving ? `<span class="az-omschrijving">${esc(it.omschrijving)}</span>` : ''}
+            <span class="az-namen">${it.personenObj.map((p) => esc(p.naam)).join(' &amp; ')}</span>
+          </button></li>`;
+        }).join('')}</ul>
+      </section>`).join('');
+    pasFilterToe();
+    markeerActief();
+  }
+
   /* ---------- Zoeken ---------- */
   function zoekOK(tekst) {
     if (!staat.zoek) return true;
@@ -320,8 +348,16 @@
       if (kaart) kaart.classList.toggle('is-gedimd', !ok);
       const stip = $(`.stip[data-ga="${CSS.escape(it.id)}"]`);
       if (stip) stip.classList.toggle('is-gedimd', !ok);
+      const az = $(`.az-item[data-id="${CSS.escape(it.id)}"]`);
+      if (az) az.classList.toggle('is-gedimd', !ok);
     });
     $$('.jaarblok').forEach((b) => b.classList.toggle('is-gedimd', $$('.kaart', b).every((k) => k.classList.contains('is-gedimd'))));
+    $$('.az-groep').forEach((g) => {
+      const leeg = $$('.az-item', g).every((k) => k.classList.contains('is-gedimd'));
+      g.classList.toggle('is-gedimd', leeg);
+      const knop = $(`.az-letter-knop[data-letter="${g.dataset.letter}"]`);
+      if (knop) knop.classList.toggle('is-gedimd', leeg);
+    });
 
     const persoonOK = new Map();
     M.perPersoon.forEach((items, pid) => {
@@ -334,9 +370,10 @@
     $$('.portret-jaar').forEach((b) => b.classList.toggle('is-gedimd', $$('.portret', b).every((k) => k.classList.contains('is-gedimd'))));
 
     const actief = Boolean(staat.zoek);
-    const totaal = staat.weergave === 'tijdlijn' ? M.items.length : M.perPersoon.size;
-    const aantal = staat.weergave === 'tijdlijn' ? n : np;
-    const woord = staat.weergave === 'tijdlijn' ? 'begrippen' : 'denkers';
+    const overBegrippen = staat.weergave === 'tijdlijn' || staat.weergave === 'begrippen';
+    const totaal = overBegrippen ? M.items.length : M.perPersoon.size;
+    const aantal = overBegrippen ? n : np;
+    const woord = overBegrippen ? 'begrippen' : 'denkers';
     let tekst = actief ? `${aantal} van ${totaal} ${woord}` : `${totaal} ${woord}`;
     if (actief && aantal === 0) tekst = `Niets gevonden voor “${staat.zoek}”`;
     $('#telling').textContent = tekst;
@@ -394,8 +431,9 @@
 
   function markeerActief() {
     $$('.kaart.is-actief, .kaart.is-verwant').forEach((k) => k.classList.remove('is-actief', 'is-verwant'));
-    $$('.leven-rij.is-actief, .portret.is-actief').forEach((r) => r.classList.remove('is-actief'));
+    $$('.leven-rij.is-actief, .portret.is-actief, .az-item.is-actief').forEach((r) => r.classList.remove('is-actief'));
     if (!staat.open) return;
+    $$(`.az-item[data-id="${CSS.escape(staat.open)}"]`).forEach((r) => r.classList.add('is-actief'));
     $$(`.portret[data-item="${CSS.escape(staat.open)}"]`).forEach((r) => r.classList.add('is-actief'));
     const it = M.itemMap.get(staat.open);
     const kaart = document.getElementById(it.id);
@@ -453,7 +491,7 @@
   }
 
   /* ---------- Weergave ---------- */
-  const WEERGAVEN = ['tijdlijn', 'portretten', 'personen'];
+  const WEERGAVEN = ['tijdlijn', 'portretten', 'personen', 'begrippen'];
   function zetWeergave(w) {
     staat.weergave = w;
     WEERGAVEN.forEach((v) => {
@@ -464,6 +502,7 @@
     $('#legenda').hidden = w !== 'tijdlijn';
     if (w === 'personen' && !$('#levens').children.length) renderPersonen();
     if (w === 'portretten' && !$('#portretten-lijst').children.length) renderPortretten();
+    if (w === 'begrippen' && !$('#az-lijst').children.length) renderBegrippen();
     pasFilterToe();
   }
 
@@ -474,7 +513,12 @@
       if (open) { e.preventDefault(); openDetail(open.dataset.open); return; }
       const ga = e.target.closest('[data-ga]');
       if (ga) { gaNaar(ga.dataset.ga); return; }
-      if (e.target.closest('.p-sluit')) sluitDetail();
+      if (e.target.closest('.p-sluit')) { sluitDetail(); return; }
+      const letter = e.target.closest('.az-letter-knop');
+      if (letter) {
+        const doel = document.getElementById(`az-${letter.dataset.letter}`);
+        if (doel) doel.scrollIntoView({ behavior: minderBeweging ? 'auto' : 'smooth', block: 'start' });
+      }
     });
     WEERGAVEN.forEach((v) => $(`#tab-${v}`).addEventListener('click', () => zetWeergave(v)));
     $('.weergave').addEventListener('keydown', (e) => {
@@ -515,7 +559,7 @@
     volgHuidigJaar();
 
     const hash = decodeURIComponent(location.hash.slice(1));
-    if (hash === 'personen' || hash === 'portretten') zetWeergave(hash);
+    if (WEERGAVEN.includes(hash) && hash !== 'tijdlijn') zetWeergave(hash);
     else if (M.itemMap.has(hash)) openDetail(hash, { focus: false });
   }
 

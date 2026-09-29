@@ -18,6 +18,7 @@ Gemaakt met gewone HTML, CSS en JavaScript. Er zijn geen build-stap en geen afha
   - een knop naar het vorige en volgende begrip.
 - **Portretten**: alle denkers onder elkaar op de tijdlijn, met portretfoto en levensjaren, zonder begrippen. Klik op een portret voor het begrip.
 - **Levenslijnen**: de levensloop van elke denker, met een stip op het jaar van het begrip. Je kunt sorteren op jaar van het begrip, geboortejaar of achternaam.
+- **Begrippen A–Z**: alle begrippen onder elkaar in alfabetische volgorde, per beginletter, met vertaling, omschrijving en denkers, zonder jaartallen. Met de letterknoppen spring je naar een beginletter.
 - **Zoeken**: zoek op begrip, naam, functie of jaar.
 
 De pagina werkt op desktop en mobiel, en in licht en donker thema.
@@ -103,3 +104,4 @@ Voor 29 denkers is geen vrij portret gevonden; daar staat `"foto": null`. Vind j
 - `index.html#t-1974-schon-argyris` opent de pagina met het detailpaneel van dat begrip.
 - `index.html#portretten` opent de pagina in de weergave Portretten.
 - `index.html#personen` opent de pagina in de weergave Levenslijnen.
+- `index.html#begrippen` opent de pagina in de weergave Begrippen A–Z.

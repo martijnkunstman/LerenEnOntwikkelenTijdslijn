@@ -71,9 +71,9 @@ h1 {
   display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px;
   padding-block: 14px; border-top: 1px solid var(--lijn);
 }
-.weergave { display: inline-flex; padding: 3px; background: var(--vlak); border: 1px solid var(--lijn); border-radius: 8px; }
+.weergave { display: inline-flex; max-width: 100%; overflow-x: auto; padding: 3px; background: var(--vlak); border: 1px solid var(--lijn); border-radius: 8px; }
 .weergave button {
-  border: 0; background: transparent; padding: 6px 14px; border-radius: 6px; font-weight: 500; font-size: 14px; color: var(--gedempt);
+  flex: none; border: 0; background: transparent; padding: 6px 14px; border-radius: 6px; font-weight: 500; font-size: 14px; color: var(--gedempt);
 }
 .weergave button[aria-selected="true"] { background: var(--inkt); color: var(--papier); }
 .zoek { position: relative; flex: 1 1 220px; max-width: 340px; min-width: 0; }
@@ -353,6 +353,32 @@ main { padding-block: 28px 64px; }
 .p-nav .volgende { text-align: right; grid-column: 2; }
 
 
+/* ---------- Begrippen A–Z ---------- */
+.az-index { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+.az-letter-knop {
+  min-width: 36px; height: 36px; padding: 0 8px; border: 1px solid var(--lijn); border-radius: 6px; background: var(--vlak);
+  font: 600 17px/1 var(--f-display); color: var(--inkt); transition: border-color .15s, opacity .2s;
+}
+.az-letter-knop:hover { border-color: var(--accent); }
+.az-letter-knop.is-gedimd { opacity: .3; }
+.az-lijst { display: grid; gap: 30px; max-width: 860px; }
+.az-groep { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 0 16px; scroll-margin-top: 16px; }
+.az-groep.is-gedimd .az-kop { opacity: .3; }
+.az-kop { margin: 0; padding-top: 8px; font: italic 400 46px/1 var(--f-display); color: var(--gedempt); }
+.az-items { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--lijn); }
+.az-items li { border-bottom: 1px solid var(--lijn); }
+.az-item {
+  display: grid; gap: 3px; width: 100%; padding: 14px 12px; border: 0; border-radius: 6px; background: transparent;
+  text-align: left; transition: background-color .15s, opacity .2s;
+}
+.az-item:hover { background: var(--vlak); }
+.az-item.is-actief { background: var(--accent-zacht); }
+.az-item.is-gedimd { opacity: .25; }
+.az-begrip { font: 600 21px/1.2 var(--f-display); letter-spacing: -.005em; }
+.az-vertaling { font: italic 400 15px/1.3 var(--f-display); color: var(--gedempt); }
+.az-omschrijving { margin-top: 4px; max-width: 65ch; font-size: 14.5px; line-height: 1.5; }
+.az-namen { margin-top: 2px; font-size: 13px; color: var(--gedempt); }
+
 /* ---------- Voeter ---------- */
 .voet { padding-block: 0 40px; font-size: 13px; color: var(--gedempt); }
 .voet p { margin: 0; padding-top: 18px; border-top: 1px solid var(--lijn); }
@@ -377,6 +403,10 @@ main { padding-block: 28px 64px; }
   .telling { margin-left: 0; flex-basis: 100%; }
   .zoek { max-width: none; }
   .tick.oneven span { display: none; }
+  .tab-lang { display: none; }
+  .az-groep { grid-template-columns: minmax(0, 1fr); }
+  .az-kop { padding: 0 0 8px; font-size: 34px; }
+  .az-item { padding-inline: 4px; }
   .portretten-lijst::before { left: 28px; }
   .portret-jaar { --kaart-midden: 39px; grid-template-columns: 56px 1fr; }
   .portret-rij::before { left: -28px; width: 28px; }
