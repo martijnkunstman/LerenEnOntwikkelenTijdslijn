@@ -15,10 +15,12 @@ Gemaakt met gewone HTML, CSS en JavaScript. Er zijn geen build-stap en geen afha
   - de personen met levensjaren, functie en leeftijd in dat jaar;
   - de andere begrippen uit hetzelfde jaar;
   - andere begrippen van dezelfde persoon;
+  - de inhoudelijke verbanden met andere begrippen, met toelichting;
   - een knop naar het vorige en volgende begrip.
 - **Personen**: alle personen onder elkaar op de tijdlijn, met portretfoto en levensjaren, zonder begrippen. Klik op een persoon voor het begrip.
 - **Levenslijnen**: de levensloop van elke persoon, met een stip op het jaar van het begrip. Je kunt sorteren op jaar van het begrip, geboortejaar of achternaam.
 - **Begrippen A–Z**: alle begrippen onder elkaar in alfabetische volgorde, per beginletter, met vertaling, omschrijving en personen, zonder jaartallen. Met de letterknoppen spring je naar een beginletter.
+- **Diagram**: de inhoudelijke verbanden tussen de begrippen, met pijlen, in vijf kolommen per thema. Wijs een begrip aan om zijn verbanden te zien, of klik voor het detailpaneel. Wijs een lijn aan voor de toelichting. Met de knoppen boven het diagram zet je soorten verbanden aan of uit.
 - **Zoeken**: zoek op begrip, naam, functie of jaar.
 
 De pagina werkt op desktop en mobiel, en in licht en donker thema.
@@ -94,7 +96,7 @@ Voorbeeld:
   "toelichting": "Schön bouwde zijn reflectieve professional voort op Deweys idee van reflectief denken." }
 ```
 
-De pagina gebruikt dit blok nog niet.
+De weergave Diagram en het detailpaneel gebruiken dit blok.
 
 ## Portretfoto's
 
@@ -127,3 +129,4 @@ Voor 29 personen is geen foto met een vrije licentie gevonden; daar staat `"foto
 - `index.html#portretten` opent de pagina in de weergave Personen.
 - `index.html#personen` opent de pagina in de weergave Levenslijnen.
 - `index.html#begrippen` opent de pagina in de weergave Begrippen A–Z.
+- `index.html#diagram` opent de pagina in de weergave Diagram.

@@ -26,6 +26,7 @@
       <button type="button" role="tab" id="tab-portretten" aria-selected="false" aria-controls="portretten">Personen</button>
       <button type="button" role="tab" id="tab-personen" aria-selected="false" aria-controls="personen">Levenslijnen</button>
       <button type="button" role="tab" id="tab-begrippen" aria-selected="false" aria-controls="begrippen"><span class="tab-lang">Begrippen </span>A–Z</button>
+      <button type="button" role="tab" id="tab-diagram" aria-selected="false" aria-controls="diagram">Diagram</button>
     </div>
     <div class="zoek">
       <label for="zoekveld" class="sr">Zoek begrip, persoon of jaar</label>
@@ -51,6 +52,11 @@
     <p class="personen-uitleg">Alle personen in volgorde van de tijdlijn, met hun levensjaren. Klik op een persoon voor het begrip.</p>
     <div class="portretten-lijst" id="portretten-lijst"></div>
     <details class="credits" id="credits"></details>
+  </div>
+  <div class="diagramweergave" id="diagram" role="tabpanel" aria-labelledby="tab-diagram" hidden>
+    <p class="personen-uitleg">Verbanden tussen de begrippen, per thema. Wijs een begrip aan om zijn verbanden te zien, of klik voor details. Wijs een lijn aan voor de toelichting. De verbanden zijn een interpretatie, niet uit het boek.</p>
+    <div class="diagram-legenda" id="diagram-legenda" role="group" aria-label="Soorten verbanden tonen of verbergen"></div>
+    <div class="diagram-scroll"><div class="diagram" id="diagram-vlak"></div></div>
   </div>
   <div class="begrippen" id="begrippen" role="tabpanel" aria-labelledby="tab-begrippen" hidden>
     <nav class="az-index" id="az-index" aria-label="Naar beginletter"></nav>

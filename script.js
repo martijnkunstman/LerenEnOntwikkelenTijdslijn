@@ -77,7 +77,22 @@
       perPersoon.get(pid).push(it);
     }));
 
-    return { meta: data.meta || {}, personen, items, itemMap, relaties, buren, groepen, perPersoon };
+    // Inhoudelijke verbanden tussen begrippen (optioneel blok 'begripsanalyse')
+    const BA = data.begripsanalyse || null;
+    let analyse = null;
+    const analyseBuren = new Map();
+    if (BA) {
+      const ar = (BA.relaties || []).filter((r) => itemMap.has(r.van) && itemMap.has(r.naar));
+      analyse = { types: BA.relatietypes || {}, themas: BA.themas || [], relaties: ar };
+      ar.forEach((r) => {
+        [[r.van, r.naar, true], [r.naar, r.van, false]].forEach(([a, b, uit]) => {
+          if (!analyseBuren.has(a)) analyseBuren.set(a, []);
+          analyseBuren.get(a).push({ r, ander: itemMap.get(b), uit });
+        });
+      });
+    }
+
+    return { meta: data.meta || {}, personen, items, itemMap, relaties, buren, groepen, perPersoon, analyse, analyseBuren };
   }
 
   /* ---------- Hulpjes ---------- */
@@ -334,6 +349,219 @@
     markeerActief();
   }
 
+  /* ---------- Diagram ---------- */
+  // Teksten voor het detailpaneel: [vanuit dit begrip, naar dit begrip toe]
+  const VERBAND_TEKST = {
+    basis_voor: ['Is basis voor', 'Bouwt voort op'],
+    voorwaarde_voor: ['Is voorwaarde voor', 'Heeft als voorwaarde'],
+    versterkt: ['Versterkt', 'Wordt versterkt door'],
+    belemmert: ['Belemmert', 'Wordt belemmerd door'],
+    sluit_aan_bij: ['Sluit aan bij', 'Sluit aan bij'],
+  };
+  const VERBAND_VOLGORDE = ['basis_voor:in', 'voorwaarde_voor:in', 'versterkt:in', 'belemmert:in',
+    'basis_voor:uit', 'voorwaarde_voor:uit', 'versterkt:uit', 'belemmert:uit', 'sluit_aan_bij:uit', 'sluit_aan_bij:in'];
+  const NS = 'http://www.w3.org/2000/svg';
+  const diagram = { klaar: false, kolomVan: new Map(), hover: null, verborgen: new Set() };
+
+  // Kies de volgorde van de thema-kolommen zo dat verbonden thema's zo dicht mogelijk bij elkaar staan.
+  function themaVolgorde(n, relaties, themaIndex) {
+    const w = Array.from({ length: n }, () => Array(n).fill(0));
+    relaties.forEach((r) => {
+      const a = themaIndex.get(r.van);
+      const b = themaIndex.get(r.naar);
+      if (a !== undefined && b !== undefined && a !== b) { w[a][b]++; w[b][a]++; }
+    });
+    const start = [...Array(n).keys()];
+    if (n > 7) return start;
+    let beste = start.slice();
+    let besteKost = Infinity;
+    const kost = (volgorde) => {
+      const pos = [];
+      volgorde.forEach((t, i) => { pos[t] = i; });
+      let k = 0;
+      for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) k += w[i][j] * Math.abs(pos[i] - pos[j]);
+      return k;
+    };
+    const permuteer = (arr, l) => {
+      if (l === arr.length) { const k = kost(arr); if (k < besteKost) { besteKost = k; beste = arr.slice(); } return; }
+      for (let i = l; i < arr.length; i++) {
+        [arr[l], arr[i]] = [arr[i], arr[l]];
+        permuteer(arr, l + 1);
+        [arr[l], arr[i]] = [arr[i], arr[l]];
+      }
+    };
+    permuteer(start, 0);
+    return beste;
+  }
+
+  function renderDiagram() {
+    const A = M.analyse;
+    if (!A || !A.relaties.length) {
+      $('#diagram-vlak').innerHTML = '<p class="melding">Deze gegevens bevatten nog geen begripsanalyse.</p>';
+      return;
+    }
+    // Kolommen: één per thema, begrippen daarbinnen in volgorde van de tijdlijn
+    const themas = A.themas.map((t) => ({ ...t, items: t.items.filter((id) => M.itemMap.has(id)) }));
+    const ingedeeld = new Set(themas.flatMap((t) => t.items));
+    const overig = M.items.filter((it) => !ingedeeld.has(it.id)).map((it) => it.id);
+    if (overig.length) themas.push({ id: 'thema-overig', naam: 'Overig', items: overig });
+    const themaIndex = new Map();
+    themas.forEach((t, i) => t.items.forEach((id) => themaIndex.set(id, i)));
+    const volgorde = themaVolgorde(themas.length, A.relaties, themaIndex);
+
+    diagram.kolomVan = new Map();
+    const kolommen = volgorde.map((ti, kolom) => {
+      const t = themas[ti];
+      const items = t.items.map((id) => M.itemMap.get(id)).sort((a, b) => a.volg - b.volg);
+      items.forEach((it) => diagram.kolomVan.set(it.id, kolom));
+      return `<section class="diagram-kolom" aria-label="${esc(t.naam)}">
+        <h3 class="diagram-thema">${esc(t.naam)}</h3>
+        <div class="diagram-knopen">${items.map((it) => `<button type="button" class="dnode" data-id="${esc(it.id)}" data-open="${esc(it.id)}">${esc(it.begrip)}</button>`).join('')}</div>
+      </section>`;
+    }).join('');
+    $('#diagram-vlak').style.setProperty('--kolommen', volgorde.length);
+    $('#diagram-vlak').innerHTML = `<svg class="diagram-lijnen" id="diagram-lijnen" aria-hidden="true"></svg><div class="diagram-kolommen">${kolommen}</div>`;
+
+    // Legenda met aan/uit-knoppen per soort verband
+    const telling = new Map();
+    A.relaties.forEach((r) => telling.set(r.type, (telling.get(r.type) || 0) + 1));
+    $('#diagram-legenda').innerHTML = Object.entries(A.types).filter(([type]) => telling.has(type)).map(([type, t]) => `
+      <button type="button" class="d-soort type-${esc(type)}" data-soort="${esc(type)}" aria-pressed="${!diagram.verborgen.has(type)}">
+        <svg viewBox="0 0 40 12" width="40" height="12" aria-hidden="true"><line x1="2" y1="6" x2="${t.richting === 'tweeweg' ? 38 : 32}" y2="6" class="rand-lijn"/>
+          ${type === 'belemmert' ? '<line x1="35" y1="1" x2="35" y2="11" class="rem-streep"/>' : t.richting === 'tweeweg' ? '' : '<path d="M31,1.5 L39,6 L31,10.5 z" class="pijlkop"/>'}</svg>
+        <span>${esc(t.label)}</span><span class="d-aantal">${telling.get(type)}</span>
+      </button>`).join('');
+
+    diagram.klaar = true;
+    pasFilterToe();
+    markeerActief();
+  }
+
+  function tekenLijnen() {
+    if (!diagram.klaar || staat.weergave !== 'diagram') return;
+    const vlak = $('#diagram-vlak');
+    const svg = $('#diagram-lijnen');
+    const basis = vlak.getBoundingClientRect();
+    const rects = new Map();
+    $$('.dnode', vlak).forEach((n) => {
+      const r = n.getBoundingClientRect();
+      rects.set(n.dataset.id, { x: r.left - basis.left, y: r.top - basis.top, w: r.width, h: r.height });
+    });
+    svg.setAttribute('width', vlak.scrollWidth);
+    svg.setAttribute('height', vlak.scrollHeight);
+    svg.setAttribute('viewBox', `0 0 ${vlak.scrollWidth} ${vlak.scrollHeight}`);
+
+    // Welke kant van elk blok gebruikt een lijn, en in welke volgorde (tegen kruisingen)
+    const randen = M.analyse.relaties.filter((r) => rects.has(r.van) && rects.has(r.naar)).map((r) => {
+      const kv = diagram.kolomVan.get(r.van);
+      const kn = diagram.kolomVan.get(r.naar);
+      const zijdeVan = kv === kn ? 'r' : kv < kn ? 'r' : 'l';
+      const zijdeNaar = kv === kn ? 'r' : kv < kn ? 'l' : 'r';
+      return { r, zijdeVan, zijdeNaar, zelfdeKolom: kv === kn };
+    });
+    const poorten = new Map();
+    const voegToe = (id, zijde, rand, eind, anderId) => {
+      const k = `${id}|${zijde}`;
+      if (!poorten.has(k)) poorten.set(k, []);
+      const ander = rects.get(anderId);
+      poorten.get(k).push({ rand, eind, sort: ander.y + ander.h / 2 });
+    };
+    randen.forEach((e) => { voegToe(e.r.van, e.zijdeVan, e, 'van', e.r.naar); voegToe(e.r.naar, e.zijdeNaar, e, 'naar', e.r.van); });
+    poorten.forEach((lijst, k) => {
+      const [id, zijde] = k.split('|');
+      const b = rects.get(id);
+      lijst.sort((a, c) => a.sort - c.sort);
+      lijst.forEach((p, i) => {
+        const y = b.y + b.h * (i + 1) / (lijst.length + 1);
+        const x = zijde === 'r' ? b.x + b.w : b.x;
+        p.rand[p.eind] = { x, y };
+      });
+    });
+
+    const defs = `<defs>
+      ${['basis_voor', 'voorwaarde_voor', 'versterkt'].map((t) => `<marker id="kop-${t}" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 z" class="pijlkop pijlkop-${t}"/></marker>`).join('')}
+      <marker id="kop-belemmert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><line x1="8" y1="0" x2="8" y2="10" class="rem-streep"/></marker>
+    </defs>`;
+    const paden = randen.map((e) => {
+      const { r } = e;
+      const a = e.van;
+      const b = e.naar;
+      let d;
+      if (e.zelfdeKolom) {
+        const uit = 18 + Math.min(34, Math.abs(b.y - a.y) * 0.12);
+        d = `M${a.x},${a.y} C${a.x + uit},${a.y} ${b.x + uit},${b.y} ${b.x},${b.y}`;
+      } else {
+        const dx = (b.x - a.x) * 0.5;
+        d = `M${a.x},${a.y} C${a.x + dx},${a.y} ${b.x - dx},${b.y} ${b.x},${b.y}`;
+      }
+      const t = M.analyse.types[r.type] || {};
+      const kop = t.richting === 'tweeweg' ? '' : ` marker-end="url(#kop-${esc(r.type)})"`;
+      const vanNaam = M.itemMap.get(r.van).begrip;
+      const naarNaam = M.itemMap.get(r.naar).begrip;
+      const titel = `${vanNaam} ${t.label || r.type} ${naarNaam}${r.toelichting ? `: ${r.toelichting}` : ''}`;
+      return `<g class="rand type-${esc(r.type)}" data-type="${esc(r.type)}" data-van="${esc(r.van)}" data-naar="${esc(r.naar)}"><title>${esc(titel)}</title>
+        <path class="rand-raak" d="${d}"/><path class="rand-lijn" d="${d}"${kop}/></g>`;
+    }).join('');
+    svg.innerHTML = defs + paden;
+    pasSoortenToe();
+    zetDiagramFocus();
+  }
+
+  // Markeer de verbanden van het begrip onder de muis, of anders van het geselecteerde begrip
+  function zetDiagramFocus() {
+    if (!diagram.klaar) return;
+    const vlak = $('#diagram-vlak');
+    const id = diagram.hover || (staat.open && M.itemMap.has(staat.open) ? staat.open : null);
+    $$('.dnode.is-focus, .dnode.is-buur', vlak).forEach((n) => n.classList.remove('is-focus', 'is-buur'));
+    $$('.rand.is-aan', vlak).forEach((g) => g.classList.remove('is-aan'));
+    vlak.classList.toggle('heeft-focus', Boolean(id));
+    if (!id) return;
+    const node = $(`.dnode[data-id="${CSS.escape(id)}"]`, vlak);
+    if (node) node.classList.add('is-focus');
+    $$('.rand', vlak).forEach((g) => {
+      if (diagram.verborgen.has(g.dataset.type)) return;
+      const ander = g.dataset.van === id ? g.dataset.naar : g.dataset.naar === id ? g.dataset.van : null;
+      if (!ander) return;
+      g.classList.add('is-aan');
+      const n = $(`.dnode[data-id="${CSS.escape(ander)}"]`, vlak);
+      if (n) n.classList.add('is-buur');
+    });
+  }
+
+  function pasSoortenToe() {
+    $$('#diagram-lijnen .rand').forEach((g) => { g.style.display = diagram.verborgen.has(g.dataset.type) ? 'none' : ''; });
+    $$('.d-soort').forEach((b) => b.setAttribute('aria-pressed', String(!diagram.verborgen.has(b.dataset.soort))));
+  }
+
+  function verbandenHTML(it) {
+    const lijst = (M.analyseBuren && M.analyseBuren.get(it.id)) || [];
+    if (!lijst.length) return '';
+    const groepen = new Map();
+    lijst.forEach((v) => {
+      const k = `${v.r.type}:${v.uit ? 'uit' : 'in'}`;
+      if (!groepen.has(k)) groepen.set(k, []);
+      groepen.get(k).push(v);
+    });
+    const sleutels = [...groepen.keys()].sort((a, b) => {
+      const ia = VERBAND_VOLGORDE.indexOf(a);
+      const ib = VERBAND_VOLGORDE.indexOf(b);
+      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+    });
+    // "Sluit aan bij" in één groep, ongeacht de richting
+    const samen = new Map();
+    sleutels.forEach((k) => {
+      const [type, kant] = k.split(':');
+      const tekst = VERBAND_TEKST[type] ? VERBAND_TEKST[type][kant === 'uit' ? 0 : 1] : type;
+      if (!samen.has(tekst)) samen.set(tekst, []);
+      samen.get(tekst).push(...groepen.get(k));
+    });
+    return `<section><h3 class="p-sectie">Verbanden</h3>
+      ${[...samen].map(([tekst, vs]) => `<div class="v-blok"><p class="v-kop">${esc(tekst)}</p>
+        <ul class="v-lijst">${vs.sort((a, b) => a.ander.volg - b.ander.volg).map((v) => `<li>${itemLink(v.ander)}${v.r.toelichting ? `<p class="v-toelichting">${esc(v.r.toelichting)}</p>` : ''}</li>`).join('')}</ul>
+      </div>`).join('')}
+    </section>`;
+  }
+
   /* ---------- Zoeken ---------- */
   function zoekOK(tekst) {
     if (!staat.zoek) return true;
@@ -350,6 +578,8 @@
       if (stip) stip.classList.toggle('is-gedimd', !ok);
       const az = $(`.az-item[data-id="${CSS.escape(it.id)}"]`);
       if (az) az.classList.toggle('is-gedimd', !ok);
+      const dn = $(`.dnode[data-id="${CSS.escape(it.id)}"]`);
+      if (dn) dn.classList.toggle('is-gedimd', !ok);
     });
     $$('.jaarblok').forEach((b) => b.classList.toggle('is-gedimd', $$('.kaart', b).every((k) => k.classList.contains('is-gedimd'))));
     $$('.az-groep').forEach((g) => {
@@ -370,7 +600,7 @@
     $$('.portret-jaar').forEach((b) => b.classList.toggle('is-gedimd', $$('.portret', b).every((k) => k.classList.contains('is-gedimd'))));
 
     const actief = Boolean(staat.zoek);
-    const overBegrippen = staat.weergave === 'tijdlijn' || staat.weergave === 'begrippen';
+    const overBegrippen = ['tijdlijn', 'begrippen', 'diagram'].includes(staat.weergave);
     const totaal = overBegrippen ? M.items.length : M.perPersoon.size;
     const aantal = overBegrippen ? n : np;
     const woord = overBegrippen ? 'begrippen' : 'personen';
@@ -423,6 +653,7 @@
       ${it.uitleg ? `<section class="p-uitleg-blok"><h3 class="p-sectie">Voor leren en ontwikkelen</h3><p class="p-tekst">${esc(it.uitleg)}</p></section>` : ''}
       <section><h3 class="p-sectie">${duo ? 'Personen' : 'Persoon'}</h3><div class="p-personen">${personen}</div></section>
       ${verbanden}
+      ${verbandenHTML(it)}
       <nav class="p-nav" aria-label="Vorig en volgend begrip">
         ${vorige ? `<button type="button" data-open="${esc(vorige.id)}"><span class="richting">← ${vorige.jaar}</span><span class="doel">${esc(vorige.begrip)}</span></button>` : ''}
         ${volgende ? `<button type="button" class="volgende" data-open="${esc(volgende.id)}"><span class="richting">${volgende.jaar} →</span><span class="doel">${esc(volgende.begrip)}</span></button>` : ''}
@@ -431,8 +662,10 @@
 
   function markeerActief() {
     $$('.kaart.is-actief, .kaart.is-verwant').forEach((k) => k.classList.remove('is-actief', 'is-verwant'));
-    $$('.leven-rij.is-actief, .portret.is-actief, .az-item.is-actief').forEach((r) => r.classList.remove('is-actief'));
+    $$('.leven-rij.is-actief, .portret.is-actief, .az-item.is-actief, .dnode.is-actief').forEach((r) => r.classList.remove('is-actief'));
+    zetDiagramFocus();
     if (!staat.open) return;
+    $$(`.dnode[data-id="${CSS.escape(staat.open)}"]`).forEach((r) => r.classList.add('is-actief'));
     $$(`.az-item[data-id="${CSS.escape(staat.open)}"]`).forEach((r) => r.classList.add('is-actief'));
     $$(`.portret[data-item="${CSS.escape(staat.open)}"]`).forEach((r) => r.classList.add('is-actief'));
     const it = M.itemMap.get(staat.open);
@@ -491,7 +724,7 @@
   }
 
   /* ---------- Weergave ---------- */
-  const WEERGAVEN = ['tijdlijn', 'portretten', 'personen', 'begrippen'];
+  const WEERGAVEN = ['tijdlijn', 'portretten', 'personen', 'begrippen', 'diagram'];
   function zetWeergave(w) {
     staat.weergave = w;
     WEERGAVEN.forEach((v) => {
@@ -503,6 +736,10 @@
     if (w === 'personen' && !$('#levens').children.length) renderPersonen();
     if (w === 'portretten' && !$('#portretten-lijst').children.length) renderPortretten();
     if (w === 'begrippen' && !$('#az-lijst').children.length) renderBegrippen();
+    if (w === 'diagram') {
+      if (!diagram.klaar) renderDiagram();
+      requestAnimationFrame(tekenLijnen);
+    }
     pasFilterToe();
   }
 
@@ -514,6 +751,14 @@
       const ga = e.target.closest('[data-ga]');
       if (ga) { gaNaar(ga.dataset.ga); return; }
       if (e.target.closest('.p-sluit')) { sluitDetail(); return; }
+      const soort = e.target.closest('.d-soort');
+      if (soort) {
+        const t = soort.dataset.soort;
+        if (diagram.verborgen.has(t)) diagram.verborgen.delete(t); else diagram.verborgen.add(t);
+        pasSoortenToe();
+        zetDiagramFocus();
+        return;
+      }
       const letter = e.target.closest('.az-letter-knop');
       if (letter) {
         const doel = document.getElementById(`az-${letter.dataset.letter}`);
@@ -521,6 +766,20 @@
       }
     });
     WEERGAVEN.forEach((v) => $(`#tab-${v}`).addEventListener('click', () => zetWeergave(v)));
+    // Diagram: verbanden tonen bij aanwijzen, lijnen opnieuw tekenen als de maten veranderen
+    const vlak = $('#diagram-vlak');
+    const wijsAan = (e) => {
+      const n = e.target.closest('.dnode');
+      const id = n ? n.dataset.id : null;
+      if (id !== diagram.hover) { diagram.hover = id; zetDiagramFocus(); }
+    };
+    vlak.addEventListener('mouseover', wijsAan);
+    vlak.addEventListener('focusin', wijsAan);
+    vlak.addEventListener('mouseleave', () => { diagram.hover = null; zetDiagramFocus(); });
+    vlak.addEventListener('focusout', (e) => { if (!vlak.contains(e.relatedTarget)) { diagram.hover = null; zetDiagramFocus(); } });
+    let hertekenen = null;
+    window.addEventListener('resize', () => { clearTimeout(hertekenen); hertekenen = setTimeout(tekenLijnen, 120); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(tekenLijnen);
     $('.weergave').addEventListener('keydown', (e) => {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
       const i = WEERGAVEN.indexOf(staat.weergave) + (e.key === 'ArrowRight' ? 1 : -1);
