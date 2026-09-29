@@ -123,19 +123,6 @@
     return `<span class="avatar ${klasse}" aria-hidden="true"><span class="avatar-ini">${initialen(p)}</span>${img}</span>`;
   }
 
-  /* ---------- Kop ---------- */
-  function renderCijfers() {
-    const jaren = M.items.map((i) => i.jaar);
-    const duos = M.items.filter(isDuo).length;
-    const cijfers = [
-      [M.items.length, 'begrippen'],
-      [M.perPersoon.size, 'denkers'],
-      [duos, "duo's"],
-      [`${Math.min(...jaren)}–${Math.max(...jaren)}`, 'periode'],
-    ];
-    $('#cijfers').innerHTML = cijfers.map(([w, l]) => `<div><dt>${l}</dt><dd>${w}</dd></div>`).join('');
-  }
-
   /* ---------- Tijdlijn ---------- */
   function kaartHTML(it) {
     const ook = [];
@@ -521,7 +508,6 @@
       m.hidden = false;
       return;
     }
-    renderCijfers();
     renderTijdlijn();
     renderLiniaal();
     koppel();
