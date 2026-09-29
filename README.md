@@ -18,7 +18,7 @@ Gemaakt met gewone HTML, CSS en JavaScript. Er zijn geen build-stap en geen afha
   - een knop naar het vorige en volgende begrip.
 - **Portretten**: alle denkers onder elkaar op de tijdlijn, met portretfoto en levensjaren, zonder begrippen. Klik op een portret voor het begrip.
 - **Levenslijnen**: de levensloop van elke denker, met een stip op het jaar van het begrip. Je kunt sorteren op jaar van het begrip, geboortejaar of achternaam.
-- **Zoeken en filteren**: zoek op begrip, naam, functie of jaar, of filter op duo's en terugkerende denkers.
+- **Zoeken**: zoek op begrip, naam, functie of jaar.
 
 De pagina werkt op desktop en mobiel, en in licht en donker thema.
 

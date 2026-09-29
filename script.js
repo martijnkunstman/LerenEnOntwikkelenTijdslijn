@@ -15,7 +15,7 @@
   const norm = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
   let M = null;
-  const staat = { weergave: 'tijdlijn', zoek: '', filter: 'alle', sorteer: 'begrip', open: null, terugFocus: null };
+  const staat = { weergave: 'tijdlijn', zoek: '', sorteer: 'begrip', open: null, terugFocus: null };
 
   /* ---------- Data ---------- */
   async function laadData() {
@@ -320,12 +320,7 @@
       <ul>${regels}</ul>`;
   }
 
-  /* ---------- Filteren ---------- */
-  function filterOK(it) {
-    if (staat.filter === 'duo') return isDuo(it);
-    if (staat.filter === 'meer') return it.personen.some((pid) => (M.perPersoon.get(pid) || []).length > 1);
-    return true;
-  }
+  /* ---------- Zoeken ---------- */
   function zoekOK(tekst) {
     if (!staat.zoek) return true;
     return norm(staat.zoek).split(/\s+/).filter(Boolean).every((w) => tekst.includes(w));
@@ -333,7 +328,7 @@
   function pasFilterToe() {
     let n = 0;
     M.items.forEach((it) => {
-      const ok = filterOK(it) && zoekOK(it.zoektekst);
+      const ok = zoekOK(it.zoektekst);
       if (ok) n++;
       const kaart = document.getElementById(it.id);
       if (kaart) kaart.classList.toggle('is-gedimd', !ok);
@@ -345,20 +340,19 @@
     const persoonOK = new Map();
     M.perPersoon.forEach((items, pid) => {
       const p = M.personen.get(pid);
-      const f = staat.filter === 'alle' || (staat.filter === 'duo' ? items.some(isDuo) : items.length > 1);
       const tekst = norm([p.naam, p.functie, p.geboortejaar, p.overlijdensjaar, ...items.map((i) => `${i.jaar} ${i.begrip} ${i.begrip_vertaling}`)].join(' '));
-      persoonOK.set(pid, f && zoekOK(tekst));
+      persoonOK.set(pid, zoekOK(tekst));
     });
     const np = [...persoonOK.values()].filter(Boolean).length;
     $$('.leven-rij, .portret').forEach((r) => r.classList.toggle('is-gedimd', !persoonOK.get(r.dataset.p)));
     $$('.portret-jaar').forEach((b) => b.classList.toggle('is-gedimd', $$('.portret', b).every((k) => k.classList.contains('is-gedimd'))));
 
-    const actief = staat.zoek || staat.filter !== 'alle';
+    const actief = Boolean(staat.zoek);
     const totaal = staat.weergave === 'tijdlijn' ? M.items.length : M.perPersoon.size;
     const aantal = staat.weergave === 'tijdlijn' ? n : np;
     const woord = staat.weergave === 'tijdlijn' ? 'begrippen' : 'denkers';
     let tekst = actief ? `${aantal} van ${totaal} ${woord}` : `${totaal} ${woord}`;
-    if (actief && aantal === 0) tekst = staat.zoek ? `Niets gevonden voor “${staat.zoek}”` : 'Niets gevonden';
+    if (actief && aantal === 0) tekst = `Niets gevonden voor “${staat.zoek}”`;
     $('#telling').textContent = tekst;
   }
 
@@ -494,13 +488,7 @@
       if (open) { e.preventDefault(); openDetail(open.dataset.open); return; }
       const ga = e.target.closest('[data-ga]');
       if (ga) { gaNaar(ga.dataset.ga); return; }
-      if (e.target.closest('.p-sluit')) { sluitDetail(); return; }
-      const chip = e.target.closest('.chip');
-      if (chip) {
-        staat.filter = chip.dataset.filter;
-        $$('.chip').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
-        pasFilterToe();
-      }
+      if (e.target.closest('.p-sluit')) sluitDetail();
     });
     WEERGAVEN.forEach((v) => $(`#tab-${v}`).addEventListener('click', () => zetWeergave(v)));
     $('.weergave').addEventListener('keydown', (e) => {

@@ -92,12 +92,6 @@ h1 {
 }
 .zoek input::placeholder { color: var(--gedempt); }
 .zoek input:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: transparent; }
-.filters { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip {
-  border: 1px solid var(--lijn); background: transparent; padding: 5px 12px; border-radius: 999px; font-size: 13px; color: var(--gedempt);
-}
-.chip:hover { border-color: var(--lijn-sterk); color: var(--inkt); }
-.chip[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-zacht); color: var(--inkt); }
 .telling { margin: 0 0 0 auto; font: 13px var(--f-cijfer); color: var(--gedempt); font-variant-numeric: tabular-nums; }
 
 .legenda {
