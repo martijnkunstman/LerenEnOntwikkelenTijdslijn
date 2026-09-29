@@ -2,7 +2,7 @@
 
 Een interactieve visualisatie van de tijdlijn van leren en ontwikkelen: de begrippen, de personen erachter en de verbanden tussen de begrippen. De gegevens zijn een transcriptie van de tijdlijn uit het boek, zonder portretten.
 
-Gemaakt met gewone HTML, CSS en JavaScript. Er zijn geen build-stap en geen afhankelijkheden nodig.
+Gemaakt met gewone HTML, CSS en JavaScript, zonder build-stap. Alleen de weergave Woordweb gebruikt een bibliotheek: [D3](https://d3js.org). Die staat in de map `lib`, zodat alles ook zonder internet werkt.
 
 ## Wat je ziet
 
@@ -21,6 +21,7 @@ Gemaakt met gewone HTML, CSS en JavaScript. Er zijn geen build-stap en geen afha
 - **Levenslijnen**: de levensloop van elke persoon, met een stip op het jaar van het begrip. Je kunt sorteren op jaar van het begrip, geboortejaar of achternaam.
 - **Begrippen A–Z**: alle begrippen onder elkaar in alfabetische volgorde, per beginletter, met vertaling, omschrijving en personen, zonder jaartallen. Met de letterknoppen spring je naar een beginletter.
 - **Diagram**: de inhoudelijke verbanden tussen de begrippen, met pijlen, in vijf kolommen per thema. Wijs een begrip aan om zijn verbanden te zien, of klik voor het detailpaneel. Wijs een lijn aan voor de toelichting. Met de knoppen boven het diagram zet je soorten verbanden aan of uit.
+- **Woordweb**: de begrippen als woorden in een netwerk dat zichzelf ordent, gemaakt met D3. Hoe groter het woord, hoe meer verbanden. Begrippen uit hetzelfde thema liggen bij elkaar op een eiland. Wijs een woord aan om de verbanden te zien of klik voor details. Je kunt woorden verslepen, het web verschuiven en zoomen met de knoppen, met Ctrl en het scrollwiel, of met twee vingers.
 - **Zoeken**: zoek op begrip, naam, functie of jaar.
 
 De pagina werkt op desktop en mobiel, en in licht en donker thema.
@@ -48,6 +49,7 @@ Open daarna het adres dat de server toont, bijvoorbeeld `http://localhost:3000` 
 | `script.js` | Leest de gegevens en tekent de tijdlijn, liniaal, levenslijnen en het detailpaneel |
 | `tijdlijn.json` | De gegevens: personen, tijdlijn-items en relaties |
 | `data.js` | Kopie van `tijdlijn.json`, zodat de pagina ook werkt zonder webserver |
+| `lib/d3.min.js` | De bibliotheek D3 (versie 7.9.0) voor het woordweb, met licentie in `lib/LICENSE-d3.txt` |
 
 ## Gegevens aanpassen
 
@@ -96,7 +98,7 @@ Voorbeeld:
   "toelichting": "Schön bouwde zijn reflectieve professional voort op Deweys idee van reflectief denken." }
 ```
 
-De weergave Diagram en het detailpaneel gebruiken dit blok.
+De weergaven Diagram en Woordweb en het detailpaneel gebruiken dit blok.
 
 ## Portretfoto's
 
@@ -130,3 +132,4 @@ Voor 29 personen is geen foto met een vrije licentie gevonden; daar staat `"foto
 - `index.html#personen` opent de pagina in de weergave Levenslijnen.
 - `index.html#begrippen` opent de pagina in de weergave Begrippen A–Z.
 - `index.html#diagram` opent de pagina in de weergave Diagram.
+- `index.html#woordweb` opent de pagina in de weergave Woordweb.

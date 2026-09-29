@@ -27,6 +27,7 @@
       <button type="button" role="tab" id="tab-personen" aria-selected="false" aria-controls="personen">Levenslijnen</button>
       <button type="button" role="tab" id="tab-begrippen" aria-selected="false" aria-controls="begrippen"><span class="tab-lang">Begrippen </span>A–Z</button>
       <button type="button" role="tab" id="tab-diagram" aria-selected="false" aria-controls="diagram">Diagram</button>
+      <button type="button" role="tab" id="tab-woordweb" aria-selected="false" aria-controls="woordweb">Woordweb</button>
     </div>
     <div class="zoek">
       <label for="zoekveld" class="sr">Zoek begrip, persoon of jaar</label>
@@ -58,6 +59,18 @@
     <div class="diagram-legenda" id="diagram-legenda" role="group" aria-label="Soorten verbanden tonen of verbergen"></div>
     <div class="diagram-scroll"><div class="diagram" id="diagram-vlak"></div></div>
   </div>
+  <div class="woordwebweergave" id="woordweb" role="tabpanel" aria-labelledby="tab-woordweb" hidden>
+    <p class="personen-uitleg">De begrippen als woordweb: hoe groter het woord, hoe meer verbanden. Begrippen uit hetzelfde thema liggen bij elkaar. Wijs een woord aan om de verbanden te zien of klik voor details. Sleep een woord om het web te ordenen, sleep de achtergrond om te verschuiven, en zoom met de knoppen of met Ctrl en het scrollwiel.</p>
+    <div class="web-balk">
+      <div class="diagram-legenda" id="web-legenda" role="group" aria-label="Soorten verbanden tonen of verbergen"></div>
+      <div class="web-zoom" role="group" aria-label="Zoomen">
+        <button type="button" class="web-knop" data-webzoom="in" aria-label="Inzoomen">+</button>
+        <button type="button" class="web-knop" data-webzoom="uit" aria-label="Uitzoomen">−</button>
+        <button type="button" class="web-knop web-knop-tekst" data-webzoom="passend">Passend maken</button>
+      </div>
+    </div>
+    <div class="web-vlak" id="web-vlak"></div>
+  </div>
   <div class="begrippen" id="begrippen" role="tabpanel" aria-labelledby="tab-begrippen" hidden>
     <nav class="az-index" id="az-index" aria-label="Naar beginletter"></nav>
     <div class="az-lijst" id="az-lijst"></div>
@@ -86,6 +99,7 @@
   <div class="paneel-inhoud" id="paneel-inhoud"></div>
 </aside>
 <!--/BODY-->
+<script src="lib/d3.min.js"></script>
 <script src="data.js"></script>
 <script src="script.js"></script>
 </body>

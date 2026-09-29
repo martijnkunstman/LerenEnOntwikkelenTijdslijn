@@ -423,14 +423,7 @@
     $('#diagram-vlak').innerHTML = `<svg class="diagram-lijnen" id="diagram-lijnen" aria-hidden="true"></svg><div class="diagram-kolommen">${kolommen}</div>`;
 
     // Legenda met aan/uit-knoppen per soort verband
-    const telling = new Map();
-    A.relaties.forEach((r) => telling.set(r.type, (telling.get(r.type) || 0) + 1));
-    $('#diagram-legenda').innerHTML = Object.entries(A.types).filter(([type]) => telling.has(type)).map(([type, t]) => `
-      <button type="button" class="d-soort type-${esc(type)}" data-soort="${esc(type)}" aria-pressed="${!diagram.verborgen.has(type)}">
-        <svg viewBox="0 0 40 12" width="40" height="12" aria-hidden="true"><line x1="2" y1="6" x2="${t.richting === 'tweeweg' ? 38 : 32}" y2="6" class="rand-lijn"/>
-          ${type === 'belemmert' ? '<line x1="35" y1="1" x2="35" y2="11" class="rem-streep"/>' : t.richting === 'tweeweg' ? '' : '<path d="M31,1.5 L39,6 L31,10.5 z" class="pijlkop"/>'}</svg>
-        <span>${esc(t.label)}</span><span class="d-aantal">${telling.get(type)}</span>
-      </button>`).join('');
+    $('#diagram-legenda').innerHTML = soortLegendaHTML();
 
     diagram.klaar = true;
     pasFilterToe();
@@ -478,10 +471,7 @@
       });
     });
 
-    const defs = `<defs>
-      ${['basis_voor', 'voorwaarde_voor', 'versterkt'].map((t) => `<marker id="kop-${t}" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 z" class="pijlkop pijlkop-${t}"/></marker>`).join('')}
-      <marker id="kop-belemmert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><line x1="8" y1="0" x2="8" y2="10" class="rem-streep"/></marker>
-    </defs>`;
+    const defs = `<defs>${markerDefs('kop')}</defs>`;
     const paden = randen.map((e) => {
       const { r } = e;
       const a = e.van;
@@ -529,7 +519,7 @@
   }
 
   function pasSoortenToe() {
-    $$('#diagram-lijnen .rand').forEach((g) => { g.style.display = diagram.verborgen.has(g.dataset.type) ? 'none' : ''; });
+    $$('#diagram-lijnen .rand, #web-svg .rand').forEach((g) => { g.style.display = diagram.verborgen.has(g.dataset.type) ? 'none' : ''; });
     $$('.d-soort').forEach((b) => b.setAttribute('aria-pressed', String(!diagram.verborgen.has(b.dataset.soort))));
   }
 
@@ -562,6 +552,244 @@
     </section>`;
   }
 
+  /* ---------- Woordweb (D3) ---------- */
+  // Begrippen als woorden in een netwerk dat zichzelf ordent. Thema's worden groepjes met een eigen eiland
+  // en naam; woorden zijn groter naarmate een begrip meer verbanden heeft.
+  const web = { klaar: false, sim: null, hover: null, zoom: null, svg: null, laag: null, knopen: [], hoogte: 600 };
+
+  function soortLegendaHTML() {
+    const A = M.analyse;
+    const telling = new Map();
+    A.relaties.forEach((r) => telling.set(r.type, (telling.get(r.type) || 0) + 1));
+    return Object.entries(A.types).filter(([type]) => telling.has(type)).map(([type, t]) => `
+      <button type="button" class="d-soort type-${esc(type)}" data-soort="${esc(type)}" aria-pressed="${!diagram.verborgen.has(type)}">
+        <svg viewBox="0 0 40 12" width="40" height="12" aria-hidden="true"><line x1="2" y1="6" x2="${t.richting === 'tweeweg' ? 38 : 32}" y2="6" class="rand-lijn"/>
+          ${type === 'belemmert' ? '<line x1="35" y1="1" x2="35" y2="11" class="rem-streep"/>' : t.richting === 'tweeweg' ? '' : '<path d="M31,1.5 L39,6 L31,10.5 z" class="pijlkop"/>'}</svg>
+        <span>${esc(t.label)}</span><span class="d-aantal">${telling.get(type)}</span>
+      </button>`).join('');
+  }
+
+  function markerDefs(voorvoegsel) {
+    return `${['basis_voor', 'voorwaarde_voor', 'versterkt'].map((t) => `<marker id="${voorvoegsel}-${t}" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 z" class="pijlkop pijlkop-${t}"/></marker>`).join('')}
+      <marker id="${voorvoegsel}-belemmert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><line x1="8" y1="0" x2="8" y2="10" class="rem-streep"/></marker>`;
+  }
+
+  // Botsing tussen de rechthoeken rond de woorden, zodat woorden elkaar niet overlappen
+  function rechthoekBotsing(marge, kracht) {
+    let knopen = [];
+    function force() {
+      for (let i = 0; i < knopen.length; i++) {
+        const a = knopen[i];
+        for (let j = i + 1; j < knopen.length; j++) {
+          const b = knopen[j];
+          const dx = (b.x + b.vx) - (a.x + a.vx);
+          const dy = (b.y + b.vy) - (a.y + a.vy);
+          const ox = a.bw + b.bw + marge - Math.abs(dx);
+          const oy = a.bh + b.bh + marge - Math.abs(dy);
+          if (ox <= 0 || oy <= 0) continue;
+          if (ox / (a.bw + b.bw) < oy / (a.bh + b.bh)) {
+            const s = (dx < 0 ? -1 : 1) * ox * 0.5 * kracht;
+            a.vx -= s; b.vx += s;
+          } else {
+            const s = (dy < 0 ? -1 : 1) * oy * 0.5 * kracht;
+            a.vy -= s; b.vy += s;
+          }
+        }
+      }
+    }
+    force.initialize = (n) => { knopen = n; };
+    return force;
+  }
+
+  // Punt op de rand van de rechthoek rond een woord, in de richting van (fx, fy)
+  function randPunt(n, fx, fy, marge) {
+    const dx = fx - n.x;
+    const dy = fy - n.y;
+    const t = Math.min((n.bw + marge) / Math.max(Math.abs(dx), 1e-6), (n.bh + marge) / Math.max(Math.abs(dy), 1e-6));
+    return t >= 1 ? { x: fx, y: fy } : { x: n.x + dx * t, y: n.y + dy * t };
+  }
+
+  function webPad(l) {
+    const s = l.source;
+    const t = l.target;
+    const dx = t.x - s.x;
+    const dy = t.y - s.y;
+    const mx = (s.x + t.x) / 2 - dy * 0.12;
+    const my = (s.y + t.y) / 2 + dx * 0.12;
+    const p0 = randPunt(s, mx, my, 2);
+    const p1 = randPunt(t, mx, my, l.pijl ? 4 : 2);
+    return `M${p0.x.toFixed(1)},${p0.y.toFixed(1)} Q${mx.toFixed(1)},${my.toFixed(1)} ${p1.x.toFixed(1)},${p1.y.toFixed(1)}`;
+  }
+
+  function woordRegels(tekst) {
+    if (tekst.length <= 16 || !tekst.includes(' ')) return [tekst];
+    const woorden = tekst.split(' ');
+    let beste = [tekst];
+    let verschil = Infinity;
+    for (let i = 1; i < woorden.length; i++) {
+      const a = woorden.slice(0, i).join(' ');
+      const b = woorden.slice(i).join(' ');
+      const v = Math.abs(a.length - b.length);
+      if (v < verschil) { verschil = v; beste = [a, b]; }
+    }
+    return beste;
+  }
+
+  function renderWeb() {
+    const houder = $('#web-vlak');
+    const A = M.analyse;
+    if (!A || !A.relaties.length) { houder.innerHTML = '<p class="melding">Deze gegevens bevatten nog geen begripsanalyse.</p>'; return; }
+    const d3 = window.d3;
+    if (!d3) { houder.innerHTML = '<p class="melding">Het woordweb heeft de bibliotheek D3 nodig (lib/d3.min.js), maar die kon niet worden geladen.</p>'; return; }
+    $('#web-legenda').innerHTML = soortLegendaHTML();
+
+    const themas = A.themas.map((t) => ({ ...t, items: t.items.filter((id) => M.itemMap.has(id)) })).filter((t) => t.items.length);
+    const themaVan = new Map();
+    themas.forEach((t, i) => t.items.forEach((id) => themaVan.set(id, i)));
+    if (M.items.some((it) => !themaVan.has(it.id))) themas.push({ id: 'thema-overig', naam: 'Overig', items: [] });
+    const graad = new Map();
+    A.relaties.forEach((r) => { graad.set(r.van, (graad.get(r.van) || 0) + 1); graad.set(r.naar, (graad.get(r.naar) || 0) + 1); });
+    const maxG = Math.max(2, ...graad.values());
+    const knopen = M.items.map((it) => ({ id: it.id, it, thema: themaVan.has(it.id) ? themaVan.get(it.id) : themas.length - 1, graad: graad.get(it.id) || 0 }));
+    const links = A.relaties.map((r) => ({ r, source: r.van, target: r.naar, pijl: (A.types[r.type] || {}).richting !== 'tweeweg' }));
+
+    // Thema-middelpunten op een ellips, liggend of staand naar de vorm van het vlak; wordt later passend geschaald
+    web.hoogte = Math.round(Math.max(460, Math.min(860, window.innerHeight * (window.innerWidth < 760 ? 0.66 : 0.78))));
+    const staand = (houder.clientWidth || 1000) < web.hoogte;
+    const W = staand ? 820 : 1200;
+    const H = staand ? 1200 : 820;
+    const rx = staand ? 250 : 440;
+    const ry = staand ? 420 : 300;
+    const centra = themas.map((t, i) => {
+      const hoek = -Math.PI / 2 + (i * 2 * Math.PI) / themas.length;
+      return { x: W / 2 + Math.cos(hoek) * rx, y: H / 2 + Math.sin(hoek) * ry };
+    });
+
+    houder.innerHTML = '';
+    const svg = d3.select(houder).append('svg').attr('class', 'web-svg').attr('id', 'web-svg')
+      .attr('width', '100%').attr('height', web.hoogte).attr('role', 'group').attr('aria-label', 'Woordweb van begrippen en hun verbanden');
+    svg.append('defs').html(markerDefs('wkop'));
+    const laag = svg.append('g').attr('class', 'web-laag');
+    const gEilanden = laag.append('g').attr('class', 'web-eilanden').attr('aria-hidden', 'true');
+    const gLinks = laag.append('g').attr('class', 'web-links').attr('aria-hidden', 'true');
+    const gKnopen = laag.append('g').attr('class', 'web-knopen');
+
+    const grootte = (d) => 13 + ((Math.sqrt(Math.max(d.graad, 1)) - 1) / (Math.sqrt(maxG) - 1)) * 11;
+    const knoopSel = gKnopen.selectAll('g').data(knopen).join('g')
+      .attr('class', 'wnode').attr('data-id', (d) => d.id).attr('data-open', (d) => d.id)
+      .attr('tabindex', 0).attr('role', 'button')
+      .attr('aria-label', (d) => `${d.it.begrip}, ${d.graad} ${d.graad === 1 ? 'verband' : 'verbanden'}`);
+    const tekst = knoopSel.append('text').attr('class', 'wlabel').attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
+      .style('font-size', (d) => `${grootte(d).toFixed(1)}px`);
+    tekst.selectAll('tspan').data((d) => woordRegels(d.it.begrip).map((regel, i, alle) => ({ regel, i, n: alle.length })))
+      .join('tspan').attr('x', 0).attr('dy', (t) => (t.i === 0 ? `${(-(t.n - 1) * 0.55).toFixed(2)}em` : '1.1em')).text((t) => t.regel);
+    knoopSel.each(function (d) { const b = this.getBBox(); d.bw = b.width / 2 + 5; d.bh = b.height / 2 + 2; });
+
+    const eilandSel = gEilanden.selectAll('g').data(themas.filter((t, i) => knopen.some((k) => k.thema === i)).map((t) => ({ t, i: themas.indexOf(t) })))
+      .join('g').attr('class', 'weiland');
+    eilandSel.append('path').attr('class', 'weiland-vorm');
+    eilandSel.append('text').attr('class', 'weiland-naam').attr('text-anchor', 'middle').text((d) => d.t.naam);
+
+    const linkSel = gLinks.selectAll('g').data(links).join('g')
+      .attr('class', (l) => `rand type-${l.r.type}`).attr('data-type', (l) => l.r.type)
+      .attr('data-van', (l) => l.r.van).attr('data-naar', (l) => l.r.naar);
+    linkSel.append('title').text((l) => {
+      const t = A.types[l.r.type] || {};
+      return `${M.itemMap.get(l.r.van).begrip} ${t.label || l.r.type} ${M.itemMap.get(l.r.naar).begrip}${l.r.toelichting ? `: ${l.r.toelichting}` : ''}`;
+    });
+    linkSel.append('path').attr('class', 'rand-raak');
+    linkSel.append('path').attr('class', 'rand-lijn').attr('marker-end', (l) => (l.pijl ? `url(#wkop-${l.r.type})` : null));
+
+    const zelfdeThema = (l) => l.source.thema === l.target.thema;
+    const sim = d3.forceSimulation(knopen)
+      .force('link', d3.forceLink(links).id((d) => d.id).distance((l) => (zelfdeThema(l) ? 60 : 220)).strength((l) => (zelfdeThema(l) ? 0.3 : 0.015)))
+      .force('lading', d3.forceManyBody().strength(-120).distanceMax(260))
+      .force('x', d3.forceX((d) => centra[d.thema].x).strength(0.3))
+      .force('y', d3.forceY((d) => centra[d.thema].y).strength(0.38))
+      .force('botsing', rechthoekBotsing(8, 0.8))
+      .stop();
+    for (let i = 0; i < 450; i++) sim.tick();
+
+    const lijn = d3.line().curve(d3.curveCatmullRomClosed.alpha(0.5));
+    const tekenWeb = () => {
+      knoopSel.attr('transform', (d) => `translate(${d.x.toFixed(1)},${d.y.toFixed(1)})`);
+      linkSel.selectAll('path').attr('d', webPad);
+      eilandSel.each(function (e) {
+        const punten = [];
+        knopen.forEach((k) => {
+          if (k.thema !== e.i) return;
+          const px = k.bw + 16;
+          const py = k.bh + 14;
+          punten.push([k.x - px, k.y - py], [k.x + px, k.y - py], [k.x + px, k.y + py], [k.x - px, k.y + py]);
+        });
+        const romp = punten.length >= 3 ? d3.polygonHull(punten) : null;
+        const g = d3.select(this);
+        g.select('.weiland-vorm').attr('d', romp ? lijn(romp) : null);
+        if (romp) {
+          const minY = Math.min(...romp.map((p) => p[1]));
+          const midX = (Math.min(...romp.map((p) => p[0])) + Math.max(...romp.map((p) => p[0]))) / 2;
+          g.select('.weiland-naam').attr('x', midX.toFixed(1)).attr('y', (minY - 8).toFixed(1));
+        }
+      });
+    };
+    sim.on('tick', tekenWeb);
+    tekenWeb();
+
+    const zoom = d3.zoom().scaleExtent([0.25, 4])
+      .filter((e) => (e.type !== 'wheel' || e.ctrlKey || e.metaKey) && !e.button)
+      .on('zoom', (e) => laag.attr('transform', e.transform));
+    svg.call(zoom).on('dblclick.zoom', null);
+
+    knoopSel.call(d3.drag().clickDistance(4)
+      .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.15).restart(); d.fx = d.x; d.fy = d.y; })
+      .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+      .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }));
+
+    Object.assign(web, { klaar: true, sim, zoom, svg, laag, knopen });
+    pasWebPassend(false);
+    pasSoortenToe();
+    pasFilterToe();
+    markeerActief();
+  }
+
+  // Schaal en verschuif het woordweb zodat alles in beeld past
+  function pasWebPassend(animeren = true) {
+    if (!web.klaar) return;
+    const breedte = $('#web-vlak').clientWidth;
+    if (!breedte) return;
+    const b = web.laag.node().getBBox();
+    const k = Math.min(1.6, (breedte - 24) / b.width, (web.hoogte - 24) / b.height);
+    const t = window.d3.zoomIdentity.translate(breedte / 2 - (b.x + b.width / 2) * k, web.hoogte / 2 - (b.y + b.height / 2) * k).scale(k);
+    (animeren && !minderBeweging ? web.svg.transition().duration(350) : web.svg).call(web.zoom.transform, t);
+  }
+
+  function zoomWeb(factor) {
+    if (!web.klaar) return;
+    (minderBeweging ? web.svg : web.svg.transition().duration(200)).call(web.zoom.scaleBy, factor);
+  }
+
+  function zetWebFocus() {
+    if (!web.klaar) return;
+    const vlak = $('#web-vlak');
+    const svg = $('#web-svg', vlak);
+    if (!svg) return;
+    const id = web.hover || (staat.open && M.itemMap.has(staat.open) ? staat.open : null);
+    $$('.wnode.is-focus, .wnode.is-buur', vlak).forEach((n) => n.classList.remove('is-focus', 'is-buur'));
+    $$('.rand.is-aan', vlak).forEach((g) => g.classList.remove('is-aan'));
+    svg.classList.toggle('heeft-focus', Boolean(id));
+    if (!id) return;
+    const node = $(`.wnode[data-id="${CSS.escape(id)}"]`, vlak);
+    if (node) node.classList.add('is-focus');
+    $$('.rand', vlak).forEach((g) => {
+      if (diagram.verborgen.has(g.dataset.type)) return;
+      const ander = g.dataset.van === id ? g.dataset.naar : g.dataset.naar === id ? g.dataset.van : null;
+      if (!ander) return;
+      g.classList.add('is-aan');
+      const n = $(`.wnode[data-id="${CSS.escape(ander)}"]`, vlak);
+      if (n) n.classList.add('is-buur');
+    });
+  }
+
   /* ---------- Zoeken ---------- */
   function zoekOK(tekst) {
     if (!staat.zoek) return true;
@@ -580,6 +808,8 @@
       if (az) az.classList.toggle('is-gedimd', !ok);
       const dn = $(`.dnode[data-id="${CSS.escape(it.id)}"]`);
       if (dn) dn.classList.toggle('is-gedimd', !ok);
+      const wn = $(`.wnode[data-id="${CSS.escape(it.id)}"]`);
+      if (wn) wn.classList.toggle('is-gedimd', !ok);
     });
     $$('.jaarblok').forEach((b) => b.classList.toggle('is-gedimd', $$('.kaart', b).every((k) => k.classList.contains('is-gedimd'))));
     $$('.az-groep').forEach((g) => {
@@ -600,7 +830,7 @@
     $$('.portret-jaar').forEach((b) => b.classList.toggle('is-gedimd', $$('.portret', b).every((k) => k.classList.contains('is-gedimd'))));
 
     const actief = Boolean(staat.zoek);
-    const overBegrippen = ['tijdlijn', 'begrippen', 'diagram'].includes(staat.weergave);
+    const overBegrippen = ['tijdlijn', 'begrippen', 'diagram', 'woordweb'].includes(staat.weergave);
     const totaal = overBegrippen ? M.items.length : M.perPersoon.size;
     const aantal = overBegrippen ? n : np;
     const woord = overBegrippen ? 'begrippen' : 'personen';
@@ -662,10 +892,11 @@
 
   function markeerActief() {
     $$('.kaart.is-actief, .kaart.is-verwant').forEach((k) => k.classList.remove('is-actief', 'is-verwant'));
-    $$('.leven-rij.is-actief, .portret.is-actief, .az-item.is-actief, .dnode.is-actief').forEach((r) => r.classList.remove('is-actief'));
+    $$('.leven-rij.is-actief, .portret.is-actief, .az-item.is-actief, .dnode.is-actief, .wnode.is-actief').forEach((r) => r.classList.remove('is-actief'));
     zetDiagramFocus();
+    zetWebFocus();
     if (!staat.open) return;
-    $$(`.dnode[data-id="${CSS.escape(staat.open)}"]`).forEach((r) => r.classList.add('is-actief'));
+    $$(`.dnode[data-id="${CSS.escape(staat.open)}"], .wnode[data-id="${CSS.escape(staat.open)}"]`).forEach((r) => r.classList.add('is-actief'));
     $$(`.az-item[data-id="${CSS.escape(staat.open)}"]`).forEach((r) => r.classList.add('is-actief'));
     $$(`.portret[data-item="${CSS.escape(staat.open)}"]`).forEach((r) => r.classList.add('is-actief'));
     const it = M.itemMap.get(staat.open);
@@ -724,7 +955,7 @@
   }
 
   /* ---------- Weergave ---------- */
-  const WEERGAVEN = ['tijdlijn', 'portretten', 'personen', 'begrippen', 'diagram'];
+  const WEERGAVEN = ['tijdlijn', 'portretten', 'personen', 'begrippen', 'diagram', 'woordweb'];
   function zetWeergave(w) {
     staat.weergave = w;
     WEERGAVEN.forEach((v) => {
@@ -740,6 +971,7 @@
       if (!diagram.klaar) renderDiagram();
       requestAnimationFrame(tekenLijnen);
     }
+    if (w === 'woordweb' && !web.klaar) renderWeb();
     pasFilterToe();
   }
 
@@ -757,6 +989,14 @@
         if (diagram.verborgen.has(t)) diagram.verborgen.delete(t); else diagram.verborgen.add(t);
         pasSoortenToe();
         zetDiagramFocus();
+        zetWebFocus();
+        return;
+      }
+      const wz = e.target.closest('[data-webzoom]');
+      if (wz) {
+        if (wz.dataset.webzoom === 'in') zoomWeb(1.3);
+        else if (wz.dataset.webzoom === 'uit') zoomWeb(1 / 1.3);
+        else pasWebPassend(true);
         return;
       }
       const letter = e.target.closest('.az-letter-knop');
@@ -777,8 +1017,26 @@
     vlak.addEventListener('focusin', wijsAan);
     vlak.addEventListener('mouseleave', () => { diagram.hover = null; zetDiagramFocus(); });
     vlak.addEventListener('focusout', (e) => { if (!vlak.contains(e.relatedTarget)) { diagram.hover = null; zetDiagramFocus(); } });
+    // Woordweb: zelfde gedrag voor aanwijzen, plus Enter of spatie om een woord te openen
+    const webVlak = $('#web-vlak');
+    const wijsWoordAan = (e) => {
+      const n = e.target.closest && e.target.closest('.wnode');
+      const id = n ? n.dataset.id : null;
+      if (id !== web.hover) { web.hover = id; zetWebFocus(); }
+    };
+    webVlak.addEventListener('mouseover', wijsWoordAan);
+    webVlak.addEventListener('focusin', wijsWoordAan);
+    webVlak.addEventListener('mouseleave', () => { web.hover = null; zetWebFocus(); });
+    webVlak.addEventListener('focusout', (e) => { if (!webVlak.contains(e.relatedTarget)) { web.hover = null; zetWebFocus(); } });
+    webVlak.addEventListener('keydown', (e) => {
+      const n = e.target.closest && e.target.closest('.wnode');
+      if (n && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openDetail(n.dataset.id); }
+    });
     let hertekenen = null;
-    window.addEventListener('resize', () => { clearTimeout(hertekenen); hertekenen = setTimeout(tekenLijnen, 120); });
+    window.addEventListener('resize', () => {
+      clearTimeout(hertekenen);
+      hertekenen = setTimeout(() => { tekenLijnen(); if (staat.weergave === 'woordweb') pasWebPassend(false); }, 120);
+    });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(tekenLijnen);
     $('.weergave').addEventListener('keydown', (e) => {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;

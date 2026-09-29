@@ -431,6 +431,35 @@ main { padding-block: 28px 64px; }
 .pijlkop-versterkt, .type-versterkt .pijlkop { fill: var(--accent); }
 .rem-streep { stroke: var(--rem); stroke-width: 2.5; }
 
+/* ---------- Woordweb ---------- */
+.woordwebweergave .personen-uitleg { margin-bottom: 14px; max-width: 75ch; }
+.web-balk { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 10px 16px; margin-bottom: 12px; }
+.web-balk .diagram-legenda { margin-bottom: 0; }
+.web-zoom { display: inline-flex; gap: 6px; }
+.web-knop {
+  min-width: 34px; height: 34px; padding: 0 10px; border: 1px solid var(--lijn); border-radius: 8px;
+  background: var(--vlak); font-size: 17px; line-height: 1; color: var(--inkt);
+}
+.web-knop-tekst { font-size: 13px; }
+.web-knop:hover { border-color: var(--lijn-sterk); }
+.web-vlak { position: relative; border: 1px solid var(--lijn); border-radius: 10px; background: var(--papier); overflow: hidden; }
+.web-svg { display: block; cursor: grab; }
+.web-svg:active { cursor: grabbing; }
+.weiland-vorm { fill: var(--vlak); stroke: var(--lijn); stroke-width: 1; }
+.weiland-naam { font: 500 11px var(--f-cijfer); letter-spacing: .1em; text-transform: uppercase; fill: var(--gedempt); }
+.wnode { cursor: pointer; outline: none; }
+.wlabel {
+  font-family: var(--f-display); font-weight: 600; fill: var(--inkt);
+  paint-order: stroke; stroke: var(--vlak); stroke-width: 4px; stroke-linejoin: round;
+}
+.wnode:hover .wlabel, .wnode.is-focus .wlabel, .wnode.is-actief .wlabel { fill: var(--accent); }
+.wnode:focus-visible .wlabel { text-decoration: underline; }
+.wnode.is-gedimd .wlabel { opacity: .22; }
+.web-links .rand { opacity: .6; transition: none; }
+.web-svg.heeft-focus .wnode:not(.is-focus):not(.is-buur) .wlabel { opacity: .2; }
+.web-svg.heeft-focus .rand:not(.is-aan) { opacity: .05; }
+.web-svg.heeft-focus .rand.is-aan { opacity: 1; }
+
 /* Verbanden in het detailpaneel */
 .v-blok + .v-blok { margin-top: 12px; }
 .v-kop { margin: 0 0 4px; font-size: 13px; color: var(--gedempt); }
