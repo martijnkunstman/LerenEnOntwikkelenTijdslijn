@@ -134,7 +134,6 @@
       [`${Math.min(...jaren)}–${Math.max(...jaren)}`, 'periode'],
     ];
     $('#cijfers').innerHTML = cijfers.map(([w, l]) => `<div><dt>${l}</dt><dd>${w}</dd></div>`).join('');
-    if (M.meta.beschrijving) $('#voet').innerHTML = `<p>${esc(M.meta.beschrijving)}</p>`;
   }
 
   /* ---------- Tijdlijn ---------- */
