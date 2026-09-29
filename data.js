@@ -3,10 +3,10 @@ window.TIJDLIJN = {
  "meta": {
   "titel": "Tijdlijn",
   "beschrijving": "Transcriptie van de tijdlijn uit het boek, zonder portretten. Personen, tijdlijn-items en relaties zijn gescheiden en gekoppeld via id's.",
-  "versie": "1.0",
+  "versie": "1.1",
   "structuur": {
    "personen": "Unieke personen. Eén persoon kan in meerdere items voorkomen (bijv. p-schon in 1974 en 1983).",
-   "items": "Eén item = één portretblok op de tijdlijn: jaartal + begrip + één of meer persoon-id's. Een duo is een item met twee persoon-id's.",
+   "items": "Eén item = één portretblok op de tijdlijn: jaartal + begrip + één of meer persoon-id's. Een duo is een item met twee persoon-id's. 'omschrijving' zegt wat het begrip inhoudt, 'uitleg' wat het betekent voor leren en ontwikkelen.",
    "relaties": "Koppelingen tussen items. 'van' en 'naar' verwijzen naar item-id's."
   },
   "relatietypes": {
@@ -482,7 +482,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Encounter",
    "personen": [
     "p-buber"
-   ]
+   ],
+   "omschrijving": "Een echte relatie tussen twee mensen (Ik–Jij), waarin je de ander als volledig persoon tegemoet treedt en niet als object of middel (Ik–Het).",
+   "uitleg": "Leren en begeleiden gebeuren in relatie. Wie de lerende werkelijk ontmoet, schept ruimte voor vertrouwen, dialoog en groei."
   },
   {
    "id": "t-1933-lewin",
@@ -491,7 +493,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Action research",
    "personen": [
     "p-lewin"
-   ]
+   ],
+   "omschrijving": "Onderzoek waarin je een praktijk verandert en die verandering tegelijk bestudeert, in cycli van plannen, handelen, observeren en reflecteren.",
+   "uitleg": "Professionals en teams leren van hun eigen praktijk door systematisch te experimenteren. Verbeteren en kennis opbouwen gaan zo hand in hand."
   },
   {
    "id": "t-1933-dewey",
@@ -500,7 +504,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Reflection",
    "personen": [
     "p-dewey"
-   ]
+   ],
+   "omschrijving": "Actief en zorgvuldig nadenken over ervaringen, overtuigingen en aannames, vooral wanneer iets onzeker of problematisch is.",
+   "uitleg": "Ervaring alleen leert niet: pas door erop te reflecteren wordt ervaring een bron van leren. Dewey legde daarmee de basis voor ervaringsgericht leren."
   },
   {
    "id": "t-1938-huizinga",
@@ -509,7 +515,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Play",
    "personen": [
     "p-huizinga"
-   ]
+   ],
+   "omschrijving": "Vrijwillige activiteit binnen eigen regels, tijd en ruimte, los van het gewone leven. Huizinga zag spel als bron van cultuur (Homo ludens).",
+   "uitleg": "Spel biedt een veilige ruimte om te experimenteren, rollen uit te proberen en fouten te maken. Daarom is het een krachtige vorm van leren, ook voor volwassenen."
   },
   {
    "id": "t-1950-erikson",
@@ -518,7 +526,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Life cycle",
    "personen": [
     "p-erikson"
-   ]
+   ],
+   "omschrijving": "Ontwikkeling verloopt in acht levensfasen, elk met een eigen psychosociale spanning, zoals vertrouwen tegenover wantrouwen of generativiteit tegenover stagnatie.",
+   "uitleg": "Ontwikkeling stopt niet na de jeugd. Wat mensen willen en kunnen leren hangt samen met hun levensfase, zoals de behoefte om in het middenleven kennis door te geven."
   },
   {
    "id": "t-1956-bloom-shulman",
@@ -528,7 +538,9 @@ window.TIJDLIJN = {
    "personen": [
     "p-bloom",
     "p-shulman"
-   ]
+   ],
+   "omschrijving": "Een ordening van leerdoelen van eenvoudig naar complex: van kennis en begrip via toepassing en analyse naar synthese en evaluatie. Shulman ontwierp later een eigen 'table of learning', van betrokkenheid tot toewijding.",
+   "uitleg": "Een taxonomie helpt leerdoelen, opdrachten en toetsing op elkaar af te stemmen en maakt zichtbaar welk denkniveau je van lerenden vraagt."
   },
   {
    "id": "t-1958-polanyi",
@@ -537,7 +549,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Stilzwijgende kennis",
    "personen": [
     "p-polanyi"
-   ]
+   ],
+   "omschrijving": "Kennis die je wel hebt maar moeilijk onder woorden kunt brengen: 'we weten meer dan we kunnen zeggen'.",
+   "uitleg": "Veel vakmanschap is stilzwijgend. Het wordt vooral overgedragen door meedoen, voordoen en samenwerken, niet via handboeken of cursussen."
   },
   {
    "id": "t-1958-berne",
@@ -546,7 +560,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Transactional analysis",
    "personen": [
     "p-berne"
-   ]
+   ],
+   "omschrijving": "Een model van communicatie waarin mensen handelen vanuit drie ego-toestanden: Ouder, Volwassene en Kind.",
+   "uitleg": "Het helpt begeleiders en teams om patronen in interacties te herkennen, zoals terugkerende 'spelletjes', en bewuster en gelijkwaardiger te communiceren."
   },
   {
    "id": "t-1960-menzies-lyth",
@@ -555,7 +571,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Sociale afweermechanismen",
    "personen": [
     "p-menzies-lyth"
-   ]
+   ],
+   "omschrijving": "Routines en structuren in organisaties die medewerkers onbewust beschermen tegen angst en spanning in het werk. Menzies Lyth onderzocht dit bij verpleegkundigen.",
+   "uitleg": "Zulke afweer maakt werk draaglijk, maar kan leren en verandering blokkeren. Wie wil veranderen, moet ook aandacht hebben voor de emoties die bestaande werkwijzen afdekken."
   },
   {
    "id": "t-1960-berlyne",
@@ -564,7 +582,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Curiosity",
    "personen": [
     "p-berlyne"
-   ]
+   ],
+   "omschrijving": "De drang om te verkennen en te weten, opgewekt door nieuwheid, complexiteit, onzekerheid en verrassing.",
+   "uitleg": "Nieuwsgierigheid is een motor van leren van binnenuit. Een passende mate van nieuwheid en uitdaging, niet te weinig en niet te veel, zet mensen aan tot onderzoeken."
   },
   {
    "id": "t-1967-freire",
@@ -573,7 +593,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Critical reflection",
    "personen": [
     "p-freire"
-   ]
+   ],
+   "omschrijving": "Samen nadenken over je eigen situatie en de machtsverhoudingen die haar vormen, met als doel die situatie te veranderen (bewustwording, conscientização).",
+   "uitleg": "Freire zette 'bankonderwijs', waarin kennis in lerenden wordt gestort, af tegen dialogisch leren. Lerenden zijn geen lege vaten, maar medeonderzoekers van hun eigen werkelijkheid."
   },
   {
    "id": "t-1969-weick",
@@ -582,7 +604,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Loosely coupled systems",
    "personen": [
     "p-weick"
-   ]
+   ],
+   "omschrijving": "Organisaties waarin onderdelen met elkaar verbonden zijn, maar elk een eigen identiteit en bewegingsvrijheid houden, zoals klassen binnen een school.",
+   "uitleg": "Losse koppeling geeft ruimte voor lokale aanpassing en experiment, maar maakt het lastig om vernieuwing in de hele organisatie te laten doorwerken."
   },
   {
    "id": "t-1970-freidson",
@@ -591,7 +615,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Professionalism",
    "personen": [
     "p-freidson"
-   ]
+   ],
+   "omschrijving": "Een manier om werk te organiseren waarin beroepsbeoefenaren zelf, op basis van specialistische kennis en beroepsethiek, de kwaliteit van hun werk bepalen. Freidson noemde dit een derde logica, naast markt en bureaucratie.",
+   "uitleg": "Professionals houden hun deskundigheid zelf op peil. Leren en ontwikkelen horen daarmee bij de verantwoordelijkheid van de beroepsgroep, niet alleen bij het management."
   },
   {
    "id": "t-1974-schon-argyris",
@@ -601,7 +627,9 @@ window.TIJDLIJN = {
    "personen": [
     "p-schon",
     "p-argyris"
-   ]
+   ],
+   "omschrijving": "Bij single-loop leren pas je je handelen aan binnen bestaande doelen en normen. Bij double-loop leren stel je die onderliggende doelen, normen en aannames zelf ter discussie.",
+   "uitleg": "Echte verandering in organisaties vraagt dat mensen hun eigen vanzelfsprekendheden onderzoeken, ook als dat ongemakkelijk is."
   },
   {
    "id": "t-1975-csikszentmihalyi",
@@ -610,7 +638,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Flow",
    "personen": [
     "p-csikszentmihalyi"
-   ]
+   ],
+   "omschrijving": "Een toestand waarin je volledig opgaat in een activiteit en de tijd vergeet, doordat uitdaging en vaardigheid in balans zijn.",
+   "uitleg": "Leren is het meest bevredigend en effectief als een taak net boven je huidige niveau ligt. Te makkelijk leidt tot verveling, te moeilijk tot angst."
   },
   {
    "id": "t-1977-bourdieu",
@@ -619,7 +649,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Habitus",
    "personen": [
     "p-bourdieu"
-   ]
+   ],
+   "omschrijving": "Het geheel van diep ingesleten gewoonten, smaak en manieren van denken en doen, gevormd door je sociale achtergrond.",
+   "uitleg": "Lerenden brengen hun habitus mee. Wie dat niet ziet, bevoordeelt onbedoeld mensen van wie de achtergrond aansluit bij de cultuur van de school of organisatie."
   },
   {
    "id": "t-1978-mcclelland",
@@ -628,7 +660,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Achievement motivation",
    "personen": [
     "p-mcclelland"
-   ]
+   ],
+   "omschrijving": "De behoefte om dingen goed te doen en uitdagende doelen te bereiken. McClelland onderscheidde die naast de behoefte aan macht en de behoefte aan verbondenheid.",
+   "uitleg": "Mensen met een sterke prestatiebehoefte zoeken haalbare uitdagingen en directe feedback. Leertaken en ontwikkelpaden kun je daarop afstemmen."
   },
   {
    "id": "t-1983-schon",
@@ -637,7 +671,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Reflectieve beroepsbeoefenaar",
    "personen": [
     "p-schon"
-   ]
+   ],
+   "omschrijving": "Een professional die reflecteert tijdens het handelen (reflection-in-action) en achteraf op het handelen (reflection-on-action).",
+   "uitleg": "Professionele kennis zit niet alleen in theorie, maar ontstaat in het omgaan met unieke, onzekere praktijksituaties. Opleiden betekent daarom ook leren reflecteren in de praktijk."
   },
   {
    "id": "t-1984-kolb",
@@ -646,7 +682,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Learning styles",
    "personen": [
     "p-kolb"
-   ]
+   ],
+   "omschrijving": "Leren verloopt in een cyclus van concreet ervaren, reflectief observeren, abstract begrijpen en actief experimenteren. Mensen hebben een voorkeur voor bepaalde fasen: hun leerstijl.",
+   "uitleg": "De leercyclus wordt veel gebruikt om leerprocessen te ontwerpen. Het idee dat je onderwijs moet aanpassen aan iemands vaste leerstijl, wordt door onderzoek echter niet ondersteund."
   },
   {
    "id": "t-1985-schein",
@@ -655,7 +693,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Culture",
    "personen": [
     "p-schein"
-   ]
+   ],
+   "omschrijving": "Organisatiecultuur heeft drie lagen: zichtbare uitingen, uitgesproken waarden en diepe, vaak onbewuste basisaannames.",
+   "uitleg": "Leren en veranderen in organisaties lukt pas duurzaam als ook de basisaannames in beeld komen. Leiders spelen een sleutelrol in het vormen van cultuur."
   },
   {
    "id": "t-1985-deci-ryan",
@@ -665,7 +705,9 @@ window.TIJDLIJN = {
    "personen": [
     "p-deci",
     "p-ryan"
-   ]
+   ],
+   "omschrijving": "Mensen hebben drie psychologische basisbehoeften: autonomie, competentie en verbondenheid. Als die vervuld worden, ontstaat motivatie van binnenuit.",
+   "uitleg": "Een leeromgeving die keuzeruimte biedt, succeservaringen mogelijk maakt en verbinding stimuleert, leidt tot diepere en duurzamere motivatie dan belonen en straffen."
   },
   {
    "id": "t-1986-cooperrider",
@@ -674,7 +716,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Waarderend onderzoeken",
    "personen": [
     "p-cooperrider"
-   ]
+   ],
+   "omschrijving": "Een veranderaanpak die vertrekt vanuit wat al goed werkt, in vier fasen: ontdekken, dromen, ontwerpen en realiseren.",
+   "uitleg": "Door te onderzoeken wat energie geeft in plaats van problemen te analyseren, bouwen teams en organisaties aan gedeelde ambities en ontwikkeling."
   },
   {
    "id": "t-1987-engestrom",
@@ -683,7 +727,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Grensoverschrijding",
    "personen": [
     "p-engestrom"
-   ]
+   ],
+   "omschrijving": "Leren dat ontstaat wanneer mensen de grenzen tussen verschillende praktijken, disciplines of organisaties overschrijden.",
+   "uitleg": "Grenzen, bijvoorbeeld tussen school en werkplek, zijn niet alleen obstakels maar ook leerkansen. Waar perspectieven botsen, ontstaan nieuwe inzichten en werkwijzen."
   },
   {
    "id": "t-1988-west-gersick",
@@ -693,7 +739,9 @@ window.TIJDLIJN = {
    "personen": [
     "p-west",
     "p-gersick"
-   ]
+   ],
+   "omschrijving": "Teamreflexiviteit is de mate waarin een team samen stilstaat bij zijn doelen, strategieën en werkwijze en die bijstelt. Gersick liet zien dat teams niet geleidelijk ontwikkelen, maar rond het midden van hun looptijd een omslag maken.",
+   "uitleg": "Teams die regelmatig reflecteren op hoe ze werken, presteren en vernieuwen beter. Omslagmomenten zijn kansen om het samen anders te doen."
   },
   {
    "id": "t-1990-checkland",
@@ -702,7 +750,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Zachte-systemenmethodologie",
    "personen": [
     "p-checkland"
-   ]
+   ],
+   "omschrijving": "Een methode om complexe, rommelige probleemsituaties te verkennen door de verschillende wereldbeelden van betrokkenen in kaart te brengen en met hen in gesprek te gaan.",
+   "uitleg": "In plaats van één juiste oplossing te zoeken, leren betrokkenen van elkaars perspectief. Zo komen ze tot verbeteringen die voor iedereen wenselijk en haalbaar zijn."
   },
   {
    "id": "t-1990-caine",
@@ -712,7 +762,9 @@ window.TIJDLIJN = {
    "personen": [
     "p-g-caine",
     "p-r-caine"
-   ]
+   ],
+   "omschrijving": "Onderwijs ontwerpen op basis van inzichten over hoe het brein leert, zoals het belang van betekenis, emotie, samenhang en een uitdagende maar niet bedreigende omgeving.",
+   "uitleg": "Leren gaat het best in een rijke, betekenisvolle context met ontspannen alertheid. Kanttekening: veel populaire 'breinclaims' zijn wetenschappelijk zwak onderbouwd."
   },
   {
    "id": "t-1991-pierce",
@@ -721,7 +773,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Psychological ownership",
    "personen": [
     "p-pierce"
-   ]
+   ],
+   "omschrijving": "Het gevoel dat iets 'van mij' is, zoals een taak, project of organisatie, ook zonder formeel bezit.",
+   "uitleg": "Dat gevoel groeit door invloed, grondige kennis en eigen investering. Wie zich eigenaar voelt van zijn werk of leren, neemt meer verantwoordelijkheid en zet zich meer in."
   },
   {
    "id": "t-1991-lave",
@@ -730,7 +784,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Informal learning",
    "personen": [
     "p-lave"
-   ]
+   ],
+   "omschrijving": "Leren buiten formele opleidingen, in het dagelijks werk en de omgang met anderen. Lave beschreef het als gesitueerd leren: nieuwkomers groeien via deelname aan de rand geleidelijk in een praktijk.",
+   "uitleg": "Het meeste leren op het werk is informeel. Het loont om deelname, samenwerking en toegang tot ervaren collega's bewust te organiseren."
   },
   {
    "id": "t-1991-seligman",
@@ -739,7 +795,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Learned optimism",
    "personen": [
     "p-seligman"
-   ]
+   ],
+   "omschrijving": "Optimisme als aan te leren denkstijl: tegenslag zien als tijdelijk, specifiek en beïnvloedbaar, in plaats van blijvend, allesomvattend en persoonlijk.",
+   "uitleg": "Hoe je tegenslag verklaart, bepaalt of je volhoudt of opgeeft. Door die verklaringsstijl te trainen, vergroten mensen hun veerkracht en leervermogen."
   },
   {
    "id": "t-1991-pedler",
@@ -748,7 +806,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Learning organization",
    "personen": [
     "p-pedler"
-   ]
+   ],
+   "omschrijving": "Een organisatie die het leren van al haar leden mogelijk maakt en zichzelf daardoor voortdurend vernieuwt.",
+   "uitleg": "Leren is dan geen losse opleidingsactiviteit, maar verweven met strategie, structuur en dagelijks werk, zodat de organisatie zich blijvend kan aanpassen."
   },
   {
    "id": "t-1996-ericsson",
@@ -757,7 +817,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Doelbewust oefenen",
    "personen": [
     "p-ericsson"
-   ]
+   ],
+   "omschrijving": "Doelgericht oefenen op specifieke onderdelen net boven je huidige niveau, met directe feedback en volle concentratie.",
+   "uitleg": "Expertise ontstaat niet vanzelf door ervaring of talent, maar door langdurig en gestructureerd oefenen. Coaching en feedback zijn daarbij essentieel."
   },
   {
    "id": "t-1996-kessels",
@@ -766,7 +828,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Bedrijfscurriculum",
    "personen": [
     "p-kessels"
-   ]
+   ],
+   "omschrijving": "Het geheel van leeractiviteiten en leeromgevingen waarmee een organisatie de kennisproductiviteit van medewerkers bevordert.",
+   "uitleg": "In een kenniseconomie draait het om het vermogen om kennis te ontwikkelen en toe te passen. Dat vraagt een werkomgeving die leren uitlokt, niet alleen een opleidingsaanbod."
   },
   {
    "id": "t-1997-stacey",
@@ -775,7 +839,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Complex systems",
    "personen": [
     "p-stacey"
-   ]
+   ],
+   "omschrijving": "Organisaties als voortdurend veranderende patronen van interactie tussen mensen. Uitkomsten zijn niet te plannen of te beheersen, maar ontstaan onderweg.",
+   "uitleg": "Verandering en leren gebeuren in alledaagse gesprekken en relaties, niet in blauwdrukken. Leiders kunnen richting geven, maar niet sturen alsof de organisatie een machine is."
   },
   {
    "id": "t-1998-wenger",
@@ -784,7 +850,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Praktijkgemeenschap",
    "personen": [
     "p-wenger"
-   ]
+   ],
+   "omschrijving": "Een groep mensen met een gedeelde passie of vraagstuk die door regelmatig contact samen leren en hun praktijk verdiepen.",
+   "uitleg": "Leren is sociaal en verbonden met identiteit en erbij horen. Organisaties kunnen zulke gemeenschappen stimuleren en faciliteren, maar niet afdwingen."
   },
   {
    "id": "t-1999-wierdsma",
@@ -793,7 +861,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Place of difficulty",
    "personen": [
     "p-wierdsma"
-   ]
+   ],
+   "omschrijving": "De plek waar het in samenwerking schuurt: waar verschillende belangen en perspectieven samenkomen en het lastige gesprek gevoerd moet worden.",
+   "uitleg": "Juist daar ligt de leerkans. Wie de moeite niet ontwijkt maar samen onderzoekt, komt tot gedeelde betekenis en werkelijke verandering (co-creatie)."
   },
   {
    "id": "t-1999-isaacs",
@@ -802,7 +872,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Dialogue",
    "personen": [
     "p-isaacs"
-   ]
+   ],
+   "omschrijving": "Samen denken: een gesprek waarin deelnemers echt luisteren, elkaar respecteren, hun oordeel opschorten en uitspreken wat ze denken, om samen betekenis te vormen.",
+   "uitleg": "Anders dan in een discussie, waarin je wint of verliest, maakt dialoog gezamenlijk leren mogelijk en brengt het onderliggende aannames aan het licht."
   },
   {
    "id": "t-1999-edmondson",
@@ -811,7 +883,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Psychologische veiligheid",
    "personen": [
     "p-edmondson"
-   ]
+   ],
+   "omschrijving": "Het gedeelde gevoel in een team dat je risico's kunt nemen, zoals vragen stellen, fouten melden of kritiek uiten, zonder te worden afgestraft of belachelijk gemaakt.",
+   "uitleg": "Het is een voorwaarde voor teamleren. Zonder psychologische veiligheid blijven fouten en ideeën verborgen en leert het team niet."
   },
   {
    "id": "t-2000-smith-lewis",
@@ -821,7 +895,9 @@ window.TIJDLIJN = {
    "personen": [
     "p-smith",
     "p-lewis"
-   ]
+   ],
+   "omschrijving": "Tegenstrijdige maar onderling verbonden eisen die tegelijk bestaan en blijven bestaan, zoals stabiliteit en verandering of benutten en verkennen.",
+   "uitleg": "In plaats van te kiezen, leren organisaties en leiders beide kanten te omarmen en de spanning productief te maken. Dat vraagt het vermogen om met dubbelzinnigheid om te gaan."
   },
   {
    "id": "t-2001-billett",
@@ -830,7 +906,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Workplace learning",
    "personen": [
     "p-billett"
-   ]
+   ],
+   "omschrijving": "Leren tijdens en door het werk, bepaald door de wisselwerking tussen de kansen die de werkplek biedt en hoe medewerkers die benutten.",
+   "uitleg": "De werkplek is een volwaardige leeromgeving, maar de kwaliteit hangt af van begeleiding, toegang tot uitdagende taken en de eigen keuzes van de lerende."
   },
   {
    "id": "t-2002-bereiter-scardamalia",
@@ -840,7 +918,9 @@ window.TIJDLIJN = {
    "personen": [
     "p-bereiter",
     "p-scardamalia"
-   ]
+   ],
+   "omschrijving": "Het doelbewust en gezamenlijk ontwikkelen en verbeteren van ideeën, zoals wetenschappers dat doen (knowledge building).",
+   "uitleg": "Lerenden zijn geen consumenten van kennis maar makers ervan. Scholen en organisaties kunnen gemeenschappen worden die samen nieuwe kennis opbouwen."
   },
   {
    "id": "t-2004-schwartz",
@@ -849,7 +929,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Praktische wijsheid",
    "personen": [
     "p-schwartz"
-   ]
+   ],
+   "omschrijving": "Het vermogen om in een concrete situatie het juiste te doen, op de juiste manier en om de juiste redenen. Het bouwt voort op Aristoteles' phronesis.",
+   "uitleg": "Regels en prikkels schieten tekort in complexe praktijken. Professionals ontwikkelen praktische wijsheid door ervaring, reflectie en goede voorbeelden, en hebben daarvoor ruimte voor eigen oordeel nodig."
   },
   {
    "id": "t-2004-spillane",
@@ -858,7 +940,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Distributed leadership",
    "personen": [
     "p-spillane"
-   ]
+   ],
+   "omschrijving": "Leiderschap is geen eigenschap van één persoon, maar ontstaat in de wisselwerking tussen leiders, medewerkers en hun situatie.",
+   "uitleg": "In scholen en organisaties dragen velen bij aan leiderschap. Dat vergroot het eigenaarschap en het vermogen om samen te leren en te verbeteren."
   },
   {
    "id": "t-2005-kunneman",
@@ -867,7 +951,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Normative professionalism",
    "personen": [
     "p-kunneman"
-   ]
+   ],
+   "omschrijving": "Professionaliteit waarin naast kennis en vaardigheden ook de morele en existentiële vragen van het werk meetellen: wat is hier goed om te doen?",
+   "uitleg": "Tegenover sturing op meetbare resultaten staat het gesprek over waarden en betekenis. Leren omvat dan ook samen nadenken over wat goed werk is."
   },
   {
    "id": "t-2006-dweck",
@@ -876,7 +962,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Mindset",
    "personen": [
     "p-dweck"
-   ]
+   ],
+   "omschrijving": "Met een groeimindset zie je bekwaamheid als ontwikkelbaar; met een vaste mindset zie je haar als aangeboren en onveranderlijk.",
+   "uitleg": "Een groeimindset maakt dat mensen uitdagingen aangaan en van fouten leren. Feedback op inzet en aanpak, in plaats van op talent, helpt die houding te versterken."
   },
   {
    "id": "t-2006-shaffer",
@@ -885,7 +973,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Professional frames",
    "personen": [
     "p-shaffer"
-   ]
+   ],
+   "omschrijving": "De manier waarop een beroepsgroep kijkt, denkt en handelt: een samenhang van vaardigheden, kennis, identiteit, waarden en manieren van oordelen.",
+   "uitleg": "Professioneel leren is ingroeien in zo'n frame. Simulaties en realistische rollen, bijvoorbeeld in games, helpen lerenden te denken als een professional."
   },
   {
    "id": "t-2007-scharmer",
@@ -894,7 +984,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Theorie U",
    "personen": [
     "p-scharmer"
-   ]
+   ],
+   "omschrijving": "Een veranderproces in de vorm van een U: oude patronen loslaten, in het dal stilstaan bij wat wil ontstaan (presencing) en daarna het nieuwe vormgeven.",
+   "uitleg": "Diepgaande vernieuwing vraagt meer dan analyseren. Met een open blik, open hart en open wil leer je van de toekomst die zich aandient in plaats van alleen van het verleden."
   },
   {
    "id": "t-2007-hattie",
@@ -903,7 +995,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Feedback",
    "personen": [
     "p-hattie"
-   ]
+   ],
+   "omschrijving": "Informatie die de kloof tussen de huidige en de gewenste prestatie helpt dichten, via drie vragen: waar ga ik heen, hoe gaat het, en wat is de volgende stap?",
+   "uitleg": "Feedback hoort bij de sterkste invloeden op leren, maar alleen als ze gaat over de taak, de aanpak of de zelfsturing, en niet over de persoon."
   },
   {
    "id": "t-2008-brown",
@@ -912,7 +1006,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Vulnerability",
    "personen": [
     "p-brown"
-   ]
+   ],
+   "omschrijving": "De bereidheid om je te laten zien in onzekerheid, risico en emotionele blootstelling.",
+   "uitleg": "Kwetsbaarheid is de bron van moed, creativiteit en verbinding. Wie zich niet kwetsbaar durft op te stellen, vermijdt fouten en feedback en leert daardoor minder."
   },
   {
    "id": "t-2008-sennett",
@@ -921,7 +1017,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Craftsmanship",
    "personen": [
     "p-sennett"
-   ]
+   ],
+   "omschrijving": "De drijfveer om werk goed te doen omwille van het werk zelf, ontwikkeld door langdurige oefening en een samenspel van hand en hoofd.",
+   "uitleg": "Vakmanschap groeit door herhaling, door het omgaan met weerstand en door overdracht van meester op gezel. Het vraagt tijd en ruimte voor kwaliteit."
   },
   {
    "id": "t-2011-kahneman",
@@ -930,7 +1028,9 @@ window.TIJDLIJN = {
    "begrip_vertaling": "Cognitive biases",
    "personen": [
     "p-kahneman"
-   ]
+   ],
+   "omschrijving": "Systematische vertekeningen in ons oordeel, doordat we vaak vertrouwen op snel, intuïtief denken (Systeem 1) in plaats van traag, beredeneerd denken (Systeem 2).",
+   "uitleg": "Ook ervaren professionals maken denkfouten. Bewustzijn ervan, feedback en gestructureerde reflectie helpen om betere beslissingen te nemen en scherper te leren van ervaring."
   }
  ],
  "relaties": [

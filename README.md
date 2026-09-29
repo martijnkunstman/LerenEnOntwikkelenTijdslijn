@@ -12,6 +12,7 @@ Gemaakt met gewone HTML, CSS en JavaScript. Er zijn geen build-stap en geen afha
   - **Duo's**, twee denkers bij één begrip, hebben een eigen label.
 - **Liniaal**: een balk bovenaan die blijft staan tijdens het scrollen. Hij toont alle begrippen op schaal en laat zien waar je bent. Klik op een stip om naar dat begrip te gaan.
 - **Detailpaneel**: klik op een begrip voor:
+  - een korte omschrijving en wat het begrip betekent voor leren en ontwikkelen;
   - de denkers met levensjaren, functie en leeftijd in dat jaar;
   - de begrippen op dezelfde lijn;
   - andere begrippen van dezelfde persoon;
@@ -50,7 +51,11 @@ Open daarna het adres dat de server toont, bijvoorbeeld `http://localhost:3000` 
 Alle gegevens staan in `tijdlijn.json`, in drie lijsten:
 
 - **`personen`**: unieke personen met `id`, `naam`, `achternaam`, `geboortejaar`, `overlijdensjaar` en `functie`. Onbekende jaren zijn `null`.
-- **`items`**: één blok op de tijdlijn met `id`, `jaar`, `begrip`, `begrip_vertaling` en een lijst `personen` met persoon-id's. Een item met twee persoon-id's is een duo.
+- **`items`**: één blok op de tijdlijn met `id`, `jaar`, `begrip`, `begrip_vertaling` en een lijst `personen` met persoon-id's. Een item met twee persoon-id's is een duo. Daarnaast heeft elk item:
+  - `omschrijving`: wat het begrip inhoudt;
+  - `uitleg`: wat het begrip betekent voor leren en ontwikkelen.
+
+  Beide teksten staan in het detailpaneel.
 - **`relaties`**: koppelingen tussen items via `van` en `naar` (item-id's). Er zijn twee typen:
   - `keten`: het item `naar` hangt direct onder het item `van`.
   - `gedeelde_lijn`: beide items hangen aan dezelfde lijn naar hetzelfde jaartal.
@@ -58,8 +63,12 @@ Alle gegevens staan in `tijdlijn.json`, in drie lijsten:
 Voorbeeld:
 
 ```json
-{ "id": "t-1983-schon", "jaar": 1983, "begrip": "Reflective practitioner",
-  "begrip_vertaling": "Reflectieve beroepsbeoefenaar", "personen": ["p-schon"] }
+{
+  "id": "t-1983-schon", "jaar": 1983, "begrip": "Reflective practitioner",
+  "begrip_vertaling": "Reflectieve beroepsbeoefenaar", "personen": ["p-schon"],
+  "omschrijving": "Een professional die reflecteert tijdens het handelen (reflection-in-action) en achteraf op het handelen (reflection-on-action).",
+  "uitleg": "Professionele kennis zit niet alleen in theorie, maar ontstaat in het omgaan met unieke, onzekere praktijksituaties. Opleiden betekent daarom ook leren reflecteren in de praktijk."
+}
 ```
 
 Pas je `tijdlijn.json` aan, zet de wijziging dan ook in `data.js`. Anders ziet de pagina de wijziging niet als je hem direct vanaf schijf opent. `data.js` bevat dezelfde JSON, na `window.TIJDLIJN = `. Via een webserver is dit niet nodig.

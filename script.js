@@ -336,6 +336,8 @@
         <h2 class="p-begrip" id="p-titel" tabindex="-1">${esc(it.begrip)}</h2>
         ${toonVertaling ? `<p class="p-vertaling">${esc(it.begrip_vertaling)}</p>` : ''}
       </div>
+      ${it.omschrijving ? `<p class="p-omschrijving">${esc(it.omschrijving)}</p>` : ''}
+      ${it.uitleg ? `<section class="p-uitleg-blok"><h3 class="p-sectie">Voor leren en ontwikkelen</h3><p class="p-tekst">${esc(it.uitleg)}</p></section>` : ''}
       <section><h3 class="p-sectie">${duo ? 'Denkers' : 'Denker'}</h3><div class="p-personen">${personen}</div></section>
       ${verbanden ? `<section><h3 class="p-sectie">Op dezelfde lijn</h3>${verbanden}</section>` : ''}
       <nav class="p-nav" aria-label="Vorig en volgend begrip">
