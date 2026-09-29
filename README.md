@@ -1,6 +1,6 @@
 # Tijdlijn leren en ontwikkelen
 
-Een interactieve visualisatie van de tijdlijn van leren en ontwikkelen: de begrippen, de denkers erachter en de verbanden tussen de begrippen. De gegevens zijn een transcriptie van de tijdlijn uit het boek, zonder portretten.
+Een interactieve visualisatie van de tijdlijn van leren en ontwikkelen: de begrippen, de personen erachter en de verbanden tussen de begrippen. De gegevens zijn een transcriptie van de tijdlijn uit het boek, zonder portretten.
 
 Gemaakt met gewone HTML, CSS en JavaScript. Er zijn geen build-stap en geen afhankelijkheden nodig.
 
@@ -8,17 +8,17 @@ Gemaakt met gewone HTML, CSS en JavaScript. Er zijn geen build-stap en geen afha
 
 - **Tijdlijn**: alle begrippen hangen aan één verticale lijn met jaartallen, gegroepeerd per decennium.
   - Begrippen uit hetzelfde jaar hangen samen aan één horizontale lijn naar dat jaartal.
-  - **Duo's**, twee denkers bij één begrip, hebben een eigen label.
+  - **Duo's**, twee personen bij één begrip, hebben een eigen label.
 - **Liniaal**: een balk bovenaan die blijft staan tijdens het scrollen. Hij toont alle begrippen op schaal en laat zien waar je bent. Klik op een stip om naar dat begrip te gaan.
 - **Detailpaneel**: klik op een begrip voor:
   - een korte omschrijving en wat het begrip betekent voor leren en ontwikkelen;
-  - de denkers met levensjaren, functie en leeftijd in dat jaar;
+  - de personen met levensjaren, functie en leeftijd in dat jaar;
   - de andere begrippen uit hetzelfde jaar;
   - andere begrippen van dezelfde persoon;
   - een knop naar het vorige en volgende begrip.
-- **Portretten**: alle denkers onder elkaar op de tijdlijn, met portretfoto en levensjaren, zonder begrippen. Klik op een portret voor het begrip.
-- **Levenslijnen**: de levensloop van elke denker, met een stip op het jaar van het begrip. Je kunt sorteren op jaar van het begrip, geboortejaar of achternaam.
-- **Begrippen A–Z**: alle begrippen onder elkaar in alfabetische volgorde, per beginletter, met vertaling, omschrijving en denkers, zonder jaartallen. Met de letterknoppen spring je naar een beginletter.
+- **Personen**: alle personen onder elkaar op de tijdlijn, met portretfoto en levensjaren, zonder begrippen. Klik op een persoon voor het begrip.
+- **Levenslijnen**: de levensloop van elke persoon, met een stip op het jaar van het begrip. Je kunt sorteren op jaar van het begrip, geboortejaar of achternaam.
+- **Begrippen A–Z**: alle begrippen onder elkaar in alfabetische volgorde, per beginletter, met vertaling, omschrijving en personen, zonder jaartallen. Met de letterknoppen spring je naar een beginletter.
 - **Zoeken**: zoek op begrip, naam, functie of jaar.
 
 De pagina werkt op desktop en mobiel, en in licht en donker thema.
@@ -72,7 +72,7 @@ Voorbeeld:
 
 Pas je `tijdlijn.json` aan, zet de wijziging dan ook in `data.js`. Anders ziet de pagina de wijziging niet als je hem direct vanaf schijf opent. `data.js` bevat dezelfde JSON, na `window.TIJDLIJN = `. Via een webserver is dit niet nodig.
 
-Zoeken, groeperen, duo's, terugkerende denkers en de volgorde worden allemaal automatisch uit de gegevens afgeleid.
+Zoeken, groeperen, duo's, personen die vaker voorkomen en de volgorde worden allemaal automatisch uit de gegevens afgeleid.
 
 ## Portretfoto's
 
@@ -95,13 +95,13 @@ Het veld `foto` bij een persoon ziet er zo uit:
 - `breedte` en `hoogte` zijn de afmetingen van het origineel. De pagina heeft ze nodig om de uitsnede te berekenen.
 - `focus` is het midden van het gezicht, in procenten van links en van boven.
 - `zoom` bepaalt hoe ver er wordt ingezoomd: 1 betekent dat de korte zijde van de foto precies in de cirkel past.
-- `bron`, `maker` en `licentie` zijn nodig voor de naamsvermelding. Die staat onder de weergave Portretten, bij "Fotoverantwoording".
+- `bron`, `maker` en `licentie` zijn nodig voor de naamsvermelding. Die staat onder de weergave Personen, bij "Fotoverantwoording".
 
-Voor 29 denkers is geen vrij portret gevonden; daar staat `"foto": null`. Vind je een foto met een vrije licentie, vul dan het veld in en werk ook `data.js` bij.
+Voor 29 personen is geen foto met een vrije licentie gevonden; daar staat `"foto": null`. Vind je een foto met een vrije licentie, vul dan het veld in en werk ook `data.js` bij.
 
 ## Deep links
 
 - `index.html#t-1974-schon-argyris` opent de pagina met het detailpaneel van dat begrip.
-- `index.html#portretten` opent de pagina in de weergave Portretten.
+- `index.html#portretten` opent de pagina in de weergave Personen.
 - `index.html#personen` opent de pagina in de weergave Levenslijnen.
 - `index.html#begrippen` opent de pagina in de weergave Begrippen A–Z.

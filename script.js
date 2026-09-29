@@ -302,7 +302,7 @@
       return `<li><b>${esc(p.naam)}</b>: foto ${esc(f.maker || 'onbekend')}, ${lic}, via <a href="${esc(f.bron)}" target="_blank" rel="noopener">Wikimedia Commons</a></li>`;
     }).join('');
     $('#credits').innerHTML = `<summary>Fotoverantwoording (${metFoto.length} foto's)</summary>
-      <p>Alle foto's komen van Wikimedia Commons en vallen onder een vrije licentie of het publieke domein. Voor ${zonder} denkers is geen vrij portret gevonden; zij staan met initialen.</p>
+      <p>Alle foto's komen van Wikimedia Commons en vallen onder een vrije licentie of het publieke domein. Voor ${zonder} personen is geen foto met een vrije licentie gevonden; zij staan met initialen.</p>
       <ul>${regels}</ul>`;
   }
 
@@ -373,7 +373,7 @@
     const overBegrippen = staat.weergave === 'tijdlijn' || staat.weergave === 'begrippen';
     const totaal = overBegrippen ? M.items.length : M.perPersoon.size;
     const aantal = overBegrippen ? n : np;
-    const woord = overBegrippen ? 'begrippen' : 'denkers';
+    const woord = overBegrippen ? 'begrippen' : 'personen';
     let tekst = actief ? `${aantal} van ${totaal} ${woord}` : `${totaal} ${woord}`;
     if (actief && aantal === 0) tekst = `Niets gevonden voor “${staat.zoek}”`;
     $('#telling').textContent = tekst;
@@ -421,7 +421,7 @@
       </div>
       ${it.omschrijving ? `<p class="p-omschrijving">${esc(it.omschrijving)}</p>` : ''}
       ${it.uitleg ? `<section class="p-uitleg-blok"><h3 class="p-sectie">Voor leren en ontwikkelen</h3><p class="p-tekst">${esc(it.uitleg)}</p></section>` : ''}
-      <section><h3 class="p-sectie">${duo ? 'Denkers' : 'Denker'}</h3><div class="p-personen">${personen}</div></section>
+      <section><h3 class="p-sectie">${duo ? 'Personen' : 'Persoon'}</h3><div class="p-personen">${personen}</div></section>
       ${verbanden}
       <nav class="p-nav" aria-label="Vorig en volgend begrip">
         ${vorige ? `<button type="button" data-open="${esc(vorige.id)}"><span class="richting">← ${vorige.jaar}</span><span class="doel">${esc(vorige.begrip)}</span></button>` : ''}
