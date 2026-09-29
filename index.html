@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tijdlijn leren en ontwikkelen</title>
+<!--FONTS-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<!--/FONTS-->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--BODY-->
+<a class="skip" href="#inhoud">Naar de tijdlijn</a>
+
+<div class="wrap">
+  <header class="kop">
+    <p class="bovenregel">Leren en ontwikkelen</p>
+    <h1>Tijdlijn van leren en ontwikkelen</h1>
+    <p class="intro">Wie bedacht welk begrip, en wanneer? Klik op een begrip voor de denkers erachter en de begrippen die aan dezelfde lijn hangen.</p>
+    <dl class="cijfers" id="cijfers"></dl>
+  </header>
+
+  <div class="bediening">
+    <div class="weergave" role="tablist" aria-label="Weergave">
+      <button type="button" role="tab" id="tab-tijdlijn" aria-selected="true" aria-controls="tijdlijn">Tijdlijn</button>
+      <button type="button" role="tab" id="tab-personen" aria-selected="false" aria-controls="personen">Levenslijnen</button>
+    </div>
+    <div class="zoek">
+      <label for="zoekveld" class="sr">Zoek begrip, persoon of jaar</label>
+      <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      <input id="zoekveld" type="search" placeholder="Zoek begrip, persoon of jaar" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="filters" role="group" aria-label="Filter">
+      <button type="button" class="chip" data-filter="alle" aria-pressed="true">Alles</button>
+      <button type="button" class="chip" data-filter="duo" aria-pressed="false">Duo's</button>
+      <button type="button" class="chip" data-filter="meer" aria-pressed="false">Terugkerende denkers</button>
+    </div>
+    <p class="telling" id="telling" aria-live="polite"></p>
+  </div>
+
+  <ul class="legenda" id="legenda">
+    <li><svg viewBox="0 0 44 18" width="44" height="18" aria-hidden="true"><path d="M2 5h40" class="lg-lijn"/><path d="M10 5v10M34 5v10" class="lg-lijn"/></svg><span><b>Gedeelde lijn</b> begrippen die aan dezelfde lijn naar één jaartal hangen</span></li>
+    <li><svg viewBox="0 0 44 18" width="44" height="18" aria-hidden="true"><rect x="12" y="1" width="20" height="5" rx="1.5" class="lg-kaart"/><path d="M18 6v6" class="lg-lijn"/><rect x="12" y="12" width="20" height="5" rx="1.5" class="lg-kaart"/></svg><span><b>Keten</b> een begrip hangt direct onder een ander</span></li>
+    <li><span class="label label-duo">Duo</span><span>twee denkers bij één begrip</span></li>
+  </ul>
+</div>
+
+<div class="liniaal-balk" id="liniaal-balk">
+  <div class="wrap"><div class="liniaal" id="liniaal" aria-label="Overzicht van alle jaartallen"></div></div>
+</div>
+
+<main class="wrap" id="inhoud">
+  <p class="melding" id="melding" hidden></p>
+  <div class="tijdlijn" id="tijdlijn" role="tabpanel" aria-labelledby="tab-tijdlijn"></div>
+  <div class="personen" id="personen" role="tabpanel" aria-labelledby="tab-personen" hidden>
+    <div class="personen-kop">
+      <p class="personen-uitleg">Levensloop van elke denker, met een stip op het jaar van het begrip.</p>
+      <div class="sorteer">
+        <label for="sorteer">Sorteer op</label>
+        <select id="sorteer">
+          <option value="begrip">jaar van het begrip</option>
+          <option value="geboorte">geboortejaar</option>
+          <option value="naam">achternaam</option>
+        </select>
+      </div>
+    </div>
+    <div class="levens-scroll"><div class="levens" id="levens"></div></div>
+  </div>
+</main>
+
+<footer class="wrap voet" id="voet"></footer>
+
+<aside class="paneel" id="paneel" aria-label="Details van het begrip" aria-hidden="true" inert>
+  <div class="paneel-inhoud" id="paneel-inhoud"></div>
+</aside>
+<!--/BODY-->
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

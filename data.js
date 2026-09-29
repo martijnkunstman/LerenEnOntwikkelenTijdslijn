@@ -1,0 +1,1064 @@
+/* Kopie van tijdlijn.json, zodat index.html ook werkt als je het bestand direct opent (zonder webserver). */
+window.TIJDLIJN = {
+ "meta": {
+  "titel": "Tijdlijn",
+  "beschrijving": "Transcriptie van de tijdlijn uit het boek, zonder portretten. Personen, tijdlijn-items en relaties zijn gescheiden en gekoppeld via id's.",
+  "versie": "1.0",
+  "structuur": {
+   "personen": "Unieke personen. Eén persoon kan in meerdere items voorkomen (bijv. p-schon in 1974 en 1983).",
+   "items": "Eén item = één portretblok op de tijdlijn: jaartal + begrip + één of meer persoon-id's. Een duo is een item met twee persoon-id's.",
+   "relaties": "Koppelingen tussen items. 'van' en 'naar' verwijzen naar item-id's."
+  },
+  "relatietypes": {
+   "keten": {
+    "richting": "eenweg",
+    "betekenis": "Het item 'naar' hangt direct onder het item 'van' op dezelfde verbindingslijn."
+   },
+   "gedeelde_lijn": {
+    "richting": "tweeweg",
+    "betekenis": "Beide items hangen aan dezelfde verbindingslijn naar hetzelfde jaartal. 'van' en 'naar' zijn uitwisselbaar."
+   }
+  },
+  "afleidbaar": [
+   "Duo's: items met meer dan één persoon-id.",
+   "Dezelfde persoon op meerdere momenten: items met dezelfde persoon-id."
+  ]
+ },
+ "personen": [
+  {
+   "id": "p-buber",
+   "naam": "Martin Buber",
+   "achternaam": "Buber",
+   "geboortejaar": 1878,
+   "overlijdensjaar": 1965,
+   "functie": "Oostenrijks-Israëlisch godsdienstfilosoof"
+  },
+  {
+   "id": "p-lewin",
+   "naam": "Kurt Lewin",
+   "achternaam": "Lewin",
+   "geboortejaar": 1890,
+   "overlijdensjaar": 1947,
+   "functie": "Duits-Amerikaans sociaal psycholoog"
+  },
+  {
+   "id": "p-dewey",
+   "naam": "John Dewey",
+   "achternaam": "Dewey",
+   "geboortejaar": 1859,
+   "overlijdensjaar": 1952,
+   "functie": "Amerikaans filosoof en onderwijshervormer"
+  },
+  {
+   "id": "p-huizinga",
+   "naam": "Johan Huizinga",
+   "achternaam": "Huizinga",
+   "geboortejaar": 1872,
+   "overlijdensjaar": 1945,
+   "functie": "Nederlands cultuurhistoricus"
+  },
+  {
+   "id": "p-erikson",
+   "naam": "Erik Erikson",
+   "achternaam": "Erikson",
+   "geboortejaar": 1902,
+   "overlijdensjaar": 1994,
+   "functie": "Duits-Amerikaans ontwikkelingspsycholoog en psychoanalyticus"
+  },
+  {
+   "id": "p-bloom",
+   "naam": "Benjamin Samuel Bloom",
+   "achternaam": "Bloom",
+   "geboortejaar": 1913,
+   "overlijdensjaar": 1999,
+   "functie": "Amerikaans onderwijspsycholoog"
+  },
+  {
+   "id": "p-shulman",
+   "naam": "Lee S. Shulman",
+   "achternaam": "Shulman",
+   "geboortejaar": 1938,
+   "overlijdensjaar": 2024,
+   "functie": "Amerikaans onderwijspsycholoog (Stanford)"
+  },
+  {
+   "id": "p-polanyi",
+   "naam": "Michael Polanyi",
+   "achternaam": "Polanyi",
+   "geboortejaar": 1891,
+   "overlijdensjaar": 1976,
+   "functie": "Hongaars-Brits chemicus en wetenschapsfilosoof"
+  },
+  {
+   "id": "p-berne",
+   "naam": "Eric Berne",
+   "achternaam": "Berne",
+   "geboortejaar": 1910,
+   "overlijdensjaar": 1970,
+   "functie": "Canadees-Amerikaans psychiater, grondlegger transactionele analyse"
+  },
+  {
+   "id": "p-menzies-lyth",
+   "naam": "Isabel Menzies Lyth",
+   "achternaam": "Menzies Lyth",
+   "geboortejaar": 1917,
+   "overlijdensjaar": 2008,
+   "functie": "Brits psychoanalyticus en organisatieadviseur (Tavistock)"
+  },
+  {
+   "id": "p-berlyne",
+   "naam": "Daniel E. Berlyne",
+   "achternaam": "Berlyne",
+   "geboortejaar": 1924,
+   "overlijdensjaar": 1976,
+   "functie": "Brits-Canadees experimenteel psycholoog"
+  },
+  {
+   "id": "p-freire",
+   "naam": "Paulo Freire",
+   "achternaam": "Freire",
+   "geboortejaar": 1921,
+   "overlijdensjaar": 1997,
+   "functie": "Braziliaans pedagoog en filosoof"
+  },
+  {
+   "id": "p-weick",
+   "naam": "Karl E. Weick",
+   "achternaam": "Weick",
+   "geboortejaar": 1936,
+   "overlijdensjaar": 2026,
+   "functie": "Amerikaans organisatiepsycholoog (University of Michigan)"
+  },
+  {
+   "id": "p-freidson",
+   "naam": "Eliot L. Freidson",
+   "achternaam": "Freidson",
+   "geboortejaar": 1923,
+   "overlijdensjaar": 2005,
+   "functie": "Amerikaans socioloog van professies (NYU)"
+  },
+  {
+   "id": "p-schon",
+   "naam": "Donald Schön",
+   "achternaam": "Schön",
+   "geboortejaar": 1930,
+   "overlijdensjaar": 1997,
+   "functie": "Amerikaans filosoof en organisatiekundige (MIT)"
+  },
+  {
+   "id": "p-argyris",
+   "naam": "Chris Argyris",
+   "achternaam": "Argyris",
+   "geboortejaar": 1923,
+   "overlijdensjaar": 2013,
+   "functie": "Amerikaans organisatiekundige (Harvard)"
+  },
+  {
+   "id": "p-csikszentmihalyi",
+   "naam": "Mihaly Csikszentmihalyi",
+   "achternaam": "Csikszentmihalyi",
+   "geboortejaar": 1934,
+   "overlijdensjaar": 2021,
+   "functie": "Hongaars-Amerikaans psycholoog"
+  },
+  {
+   "id": "p-bourdieu",
+   "naam": "Pierre Bourdieu",
+   "achternaam": "Bourdieu",
+   "geboortejaar": 1930,
+   "overlijdensjaar": 2002,
+   "functie": "Frans socioloog"
+  },
+  {
+   "id": "p-mcclelland",
+   "naam": "David C. McClelland",
+   "achternaam": "McClelland",
+   "geboortejaar": 1917,
+   "overlijdensjaar": 1998,
+   "functie": "Amerikaans psycholoog, motivatieonderzoeker (Harvard)"
+  },
+  {
+   "id": "p-kolb",
+   "naam": "David A. Kolb",
+   "achternaam": "Kolb",
+   "geboortejaar": 1939,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans onderwijstheoreticus (Case Western Reserve)"
+  },
+  {
+   "id": "p-schein",
+   "naam": "Edgar Schein",
+   "achternaam": "Schein",
+   "geboortejaar": 1928,
+   "overlijdensjaar": 2023,
+   "functie": "Amerikaans organisatiepsycholoog (MIT)"
+  },
+  {
+   "id": "p-deci",
+   "naam": "Edward L. Deci",
+   "achternaam": "Deci",
+   "geboortejaar": 1942,
+   "overlijdensjaar": 2026,
+   "functie": "Amerikaans psycholoog (University of Rochester)"
+  },
+  {
+   "id": "p-ryan",
+   "naam": "Richard M. Ryan",
+   "achternaam": "Ryan",
+   "geboortejaar": 1953,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans psycholoog, motivatieonderzoeker"
+  },
+  {
+   "id": "p-cooperrider",
+   "naam": "David Cooperrider",
+   "achternaam": "Cooperrider",
+   "geboortejaar": 1954,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans organisatiekundige (Case Western Reserve)"
+  },
+  {
+   "id": "p-engestrom",
+   "naam": "Yrjö Engeström",
+   "achternaam": "Engeström",
+   "geboortejaar": 1948,
+   "overlijdensjaar": null,
+   "functie": "Fins onderwijskundige (Universiteit van Helsinki)"
+  },
+  {
+   "id": "p-west",
+   "naam": "Michael West",
+   "achternaam": "West",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Brits organisatiepsycholoog (Lancaster University)"
+  },
+  {
+   "id": "p-gersick",
+   "naam": "Connie J.G Gersick",
+   "achternaam": "Gersick",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans organisatiekundige (teams en verandering)"
+  },
+  {
+   "id": "p-checkland",
+   "naam": "Peter Checkland",
+   "achternaam": "Checkland",
+   "geboortejaar": 1930,
+   "overlijdensjaar": 2026,
+   "functie": "Brits systeemdenker (Lancaster University)"
+  },
+  {
+   "id": "p-g-caine",
+   "naam": "Geoffrey Caine",
+   "achternaam": "Caine",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Onderwijskundige en auteur over leren en het brein"
+  },
+  {
+   "id": "p-r-caine",
+   "naam": "Renate N. Caine",
+   "achternaam": "Caine",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Onderwijspsycholoog (California State University)"
+  },
+  {
+   "id": "p-pierce",
+   "naam": "Jon L. Pierce",
+   "achternaam": "Pierce",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans organisatiepsycholoog (University of Minnesota Duluth)"
+  },
+  {
+   "id": "p-lave",
+   "naam": "Jean Lave",
+   "achternaam": "Lave",
+   "geboortejaar": 1939,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans sociaal antropoloog (UC Berkeley)"
+  },
+  {
+   "id": "p-seligman",
+   "naam": "Martin Seligman",
+   "achternaam": "Seligman",
+   "geboortejaar": 1942,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans psycholoog, grondlegger positieve psychologie"
+  },
+  {
+   "id": "p-pedler",
+   "naam": "Mike Pedler",
+   "achternaam": "Pedler",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Brits organisatiekundige (action learning)"
+  },
+  {
+   "id": "p-ericsson",
+   "naam": "K. Anders Ericsson",
+   "achternaam": "Ericsson",
+   "geboortejaar": 1947,
+   "overlijdensjaar": 2020,
+   "functie": "Zweeds psycholoog, expertiseonderzoeker (Florida State)"
+  },
+  {
+   "id": "p-kessels",
+   "naam": "Joseph W.M. Kessels",
+   "achternaam": "Kessels",
+   "geboortejaar": 1952,
+   "overlijdensjaar": null,
+   "functie": "Nederlands onderwijskundige, HRD (Universiteit Twente)"
+  },
+  {
+   "id": "p-stacey",
+   "naam": "Ralph Stacey",
+   "achternaam": "Stacey",
+   "geboortejaar": 1942,
+   "overlijdensjaar": 2021,
+   "functie": "Brits organisatietheoreticus (University of Hertfordshire)"
+  },
+  {
+   "id": "p-wenger",
+   "naam": "Etienne Wenger",
+   "achternaam": "Wenger",
+   "geboortejaar": 1952,
+   "overlijdensjaar": null,
+   "functie": "Zwitsers onderwijstheoreticus"
+  },
+  {
+   "id": "p-wierdsma",
+   "naam": "André Wierdsma",
+   "achternaam": "Wierdsma",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Nederlands organisatiekundige (Nyenrode)"
+  },
+  {
+   "id": "p-isaacs",
+   "naam": "William Isaacs",
+   "achternaam": "Isaacs",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans organisatiekundige, dialoogspecialist (MIT)"
+  },
+  {
+   "id": "p-edmondson",
+   "naam": "Amy Edmondson",
+   "achternaam": "Edmondson",
+   "geboortejaar": 1959,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans organisatiekundige (Harvard Business School)"
+  },
+  {
+   "id": "p-smith",
+   "naam": "Wendy Smith",
+   "achternaam": "Smith",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans organisatiekundige (University of Delaware)"
+  },
+  {
+   "id": "p-lewis",
+   "naam": "Marianne Lewis",
+   "achternaam": "Lewis",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans organisatiekundige (University of Cincinnati)"
+  },
+  {
+   "id": "p-billett",
+   "naam": "Stephen Billett",
+   "achternaam": "Billett",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Australisch onderwijskundige, werkplekleren (Griffith University)"
+  },
+  {
+   "id": "p-bereiter",
+   "naam": "Carl Bereiter",
+   "achternaam": "Bereiter",
+   "geboortejaar": 1930,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans-Canadees onderwijspsycholoog (OISE, Toronto)"
+  },
+  {
+   "id": "p-scardamalia",
+   "naam": "Marlene Scardamalia",
+   "achternaam": "Scardamalia",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Canadees onderwijspsycholoog (OISE, Toronto)"
+  },
+  {
+   "id": "p-schwartz",
+   "naam": "Barry Schwartz",
+   "achternaam": "Schwartz",
+   "geboortejaar": 1946,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans psycholoog (Swarthmore College)"
+  },
+  {
+   "id": "p-spillane",
+   "naam": "James P. Spillane",
+   "achternaam": "Spillane",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Onderwijskundige, schoolleiderschap (Northwestern University)"
+  },
+  {
+   "id": "p-kunneman",
+   "naam": "Harry Kunneman",
+   "achternaam": "Kunneman",
+   "geboortejaar": 1948,
+   "overlijdensjaar": null,
+   "functie": "Nederlands filosoof (Universiteit voor Humanistiek)"
+  },
+  {
+   "id": "p-dweck",
+   "naam": "Carol Dweck",
+   "achternaam": "Dweck",
+   "geboortejaar": 1946,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans psycholoog (Stanford)"
+  },
+  {
+   "id": "p-shaffer",
+   "naam": "David W. Shaffer",
+   "achternaam": "Shaffer",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans leerwetenschapper (University of Wisconsin–Madison)"
+  },
+  {
+   "id": "p-scharmer",
+   "naam": "Otto Scharmer",
+   "achternaam": "Scharmer",
+   "geboortejaar": 1961,
+   "overlijdensjaar": null,
+   "functie": "Duits organisatiekundige (MIT)"
+  },
+  {
+   "id": "p-hattie",
+   "naam": "John Hattie",
+   "achternaam": "Hattie",
+   "geboortejaar": 1950,
+   "overlijdensjaar": null,
+   "functie": "Nieuw-Zeelands onderwijskundige (University of Melbourne)"
+  },
+  {
+   "id": "p-brown",
+   "naam": "Brené Brown",
+   "achternaam": "Brown",
+   "geboortejaar": 1965,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans onderzoeker sociaal werk (University of Houston)"
+  },
+  {
+   "id": "p-sennett",
+   "naam": "Richard Sennett",
+   "achternaam": "Sennett",
+   "geboortejaar": 1943,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans socioloog (LSE)"
+  },
+  {
+   "id": "p-kahneman",
+   "naam": "Daniel Kahneman",
+   "achternaam": "Kahneman",
+   "geboortejaar": 1934,
+   "overlijdensjaar": 2024,
+   "functie": "Israëlisch-Amerikaans psycholoog, Nobelprijs economie"
+  }
+ ],
+ "items": [
+  {
+   "id": "t-1923-buber",
+   "jaar": 1923,
+   "begrip": "Ontmoeting",
+   "begrip_vertaling": "Encounter",
+   "personen": [
+    "p-buber"
+   ]
+  },
+  {
+   "id": "t-1933-lewin",
+   "jaar": 1933,
+   "begrip": "Actieonderzoek",
+   "begrip_vertaling": "Action research",
+   "personen": [
+    "p-lewin"
+   ]
+  },
+  {
+   "id": "t-1933-dewey",
+   "jaar": 1933,
+   "begrip": "Reflectie",
+   "begrip_vertaling": "Reflection",
+   "personen": [
+    "p-dewey"
+   ]
+  },
+  {
+   "id": "t-1938-huizinga",
+   "jaar": 1938,
+   "begrip": "Spel",
+   "begrip_vertaling": "Play",
+   "personen": [
+    "p-huizinga"
+   ]
+  },
+  {
+   "id": "t-1950-erikson",
+   "jaar": 1950,
+   "begrip": "Levenscyclus",
+   "begrip_vertaling": "Life cycle",
+   "personen": [
+    "p-erikson"
+   ]
+  },
+  {
+   "id": "t-1956-bloom-shulman",
+   "jaar": 1956,
+   "begrip": "Taxonomie",
+   "begrip_vertaling": "Taxonomy",
+   "personen": [
+    "p-bloom",
+    "p-shulman"
+   ]
+  },
+  {
+   "id": "t-1958-polanyi",
+   "jaar": 1958,
+   "begrip": "Tacit knowledge",
+   "begrip_vertaling": "Stilzwijgende kennis",
+   "personen": [
+    "p-polanyi"
+   ]
+  },
+  {
+   "id": "t-1958-berne",
+   "jaar": 1958,
+   "begrip": "Transactionele analyse",
+   "begrip_vertaling": "Transactional analysis",
+   "personen": [
+    "p-berne"
+   ]
+  },
+  {
+   "id": "t-1960-menzies-lyth",
+   "jaar": 1960,
+   "begrip": "Social defences",
+   "begrip_vertaling": "Sociale afweermechanismen",
+   "personen": [
+    "p-menzies-lyth"
+   ]
+  },
+  {
+   "id": "t-1960-berlyne",
+   "jaar": 1960,
+   "begrip": "Nieuwsgierigheid",
+   "begrip_vertaling": "Curiosity",
+   "personen": [
+    "p-berlyne"
+   ]
+  },
+  {
+   "id": "t-1967-freire",
+   "jaar": 1967,
+   "begrip": "Kritische reflectie",
+   "begrip_vertaling": "Critical reflection",
+   "personen": [
+    "p-freire"
+   ]
+  },
+  {
+   "id": "t-1969-weick",
+   "jaar": 1969,
+   "begrip": "Losjes gekoppelde systemen",
+   "begrip_vertaling": "Loosely coupled systems",
+   "personen": [
+    "p-weick"
+   ]
+  },
+  {
+   "id": "t-1970-freidson",
+   "jaar": 1970,
+   "begrip": "Professionaliteit",
+   "begrip_vertaling": "Professionalism",
+   "personen": [
+    "p-freidson"
+   ]
+  },
+  {
+   "id": "t-1974-schon-argyris",
+   "jaar": 1974,
+   "begrip": "Double-loop learning",
+   "begrip_vertaling": "Dubbelslagleren",
+   "personen": [
+    "p-schon",
+    "p-argyris"
+   ]
+  },
+  {
+   "id": "t-1975-csikszentmihalyi",
+   "jaar": 1975,
+   "begrip": "Flow",
+   "begrip_vertaling": "Flow",
+   "personen": [
+    "p-csikszentmihalyi"
+   ]
+  },
+  {
+   "id": "t-1977-bourdieu",
+   "jaar": 1977,
+   "begrip": "Habitus",
+   "begrip_vertaling": "Habitus",
+   "personen": [
+    "p-bourdieu"
+   ]
+  },
+  {
+   "id": "t-1978-mcclelland",
+   "jaar": 1978,
+   "begrip": "Prestatiemotivatie",
+   "begrip_vertaling": "Achievement motivation",
+   "personen": [
+    "p-mcclelland"
+   ]
+  },
+  {
+   "id": "t-1983-schon",
+   "jaar": 1983,
+   "begrip": "Reflective practitioner",
+   "begrip_vertaling": "Reflectieve beroepsbeoefenaar",
+   "personen": [
+    "p-schon"
+   ]
+  },
+  {
+   "id": "t-1984-kolb",
+   "jaar": 1984,
+   "begrip": "Leerstijlen",
+   "begrip_vertaling": "Learning styles",
+   "personen": [
+    "p-kolb"
+   ]
+  },
+  {
+   "id": "t-1985-schein",
+   "jaar": 1985,
+   "begrip": "Cultuur",
+   "begrip_vertaling": "Culture",
+   "personen": [
+    "p-schein"
+   ]
+  },
+  {
+   "id": "t-1985-deci-ryan",
+   "jaar": 1985,
+   "begrip": "Self-Determination Theory",
+   "begrip_vertaling": "Zelfdeterminatietheorie",
+   "personen": [
+    "p-deci",
+    "p-ryan"
+   ]
+  },
+  {
+   "id": "t-1986-cooperrider",
+   "jaar": 1986,
+   "begrip": "Appreciative Inquiry",
+   "begrip_vertaling": "Waarderend onderzoeken",
+   "personen": [
+    "p-cooperrider"
+   ]
+  },
+  {
+   "id": "t-1987-engestrom",
+   "jaar": 1987,
+   "begrip": "Boundary crossing",
+   "begrip_vertaling": "Grensoverschrijding",
+   "personen": [
+    "p-engestrom"
+   ]
+  },
+  {
+   "id": "t-1988-west-gersick",
+   "jaar": 1988,
+   "begrip": "Teamleren en teamreflexiviteit",
+   "begrip_vertaling": "Team learning and team reflexivity",
+   "personen": [
+    "p-west",
+    "p-gersick"
+   ]
+  },
+  {
+   "id": "t-1990-checkland",
+   "jaar": 1990,
+   "begrip": "Soft Systems Methodology",
+   "begrip_vertaling": "Zachte-systemenmethodologie",
+   "personen": [
+    "p-checkland"
+   ]
+  },
+  {
+   "id": "t-1990-caine",
+   "jaar": 1990,
+   "begrip": "Brain-based learning",
+   "begrip_vertaling": "Breingebaseerd leren",
+   "personen": [
+    "p-g-caine",
+    "p-r-caine"
+   ]
+  },
+  {
+   "id": "t-1991-pierce",
+   "jaar": 1991,
+   "begrip": "Psychologisch eigenaarschap",
+   "begrip_vertaling": "Psychological ownership",
+   "personen": [
+    "p-pierce"
+   ]
+  },
+  {
+   "id": "t-1991-lave",
+   "jaar": 1991,
+   "begrip": "Informeel leren",
+   "begrip_vertaling": "Informal learning",
+   "personen": [
+    "p-lave"
+   ]
+  },
+  {
+   "id": "t-1991-seligman",
+   "jaar": 1991,
+   "begrip": "Aangeleerd optimisme",
+   "begrip_vertaling": "Learned optimism",
+   "personen": [
+    "p-seligman"
+   ]
+  },
+  {
+   "id": "t-1991-pedler",
+   "jaar": 1991,
+   "begrip": "Lerende organisatie",
+   "begrip_vertaling": "Learning organization",
+   "personen": [
+    "p-pedler"
+   ]
+  },
+  {
+   "id": "t-1996-ericsson",
+   "jaar": 1996,
+   "begrip": "Deliberate practice",
+   "begrip_vertaling": "Doelbewust oefenen",
+   "personen": [
+    "p-ericsson"
+   ]
+  },
+  {
+   "id": "t-1996-kessels",
+   "jaar": 1996,
+   "begrip": "Corporate curriculum",
+   "begrip_vertaling": "Bedrijfscurriculum",
+   "personen": [
+    "p-kessels"
+   ]
+  },
+  {
+   "id": "t-1997-stacey",
+   "jaar": 1997,
+   "begrip": "Complexe systemen",
+   "begrip_vertaling": "Complex systems",
+   "personen": [
+    "p-stacey"
+   ]
+  },
+  {
+   "id": "t-1998-wenger",
+   "jaar": 1998,
+   "begrip": "Community of Practice",
+   "begrip_vertaling": "Praktijkgemeenschap",
+   "personen": [
+    "p-wenger"
+   ]
+  },
+  {
+   "id": "t-1999-wierdsma",
+   "jaar": 1999,
+   "begrip": "Plek der moeite",
+   "begrip_vertaling": "Place of difficulty",
+   "personen": [
+    "p-wierdsma"
+   ]
+  },
+  {
+   "id": "t-1999-isaacs",
+   "jaar": 1999,
+   "begrip": "Dialoog",
+   "begrip_vertaling": "Dialogue",
+   "personen": [
+    "p-isaacs"
+   ]
+  },
+  {
+   "id": "t-1999-edmondson",
+   "jaar": 1999,
+   "begrip": "Psychological safety",
+   "begrip_vertaling": "Psychologische veiligheid",
+   "personen": [
+    "p-edmondson"
+   ]
+  },
+  {
+   "id": "t-2000-smith-lewis",
+   "jaar": 2000,
+   "begrip": "Paradoxen",
+   "begrip_vertaling": "Paradoxes",
+   "personen": [
+    "p-smith",
+    "p-lewis"
+   ]
+  },
+  {
+   "id": "t-2001-billett",
+   "jaar": 2001,
+   "begrip": "Werkleren",
+   "begrip_vertaling": "Workplace learning",
+   "personen": [
+    "p-billett"
+   ]
+  },
+  {
+   "id": "t-2002-bereiter-scardamalia",
+   "jaar": 2002,
+   "begrip": "Kenniscreatie",
+   "begrip_vertaling": "Knowledge creation",
+   "personen": [
+    "p-bereiter",
+    "p-scardamalia"
+   ]
+  },
+  {
+   "id": "t-2004-schwartz",
+   "jaar": 2004,
+   "begrip": "Practical wisdom",
+   "begrip_vertaling": "Praktische wijsheid",
+   "personen": [
+    "p-schwartz"
+   ]
+  },
+  {
+   "id": "t-2004-spillane",
+   "jaar": 2004,
+   "begrip": "Gespreid leiderschap",
+   "begrip_vertaling": "Distributed leadership",
+   "personen": [
+    "p-spillane"
+   ]
+  },
+  {
+   "id": "t-2005-kunneman",
+   "jaar": 2005,
+   "begrip": "Normatieve professionaliteit",
+   "begrip_vertaling": "Normative professionalism",
+   "personen": [
+    "p-kunneman"
+   ]
+  },
+  {
+   "id": "t-2006-dweck",
+   "jaar": 2006,
+   "begrip": "Mindset",
+   "begrip_vertaling": "Mindset",
+   "personen": [
+    "p-dweck"
+   ]
+  },
+  {
+   "id": "t-2006-shaffer",
+   "jaar": 2006,
+   "begrip": "Professionele frames",
+   "begrip_vertaling": "Professional frames",
+   "personen": [
+    "p-shaffer"
+   ]
+  },
+  {
+   "id": "t-2007-scharmer",
+   "jaar": 2007,
+   "begrip": "Theory U",
+   "begrip_vertaling": "Theorie U",
+   "personen": [
+    "p-scharmer"
+   ]
+  },
+  {
+   "id": "t-2007-hattie",
+   "jaar": 2007,
+   "begrip": "Feedback",
+   "begrip_vertaling": "Feedback",
+   "personen": [
+    "p-hattie"
+   ]
+  },
+  {
+   "id": "t-2008-brown",
+   "jaar": 2008,
+   "begrip": "Kwetsbaarheid",
+   "begrip_vertaling": "Vulnerability",
+   "personen": [
+    "p-brown"
+   ]
+  },
+  {
+   "id": "t-2008-sennett",
+   "jaar": 2008,
+   "begrip": "Vakmanschap",
+   "begrip_vertaling": "Craftsmanship",
+   "personen": [
+    "p-sennett"
+   ]
+  },
+  {
+   "id": "t-2011-kahneman",
+   "jaar": 2011,
+   "begrip": "Denkfouten",
+   "begrip_vertaling": "Cognitive biases",
+   "personen": [
+    "p-kahneman"
+   ]
+  }
+ ],
+ "relaties": [
+  {
+   "id": "r-01",
+   "type": "keten",
+   "richting": "eenweg",
+   "van": "t-1933-lewin",
+   "naar": "t-1933-dewey"
+  },
+  {
+   "id": "r-02",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1958-polanyi",
+   "naar": "t-1958-berne"
+  },
+  {
+   "id": "r-03",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1960-menzies-lyth",
+   "naar": "t-1960-berlyne"
+  },
+  {
+   "id": "r-04",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1985-schein",
+   "naar": "t-1985-deci-ryan"
+  },
+  {
+   "id": "r-05",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1990-checkland",
+   "naar": "t-1990-caine"
+  },
+  {
+   "id": "r-06",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1991-pierce",
+   "naar": "t-1991-lave"
+  },
+  {
+   "id": "r-07",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1991-pierce",
+   "naar": "t-1991-seligman"
+  },
+  {
+   "id": "r-08",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1991-pierce",
+   "naar": "t-1991-pedler"
+  },
+  {
+   "id": "r-09",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1991-lave",
+   "naar": "t-1991-seligman"
+  },
+  {
+   "id": "r-10",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1991-lave",
+   "naar": "t-1991-pedler"
+  },
+  {
+   "id": "r-11",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1991-seligman",
+   "naar": "t-1991-pedler"
+  },
+  {
+   "id": "r-12",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1996-ericsson",
+   "naar": "t-1996-kessels"
+  },
+  {
+   "id": "r-13",
+   "type": "keten",
+   "richting": "eenweg",
+   "van": "t-1999-wierdsma",
+   "naar": "t-1999-isaacs"
+  },
+  {
+   "id": "r-14",
+   "type": "keten",
+   "richting": "eenweg",
+   "van": "t-1999-isaacs",
+   "naar": "t-1999-edmondson"
+  },
+  {
+   "id": "r-15",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-2004-schwartz",
+   "naar": "t-2004-spillane"
+  },
+  {
+   "id": "r-16",
+   "type": "keten",
+   "richting": "eenweg",
+   "van": "t-2006-dweck",
+   "naar": "t-2006-shaffer"
+  },
+  {
+   "id": "r-17",
+   "type": "keten",
+   "richting": "eenweg",
+   "van": "t-2007-scharmer",
+   "naar": "t-2007-hattie"
+  },
+  {
+   "id": "r-18",
+   "type": "keten",
+   "richting": "eenweg",
+   "van": "t-2008-brown",
+   "naar": "t-2008-sennett"
+  }
+ ]
+};
