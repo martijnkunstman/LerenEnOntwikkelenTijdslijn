@@ -3,9 +3,9 @@ window.TIJDLIJN = {
  "meta": {
   "titel": "Tijdlijn",
   "beschrijving": "Transcriptie van de tijdlijn uit het boek, zonder portretten. Personen, tijdlijn-items en relaties zijn gescheiden en gekoppeld via id's.",
-  "versie": "1.1",
+  "versie": "1.2",
   "structuur": {
-   "personen": "Unieke personen. Eén persoon kan in meerdere items voorkomen (bijv. p-schon in 1974 en 1983).",
+   "personen": "Unieke personen. Eén persoon kan in meerdere items voorkomen (bijv. p-schon in 1974 en 1983). 'foto' verwijst naar een portret met vrije licentie op Wikimedia Commons (url, afmetingen, uitsnede via focus in procenten en zoom, en bron, maker en licentie voor de naamsvermelding), of is null als er geen vrij portret is gevonden.",
    "items": "Eén item = één portretblok op de tijdlijn: jaartal + begrip + één of meer persoon-id's. Een duo is een item met twee persoon-id's. 'omschrijving' zegt wat het begrip inhoudt, 'uitleg' wat het betekent voor leren en ontwikkelen.",
    "relaties": "Koppelingen tussen items. 'van' en 'naar' verwijzen naar item-id's."
   },
@@ -31,7 +31,21 @@ window.TIJDLIJN = {
    "achternaam": "Buber",
    "geboortejaar": 1878,
    "overlijdensjaar": 1965,
-   "functie": "Oostenrijks-Israëlisch godsdienstfilosoof"
+   "functie": "Oostenrijks-Israëlisch godsdienstfilosoof",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Martin_Buber_portrait.jpg/250px-Martin_Buber_portrait.jpg",
+    "breedte": 1785,
+    "hoogte": 2399,
+    "focus": [
+     55,
+     37
+    ],
+    "zoom": 1.2,
+    "bron": "https://commons.wikimedia.org/wiki/File:Martin_Buber_portrait.jpg",
+    "maker": "Onbekend",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
   },
   {
    "id": "p-lewin",
@@ -39,7 +53,8 @@ window.TIJDLIJN = {
    "achternaam": "Lewin",
    "geboortejaar": 1890,
    "overlijdensjaar": 1947,
-   "functie": "Duits-Amerikaans sociaal psycholoog"
+   "functie": "Duits-Amerikaans sociaal psycholoog",
+   "foto": null
   },
   {
    "id": "p-dewey",
@@ -47,7 +62,21 @@ window.TIJDLIJN = {
    "achternaam": "Dewey",
    "geboortejaar": 1859,
    "overlijdensjaar": 1952,
-   "functie": "Amerikaans filosoof en onderwijshervormer"
+   "functie": "Amerikaans filosoof en onderwijshervormer",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/John_Dewey_in_1902.jpg/500px-John_Dewey_in_1902.jpg",
+    "breedte": 1001,
+    "hoogte": 1309,
+    "focus": [
+     44,
+     17
+    ],
+    "zoom": 1.8,
+    "bron": "https://commons.wikimedia.org/wiki/File:John_Dewey_in_1902.jpg",
+    "maker": "Eva Watson-Schütze",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
   },
   {
    "id": "p-huizinga",
@@ -55,7 +84,21 @@ window.TIJDLIJN = {
    "achternaam": "Huizinga",
    "geboortejaar": 1872,
    "overlijdensjaar": 1945,
-   "functie": "Nederlands cultuurhistoricus"
+   "functie": "Nederlands cultuurhistoricus",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Johan-huizinga1.jpg/330px-Johan-huizinga1.jpg",
+    "breedte": 507,
+    "hoogte": 755,
+    "focus": [
+     45,
+     28
+    ],
+    "zoom": 1.3,
+    "bron": "https://commons.wikimedia.org/wiki/File:Johan-huizinga1.jpg",
+    "maker": "Onbekend",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
   },
   {
    "id": "p-erikson",
@@ -63,7 +106,21 @@ window.TIJDLIJN = {
    "achternaam": "Erikson",
    "geboortejaar": 1902,
    "overlijdensjaar": 1994,
-   "functie": "Duits-Amerikaans ontwikkelingspsycholoog en psychoanalyticus"
+   "functie": "Duits-Amerikaans ontwikkelingspsycholoog en psychoanalyticus",
+   "foto": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Erik_Erikson.jpg",
+    "breedte": 233,
+    "hoogte": 291,
+    "focus": [
+     62,
+     30
+    ],
+    "zoom": 1.5,
+    "bron": "https://commons.wikimedia.org/wiki/File:Erik_Erikson.jpg",
+    "maker": "Onbekend",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
   },
   {
    "id": "p-bloom",
@@ -71,7 +128,8 @@ window.TIJDLIJN = {
    "achternaam": "Bloom",
    "geboortejaar": 1913,
    "overlijdensjaar": 1999,
-   "functie": "Amerikaans onderwijspsycholoog"
+   "functie": "Amerikaans onderwijspsycholoog",
+   "foto": null
   },
   {
    "id": "p-shulman",
@@ -79,7 +137,8 @@ window.TIJDLIJN = {
    "achternaam": "Shulman",
    "geboortejaar": 1938,
    "overlijdensjaar": 2024,
-   "functie": "Amerikaans onderwijspsycholoog (Stanford)"
+   "functie": "Amerikaans onderwijspsycholoog (Stanford)",
+   "foto": null
   },
   {
    "id": "p-polanyi",
@@ -87,7 +146,21 @@ window.TIJDLIJN = {
    "achternaam": "Polanyi",
    "geboortejaar": 1891,
    "overlijdensjaar": 1976,
-   "functie": "Hongaars-Brits chemicus en wetenschapsfilosoof"
+   "functie": "Hongaars-Brits chemicus en wetenschapsfilosoof",
+   "foto": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Michael_Polanyi.png",
+    "breedte": 252,
+    "hoogte": 413,
+    "focus": [
+     50,
+     20
+    ],
+    "zoom": 2.2,
+    "bron": "https://commons.wikimedia.org/wiki/File:Michael_Polanyi.png",
+    "maker": "Onbekend (archief Manchester)",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
   },
   {
    "id": "p-berne",
@@ -95,7 +168,21 @@ window.TIJDLIJN = {
    "achternaam": "Berne",
    "geboortejaar": 1910,
    "overlijdensjaar": 1970,
-   "functie": "Canadees-Amerikaans psychiater, grondlegger transactionele analyse"
+   "functie": "Canadees-Amerikaans psychiater, grondlegger transactionele analyse",
+   "foto": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/05/Eric_Berne_at_his_wedding_in_1942.jpg",
+    "breedte": 318,
+    "hoogte": 648,
+    "focus": [
+     45,
+     40
+    ],
+    "zoom": 1,
+    "bron": "https://commons.wikimedia.org/wiki/File:Eric_Berne_at_his_wedding_in_1942.jpg",
+    "maker": "Onbekend",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
   },
   {
    "id": "p-menzies-lyth",
@@ -103,7 +190,8 @@ window.TIJDLIJN = {
    "achternaam": "Menzies Lyth",
    "geboortejaar": 1917,
    "overlijdensjaar": 2008,
-   "functie": "Brits psychoanalyticus en organisatieadviseur (Tavistock)"
+   "functie": "Brits psychoanalyticus en organisatieadviseur (Tavistock)",
+   "foto": null
   },
   {
    "id": "p-berlyne",
@@ -111,7 +199,8 @@ window.TIJDLIJN = {
    "achternaam": "Berlyne",
    "geboortejaar": 1924,
    "overlijdensjaar": 1976,
-   "functie": "Brits-Canadees experimenteel psycholoog"
+   "functie": "Brits-Canadees experimenteel psycholoog",
+   "foto": null
   },
   {
    "id": "p-freire",
@@ -119,7 +208,21 @@ window.TIJDLIJN = {
    "achternaam": "Freire",
    "geboortejaar": 1921,
    "overlijdensjaar": 1997,
-   "functie": "Braziliaans pedagoog en filosoof"
+   "functie": "Braziliaans pedagoog en filosoof",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Paulo_Freire_1977.jpg/330px-Paulo_Freire_1977.jpg",
+    "breedte": 660,
+    "hoogte": 833,
+    "focus": [
+     50,
+     32
+    ],
+    "zoom": 1.4,
+    "bron": "https://commons.wikimedia.org/wiki/File:Paulo_Freire_1977.jpg",
+    "maker": "Slobodan Dimitro",
+    "licentie": "CC BY-SA 3.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/3.0"
+   }
   },
   {
    "id": "p-weick",
@@ -127,7 +230,8 @@ window.TIJDLIJN = {
    "achternaam": "Weick",
    "geboortejaar": 1936,
    "overlijdensjaar": 2026,
-   "functie": "Amerikaans organisatiepsycholoog (University of Michigan)"
+   "functie": "Amerikaans organisatiepsycholoog (University of Michigan)",
+   "foto": null
   },
   {
    "id": "p-freidson",
@@ -135,7 +239,8 @@ window.TIJDLIJN = {
    "achternaam": "Freidson",
    "geboortejaar": 1923,
    "overlijdensjaar": 2005,
-   "functie": "Amerikaans socioloog van professies (NYU)"
+   "functie": "Amerikaans socioloog van professies (NYU)",
+   "foto": null
   },
   {
    "id": "p-schon",
@@ -143,7 +248,21 @@ window.TIJDLIJN = {
    "achternaam": "Schön",
    "geboortejaar": 1930,
    "overlijdensjaar": 1997,
-   "functie": "Amerikaans filosoof en organisatiekundige (MIT)"
+   "functie": "Amerikaans filosoof en organisatiekundige (MIT)",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Donald_schon_pic.jpg/330px-Donald_schon_pic.jpg",
+    "breedte": 350,
+    "hoogte": 522,
+    "focus": [
+     45,
+     32
+    ],
+    "zoom": 1.3,
+    "bron": "https://commons.wikimedia.org/wiki/File:Donald_schon_pic.jpg",
+    "maker": "VectorStudy",
+    "licentie": "FAL",
+    "licentie_url": "http://artlibre.org/licence/lal/en"
+   }
   },
   {
    "id": "p-argyris",
@@ -151,7 +270,8 @@ window.TIJDLIJN = {
    "achternaam": "Argyris",
    "geboortejaar": 1923,
    "overlijdensjaar": 2013,
-   "functie": "Amerikaans organisatiekundige (Harvard)"
+   "functie": "Amerikaans organisatiekundige (Harvard)",
+   "foto": null
   },
   {
    "id": "p-csikszentmihalyi",
@@ -159,7 +279,21 @@ window.TIJDLIJN = {
    "achternaam": "Csikszentmihalyi",
    "geboortejaar": 1934,
    "overlijdensjaar": 2021,
-   "functie": "Hongaars-Amerikaans psycholoog"
+   "functie": "Hongaars-Amerikaans psycholoog",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Mihaly_Csikszentmihalyi.jpg/330px-Mihaly_Csikszentmihalyi.jpg",
+    "breedte": 673,
+    "hoogte": 774,
+    "focus": [
+     40,
+     28
+    ],
+    "zoom": 1.5,
+    "bron": "https://commons.wikimedia.org/wiki/File:Mihaly_Csikszentmihalyi.jpg",
+    "maker": "Ehirsh",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
   },
   {
    "id": "p-bourdieu",
@@ -167,7 +301,21 @@ window.TIJDLIJN = {
    "achternaam": "Bourdieu",
    "geboortejaar": 1930,
    "overlijdensjaar": 2002,
-   "functie": "Frans socioloog"
+   "functie": "Frans socioloog",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Pierre_Bourdieu_%281%29.jpg/330px-Pierre_Bourdieu_%281%29.jpg",
+    "breedte": 1347,
+    "hoogte": 1944,
+    "focus": [
+     45,
+     30
+    ],
+    "zoom": 1.4,
+    "bron": "https://commons.wikimedia.org/wiki/File:Pierre_Bourdieu_(1).jpg",
+    "maker": "Bernard Lambert",
+    "licentie": "CC BY-SA 4.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/4.0"
+   }
   },
   {
    "id": "p-mcclelland",
@@ -175,7 +323,21 @@ window.TIJDLIJN = {
    "achternaam": "McClelland",
    "geboortejaar": 1917,
    "overlijdensjaar": 1998,
-   "functie": "Amerikaans psycholoog, motivatieonderzoeker (Harvard)"
+   "functie": "Amerikaans psycholoog, motivatieonderzoeker (Harvard)",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/DavidMcClelland.jpg/330px-DavidMcClelland.jpg",
+    "breedte": 915,
+    "hoogte": 1279,
+    "focus": [
+     50,
+     30
+    ],
+    "zoom": 1.4,
+    "bron": "https://commons.wikimedia.org/wiki/File:DavidMcClelland.jpg",
+    "maker": "Oschult",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
   },
   {
    "id": "p-kolb",
@@ -183,7 +345,8 @@ window.TIJDLIJN = {
    "achternaam": "Kolb",
    "geboortejaar": 1939,
    "overlijdensjaar": null,
-   "functie": "Amerikaans onderwijstheoreticus (Case Western Reserve)"
+   "functie": "Amerikaans onderwijstheoreticus (Case Western Reserve)",
+   "foto": null
   },
   {
    "id": "p-schein",
@@ -191,7 +354,8 @@ window.TIJDLIJN = {
    "achternaam": "Schein",
    "geboortejaar": 1928,
    "overlijdensjaar": 2023,
-   "functie": "Amerikaans organisatiepsycholoog (MIT)"
+   "functie": "Amerikaans organisatiepsycholoog (MIT)",
+   "foto": null
   },
   {
    "id": "p-deci",
@@ -199,7 +363,21 @@ window.TIJDLIJN = {
    "achternaam": "Deci",
    "geboortejaar": 1942,
    "overlijdensjaar": 2026,
-   "functie": "Amerikaans psycholoog (University of Rochester)"
+   "functie": "Amerikaans psycholoog (University of Rochester)",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/Edward_L_Deci.jpg/330px-Edward_L_Deci.jpg",
+    "breedte": 800,
+    "hoogte": 1000,
+    "focus": [
+     40,
+     25
+    ],
+    "zoom": 1.6,
+    "bron": "https://commons.wikimedia.org/wiki/File:Edward_L_Deci.jpg",
+    "maker": "Center for Self-Determination Theory",
+    "licentie": "CC BY-SA 4.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/4.0"
+   }
   },
   {
    "id": "p-ryan",
@@ -207,7 +385,21 @@ window.TIJDLIJN = {
    "achternaam": "Ryan",
    "geboortejaar": 1953,
    "overlijdensjaar": null,
-   "functie": "Amerikaans psycholoog, motivatieonderzoeker"
+   "functie": "Amerikaans psycholoog, motivatieonderzoeker",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Richard-ryan-600x400_acu_RT_HiRes.png/500px-Richard-ryan-600x400_acu_RT_HiRes.png",
+    "breedte": 1042,
+    "hoogte": 695,
+    "focus": [
+     45,
+     30
+    ],
+    "zoom": 1.3,
+    "bron": "https://commons.wikimedia.org/wiki/File:Richard-ryan-600x400_acu_RT_HiRes.png",
+    "maker": "CenterForSDT",
+    "licentie": "CC BY-SA 4.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/4.0"
+   }
   },
   {
    "id": "p-cooperrider",
@@ -215,7 +407,8 @@ window.TIJDLIJN = {
    "achternaam": "Cooperrider",
    "geboortejaar": 1954,
    "overlijdensjaar": null,
-   "functie": "Amerikaans organisatiekundige (Case Western Reserve)"
+   "functie": "Amerikaans organisatiekundige (Case Western Reserve)",
+   "foto": null
   },
   {
    "id": "p-engestrom",
@@ -223,7 +416,8 @@ window.TIJDLIJN = {
    "achternaam": "Engeström",
    "geboortejaar": 1948,
    "overlijdensjaar": null,
-   "functie": "Fins onderwijskundige (Universiteit van Helsinki)"
+   "functie": "Fins onderwijskundige (Universiteit van Helsinki)",
+   "foto": null
   },
   {
    "id": "p-west",
@@ -231,7 +425,8 @@ window.TIJDLIJN = {
    "achternaam": "West",
    "geboortejaar": null,
    "overlijdensjaar": null,
-   "functie": "Brits organisatiepsycholoog (Lancaster University)"
+   "functie": "Brits organisatiepsycholoog (Lancaster University)",
+   "foto": null
   },
   {
    "id": "p-gersick",
@@ -239,7 +434,8 @@ window.TIJDLIJN = {
    "achternaam": "Gersick",
    "geboortejaar": null,
    "overlijdensjaar": null,
-   "functie": "Amerikaans organisatiekundige (teams en verandering)"
+   "functie": "Amerikaans organisatiekundige (teams en verandering)",
+   "foto": null
   },
   {
    "id": "p-checkland",
@@ -247,7 +443,8 @@ window.TIJDLIJN = {
    "achternaam": "Checkland",
    "geboortejaar": 1930,
    "overlijdensjaar": 2026,
-   "functie": "Brits systeemdenker (Lancaster University)"
+   "functie": "Brits systeemdenker (Lancaster University)",
+   "foto": null
   },
   {
    "id": "p-g-caine",
@@ -255,7 +452,8 @@ window.TIJDLIJN = {
    "achternaam": "Caine",
    "geboortejaar": null,
    "overlijdensjaar": null,
-   "functie": "Onderwijskundige en auteur over leren en het brein"
+   "functie": "Onderwijskundige en auteur over leren en het brein",
+   "foto": null
   },
   {
    "id": "p-r-caine",
@@ -263,7 +461,8 @@ window.TIJDLIJN = {
    "achternaam": "Caine",
    "geboortejaar": null,
    "overlijdensjaar": null,
-   "functie": "Onderwijspsycholoog (California State University)"
+   "functie": "Onderwijspsycholoog (California State University)",
+   "foto": null
   },
   {
    "id": "p-pierce",
@@ -271,7 +470,8 @@ window.TIJDLIJN = {
    "achternaam": "Pierce",
    "geboortejaar": null,
    "overlijdensjaar": null,
-   "functie": "Amerikaans organisatiepsycholoog (University of Minnesota Duluth)"
+   "functie": "Amerikaans organisatiepsycholoog (University of Minnesota Duluth)",
+   "foto": null
   },
   {
    "id": "p-lave",
@@ -279,7 +479,21 @@ window.TIJDLIJN = {
    "achternaam": "Lave",
    "geboortejaar": 1939,
    "overlijdensjaar": null,
-   "functie": "Amerikaans sociaal antropoloog (UC Berkeley)"
+   "functie": "Amerikaans sociaal antropoloog (UC Berkeley)",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Jean_Lave%2C_ICLS_2014_opening_keynote_%2815057409757%29.jpg/500px-Jean_Lave%2C_ICLS_2014_opening_keynote_%2815057409757%29.jpg",
+    "breedte": 4000,
+    "hoogte": 3000,
+    "focus": [
+     36,
+     28
+    ],
+    "zoom": 1.8,
+    "bron": "https://commons.wikimedia.org/wiki/File:Jean_Lave,_ICLS_2014_opening_keynote_(15057409757).jpg",
+    "maker": "Raymond Johnson",
+    "licentie": "CC BY-SA 2.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/2.0"
+   }
   },
   {
    "id": "p-seligman",
@@ -287,7 +501,21 @@ window.TIJDLIJN = {
    "achternaam": "Seligman",
    "geboortejaar": 1942,
    "overlijdensjaar": null,
-   "functie": "Amerikaans psycholoog, grondlegger positieve psychologie"
+   "functie": "Amerikaans psycholoog, grondlegger positieve psychologie",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Martin_Seligman_Philadelphia_2009.jpg/500px-Martin_Seligman_Philadelphia_2009.jpg",
+    "breedte": 600,
+    "hoogte": 560,
+    "focus": [
+     50,
+     22
+    ],
+    "zoom": 1.8,
+    "bron": "https://commons.wikimedia.org/wiki/File:Martin_Seligman_Philadelphia_2009.jpg",
+    "maker": "D. Myles Cullen, U.S. Department of Defense",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
   },
   {
    "id": "p-pedler",
@@ -295,7 +523,8 @@ window.TIJDLIJN = {
    "achternaam": "Pedler",
    "geboortejaar": null,
    "overlijdensjaar": null,
-   "functie": "Brits organisatiekundige (action learning)"
+   "functie": "Brits organisatiekundige (action learning)",
+   "foto": null
   },
   {
    "id": "p-ericsson",
@@ -303,7 +532,8 @@ window.TIJDLIJN = {
    "achternaam": "Ericsson",
    "geboortejaar": 1947,
    "overlijdensjaar": 2020,
-   "functie": "Zweeds psycholoog, expertiseonderzoeker (Florida State)"
+   "functie": "Zweeds psycholoog, expertiseonderzoeker (Florida State)",
+   "foto": null
   },
   {
    "id": "p-kessels",
@@ -311,7 +541,8 @@ window.TIJDLIJN = {
    "achternaam": "Kessels",
    "geboortejaar": 1952,
    "overlijdensjaar": null,
-   "functie": "Nederlands onderwijskundige, HRD (Universiteit Twente)"
+   "functie": "Nederlands onderwijskundige, HRD (Universiteit Twente)",
+   "foto": null
   },
   {
    "id": "p-stacey",
@@ -319,7 +550,21 @@ window.TIJDLIJN = {
    "achternaam": "Stacey",
    "geboortejaar": 1942,
    "overlijdensjaar": 2021,
-   "functie": "Brits organisatietheoreticus (University of Hertfordshire)"
+   "functie": "Brits organisatietheoreticus (University of Hertfordshire)",
+   "foto": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Ralph_Stacey.jpg",
+    "breedte": 237,
+    "hoogte": 234,
+    "focus": [
+     50,
+     35
+    ],
+    "zoom": 1.2,
+    "bron": "https://commons.wikimedia.org/wiki/File:Ralph_Stacey.jpg",
+    "maker": "Dr. Eric Wenzel",
+    "licentie": "CC BY-SA 3.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/3.0"
+   }
   },
   {
    "id": "p-wenger",
@@ -327,7 +572,21 @@ window.TIJDLIJN = {
    "achternaam": "Wenger",
    "geboortejaar": 1952,
    "overlijdensjaar": null,
-   "functie": "Zwitsers onderwijstheoreticus"
+   "functie": "Zwitsers onderwijstheoreticus",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Etienne_Wenger_893x893.jpg/330px-Etienne_Wenger_893x893.jpg",
+    "breedte": 893,
+    "hoogte": 893,
+    "focus": [
+     40,
+     35
+    ],
+    "zoom": 1.3,
+    "bron": "https://commons.wikimedia.org/wiki/File:Etienne_Wenger_893x893.jpg",
+    "maker": "Beverly Trayner",
+    "licentie": "CC BY 2.0",
+    "licentie_url": "https://creativecommons.org/licenses/by/2.0"
+   }
   },
   {
    "id": "p-wierdsma",
@@ -335,7 +594,8 @@ window.TIJDLIJN = {
    "achternaam": "Wierdsma",
    "geboortejaar": null,
    "overlijdensjaar": null,
-   "functie": "Nederlands organisatiekundige (Nyenrode)"
+   "functie": "Nederlands organisatiekundige (Nyenrode)",
+   "foto": null
   },
   {
    "id": "p-isaacs",
@@ -343,7 +603,8 @@ window.TIJDLIJN = {
    "achternaam": "Isaacs",
    "geboortejaar": null,
    "overlijdensjaar": null,
-   "functie": "Amerikaans organisatiekundige, dialoogspecialist (MIT)"
+   "functie": "Amerikaans organisatiekundige, dialoogspecialist (MIT)",
+   "foto": null
   },
   {
    "id": "p-edmondson",
@@ -351,7 +612,21 @@ window.TIJDLIJN = {
    "achternaam": "Edmondson",
    "geboortejaar": 1959,
    "overlijdensjaar": null,
-   "functie": "Amerikaans organisatiekundige (Harvard Business School)"
+   "functie": "Amerikaans organisatiekundige (Harvard Business School)",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Photo_Credit-_Evgenia_Eliseeva.jpg/500px-Photo_Credit-_Evgenia_Eliseeva.jpg",
+    "breedte": 2640,
+    "hoogte": 3960,
+    "focus": [
+     50,
+     30
+    ],
+    "zoom": 2,
+    "bron": "https://commons.wikimedia.org/wiki/File:Photo_Credit-_Evgenia_Eliseeva.jpg",
+    "maker": "Evgenia Eliseeva",
+    "licentie": "CC BY-SA 2.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/2.0"
+   }
   },
   {
    "id": "p-smith",
@@ -359,7 +634,8 @@ window.TIJDLIJN = {
    "achternaam": "Smith",
    "geboortejaar": null,
    "overlijdensjaar": null,
-   "functie": "Amerikaans organisatiekundige (University of Delaware)"
+   "functie": "Amerikaans organisatiekundige (University of Delaware)",
+   "foto": null
   },
   {
    "id": "p-lewis",
@@ -367,7 +643,8 @@ window.TIJDLIJN = {
    "achternaam": "Lewis",
    "geboortejaar": null,
    "overlijdensjaar": null,
-   "functie": "Amerikaans organisatiekundige (University of Cincinnati)"
+   "functie": "Amerikaans organisatiekundige (University of Cincinnati)",
+   "foto": null
   },
   {
    "id": "p-billett",
@@ -375,7 +652,8 @@ window.TIJDLIJN = {
    "achternaam": "Billett",
    "geboortejaar": null,
    "overlijdensjaar": null,
-   "functie": "Australisch onderwijskundige, werkplekleren (Griffith University)"
+   "functie": "Australisch onderwijskundige, werkplekleren (Griffith University)",
+   "foto": null
   },
   {
    "id": "p-bereiter",
@@ -383,7 +661,21 @@ window.TIJDLIJN = {
    "achternaam": "Bereiter",
    "geboortejaar": 1930,
    "overlijdensjaar": null,
-   "functie": "Amerikaans-Canadees onderwijspsycholoog (OISE, Toronto)"
+   "functie": "Amerikaans-Canadees onderwijspsycholoog (OISE, Toronto)",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/06/Carl_Bereiter.jpg/330px-Carl_Bereiter.jpg",
+    "breedte": 360,
+    "hoogte": 360,
+    "focus": [
+     55,
+     34
+    ],
+    "zoom": 1.4,
+    "bron": "https://commons.wikimedia.org/wiki/File:Carl_Bereiter.jpg",
+    "maker": "Saltise INC",
+    "licentie": "CC BY-SA 4.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/4.0"
+   }
   },
   {
    "id": "p-scardamalia",
@@ -391,7 +683,8 @@ window.TIJDLIJN = {
    "achternaam": "Scardamalia",
    "geboortejaar": null,
    "overlijdensjaar": null,
-   "functie": "Canadees onderwijspsycholoog (OISE, Toronto)"
+   "functie": "Canadees onderwijspsycholoog (OISE, Toronto)",
+   "foto": null
   },
   {
    "id": "p-schwartz",
@@ -399,7 +692,21 @@ window.TIJDLIJN = {
    "achternaam": "Schwartz",
    "geboortejaar": 1946,
    "overlijdensjaar": null,
-   "functie": "Amerikaans psycholoog (Swarthmore College)"
+   "functie": "Amerikaans psycholoog (Swarthmore College)",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Barry_Schwartz.jpg/960px-Barry_Schwartz.jpg",
+    "breedte": 4752,
+    "hoogte": 3168,
+    "focus": [
+     40,
+     25
+    ],
+    "zoom": 2.5,
+    "bron": "https://commons.wikimedia.org/wiki/File:Barry_Schwartz.jpg",
+    "maker": "Bill Holsinger-Robinson",
+    "licentie": "CC BY 2.0",
+    "licentie_url": "https://creativecommons.org/licenses/by/2.0"
+   }
   },
   {
    "id": "p-spillane",
@@ -407,7 +714,8 @@ window.TIJDLIJN = {
    "achternaam": "Spillane",
    "geboortejaar": null,
    "overlijdensjaar": null,
-   "functie": "Onderwijskundige, schoolleiderschap (Northwestern University)"
+   "functie": "Onderwijskundige, schoolleiderschap (Northwestern University)",
+   "foto": null
   },
   {
    "id": "p-kunneman",
@@ -415,7 +723,8 @@ window.TIJDLIJN = {
    "achternaam": "Kunneman",
    "geboortejaar": 1948,
    "overlijdensjaar": null,
-   "functie": "Nederlands filosoof (Universiteit voor Humanistiek)"
+   "functie": "Nederlands filosoof (Universiteit voor Humanistiek)",
+   "foto": null
   },
   {
    "id": "p-dweck",
@@ -423,7 +732,21 @@ window.TIJDLIJN = {
    "achternaam": "Dweck",
    "geboortejaar": 1946,
    "overlijdensjaar": null,
-   "functie": "Amerikaans psycholoog (Stanford)"
+   "functie": "Amerikaans psycholoog (Stanford)",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Carol_Dweck_for_Innovation_documentary.jpg/330px-Carol_Dweck_for_Innovation_documentary.jpg",
+    "breedte": 716,
+    "hoogte": 799,
+    "focus": [
+     45,
+     30
+    ],
+    "zoom": 1.6,
+    "bron": "https://commons.wikimedia.org/wiki/File:Carol_Dweck_for_Innovation_documentary.jpg",
+    "maker": "Satheesh Gopalan",
+    "licentie": "CC BY-SA 3.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/3.0"
+   }
   },
   {
    "id": "p-shaffer",
@@ -431,7 +754,21 @@ window.TIJDLIJN = {
    "achternaam": "Shaffer",
    "geboortejaar": null,
    "overlijdensjaar": null,
-   "functie": "Amerikaans leerwetenschapper (University of Wisconsin–Madison)"
+   "functie": "Amerikaans leerwetenschapper (University of Wisconsin–Madison)",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/David_Williamson_Shaffer_LISE2008.jpg/960px-David_Williamson_Shaffer_LISE2008.jpg",
+    "breedte": 2865,
+    "hoogte": 1918,
+    "focus": [
+     50,
+     26
+    ],
+    "zoom": 2.4,
+    "bron": "https://commons.wikimedia.org/wiki/File:David_Williamson_Shaffer_LISE2008.jpg",
+    "maker": "Douglas A. Lockard",
+    "licentie": "CC BY-SA 3.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/3.0"
+   }
   },
   {
    "id": "p-scharmer",
@@ -439,7 +776,21 @@ window.TIJDLIJN = {
    "achternaam": "Scharmer",
    "geboortejaar": 1961,
    "overlijdensjaar": null,
-   "functie": "Duits organisatiekundige (MIT)"
+   "functie": "Duits organisatiekundige (MIT)",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Otto_Scharmer.jpg/500px-Otto_Scharmer.jpg",
+    "breedte": 2592,
+    "hoogte": 3888,
+    "focus": [
+     45,
+     43
+    ],
+    "zoom": 2,
+    "bron": "https://commons.wikimedia.org/wiki/File:Otto_Scharmer.jpg",
+    "maker": "Ad Huikeshoven",
+    "licentie": "CC BY-SA 4.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/4.0"
+   }
   },
   {
    "id": "p-hattie",
@@ -447,7 +798,21 @@ window.TIJDLIJN = {
    "achternaam": "Hattie",
    "geboortejaar": 1950,
    "overlijdensjaar": null,
-   "functie": "Nieuw-Zeelands onderwijskundige (University of Melbourne)"
+   "functie": "Nieuw-Zeelands onderwijskundige (University of Melbourne)",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/John_Hattie.jpeg/500px-John_Hattie.jpeg",
+    "breedte": 2448,
+    "hoogte": 3264,
+    "focus": [
+     47,
+     36
+    ],
+    "zoom": 1.7,
+    "bron": "https://commons.wikimedia.org/wiki/File:John_Hattie.jpeg",
+    "maker": "idunius",
+    "licentie": "CC BY-SA 3.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/3.0"
+   }
   },
   {
    "id": "p-brown",
@@ -455,7 +820,21 @@ window.TIJDLIJN = {
    "achternaam": "Brown",
    "geboortejaar": 1965,
    "overlijdensjaar": null,
-   "functie": "Amerikaans onderzoeker sociaal werk (University of Houston)"
+   "functie": "Amerikaans onderzoeker sociaal werk (University of Houston)",
+   "foto": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/63/Dr._Brene_Brown_at_Texas_Conference_for_Women_%28cropped%29.jpg",
+    "breedte": 842,
+    "hoogte": 1263,
+    "focus": [
+     48,
+     17
+    ],
+    "zoom": 3,
+    "bron": "https://commons.wikimedia.org/wiki/File:Dr._Brene_Brown_at_Texas_Conference_for_Women_(cropped).jpg",
+    "maker": "Dell Inc.",
+    "licentie": "CC BY 2.0",
+    "licentie_url": "https://creativecommons.org/licenses/by/2.0"
+   }
   },
   {
    "id": "p-sennett",
@@ -463,7 +842,21 @@ window.TIJDLIJN = {
    "achternaam": "Sennett",
    "geboortejaar": 1943,
    "overlijdensjaar": null,
-   "functie": "Amerikaans socioloog (LSE)"
+   "functie": "Amerikaans socioloog (LSE)",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Richard_Sennett%2C_re-publica_2016_%28cropped%29.JPG/330px-Richard_Sennett%2C_re-publica_2016_%28cropped%29.JPG",
+    "breedte": 2957,
+    "hoogte": 3446,
+    "focus": [
+     48,
+     35
+    ],
+    "zoom": 1.5,
+    "bron": "https://commons.wikimedia.org/wiki/File:Richard_Sennett,_re-publica_2016_(cropped).JPG",
+    "maker": "Ot",
+    "licentie": "CC BY-SA 4.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/4.0"
+   }
   },
   {
    "id": "p-kahneman",
@@ -471,7 +864,21 @@ window.TIJDLIJN = {
    "achternaam": "Kahneman",
    "geboortejaar": 1934,
    "overlijdensjaar": 2024,
-   "functie": "Israëlisch-Amerikaans psycholoog, Nobelprijs economie"
+   "functie": "Israëlisch-Amerikaans psycholoog, Nobelprijs economie",
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Daniel_Kahneman_%283283955327%29_%28cropped%29.jpg/500px-Daniel_Kahneman_%283283955327%29_%28cropped%29.jpg",
+    "breedte": 688,
+    "hoogte": 818,
+    "focus": [
+     45,
+     28
+    ],
+    "zoom": 1.8,
+    "bron": "https://commons.wikimedia.org/wiki/File:Daniel_Kahneman_(3283955327)_(cropped).jpg",
+    "maker": "nrkbeta",
+    "licentie": "CC BY-SA 2.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/2.0"
+   }
   }
  ],
  "items": [

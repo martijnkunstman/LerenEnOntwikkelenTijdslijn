@@ -17,6 +17,7 @@ Gemaakt met gewone HTML, CSS en JavaScript. Er zijn geen build-stap en geen afha
   - de begrippen op dezelfde lijn;
   - andere begrippen van dezelfde persoon;
   - een knop naar het vorige en volgende begrip.
+- **Portretten**: alle denkers onder elkaar op de tijdlijn, met portretfoto en levensjaren, zonder begrippen. Klik op een portret voor het begrip.
 - **Levenslijnen**: de levensloop van elke denker, met een stip op het jaar van het begrip. Je kunt sorteren op jaar van het begrip, geboortejaar of achternaam.
 - **Zoeken en filteren**: zoek op begrip, naam, functie of jaar, of filter op duo's en terugkerende denkers.
 
@@ -50,7 +51,7 @@ Open daarna het adres dat de server toont, bijvoorbeeld `http://localhost:3000` 
 
 Alle gegevens staan in `tijdlijn.json`, in drie lijsten:
 
-- **`personen`**: unieke personen met `id`, `naam`, `achternaam`, `geboortejaar`, `overlijdensjaar` en `functie`. Onbekende jaren zijn `null`.
+- **`personen`**: unieke personen met `id`, `naam`, `achternaam`, `geboortejaar`, `overlijdensjaar`, `functie` en `foto`. Onbekende jaren zijn `null`.
 - **`items`**: één blok op de tijdlijn met `id`, `jaar`, `begrip`, `begrip_vertaling` en een lijst `personen` met persoon-id's. Een item met twee persoon-id's is een duo. Daarnaast heeft elk item:
   - `omschrijving`: wat het begrip inhoudt;
   - `uitleg`: wat het begrip betekent voor leren en ontwikkelen.
@@ -75,7 +76,33 @@ Pas je `tijdlijn.json` aan, zet de wijziging dan ook in `data.js`. Anders ziet d
 
 Zoeken, groeperen, duo's, terugkerende denkers en de volgorde worden allemaal automatisch uit de gegevens afgeleid.
 
+## Portretfoto's
+
+De foto's komen van [Wikimedia Commons](https://commons.wikimedia.org) en hebben allemaal een vrije licentie of vallen in het publieke domein. De pagina laadt ze rechtstreeks van Wikimedia, dus je hebt internet nodig om ze te zien. Zonder foto, of zonder verbinding, toont de pagina de initialen.
+
+Het veld `foto` bij een persoon ziet er zo uit:
+
+```json
+"foto": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Ralph_Stacey.jpg",
+  "breedte": 237, "hoogte": 234,
+  "focus": [50, 35], "zoom": 1.2,
+  "bron": "https://commons.wikimedia.org/wiki/File:Ralph_Stacey.jpg",
+  "maker": "Dr. Eric Wenzel",
+  "licentie": "CC BY-SA 3.0",
+  "licentie_url": "https://creativecommons.org/licenses/by-sa/3.0"
+}
+```
+
+- `breedte` en `hoogte` zijn de afmetingen van het origineel. De pagina heeft ze nodig om de uitsnede te berekenen.
+- `focus` is het midden van het gezicht, in procenten van links en van boven.
+- `zoom` bepaalt hoe ver er wordt ingezoomd: 1 betekent dat de korte zijde van de foto precies in de cirkel past.
+- `bron`, `maker` en `licentie` zijn nodig voor de naamsvermelding. Die staat onder de weergave Portretten, bij "Fotoverantwoording".
+
+Voor 29 denkers is geen vrij portret gevonden; daar staat `"foto": null`. Vind je een foto met een vrije licentie, vul dan het veld in en werk ook `data.js` bij.
+
 ## Deep links
 
 - `index.html#t-1974-schon-argyris` opent de pagina met het detailpaneel van dat begrip.
+- `index.html#portretten` opent de pagina in de weergave Portretten.
 - `index.html#personen` opent de pagina in de weergave Levenslijnen.

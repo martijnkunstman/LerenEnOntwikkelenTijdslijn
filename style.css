@@ -256,7 +256,8 @@ main { padding-block: 28px 64px; }
 .leven-rij:hover { background: var(--vlak); }
 .leven-rij.is-gedimd { opacity: .22; }
 .leven-rij.is-actief { background: var(--accent-zacht); }
-.leven-naam { padding: 7px 14px 7px 4px; min-width: 0; }
+.leven-naam { padding: 7px 14px 7px 4px; min-width: 0; display: flex; align-items: center; gap: 10px; }
+.leven-naam-tekst { min-width: 0; }
 .leven-naam .naam { display: block; font-size: 14px; font-weight: 600; }
 .leven-begrippen { display: block; font-size: 12.5px; color: var(--gedempt); line-height: 1.35; }
 .begrip-link { border: 0; background: none; padding: 0; color: var(--accent); font-size: 12.5px; text-align: left; }
@@ -275,6 +276,50 @@ main { padding-block: 28px 64px; }
 }
 .leven-stip.is-duo { background: var(--duo); }
 .leven-stip:hover { transform: scale(1.3); }
+
+/* ---------- Portretfoto (ronde uitsnede) ---------- */
+.avatar {
+  --av: 40px;
+  position: relative; flex: none; display: inline-grid; place-items: center;
+  width: var(--av); height: var(--av); border-radius: 50%; overflow: hidden;
+  background: var(--accent-zacht); color: var(--accent);
+  font: 500 calc(var(--av) * .32)/1 var(--f-tekst); letter-spacing: .03em;
+  box-shadow: inset 0 0 0 1px var(--lijn);
+}
+.avatar img { position: absolute; max-width: none; object-fit: cover; }
+.avatar-klein { --av: 34px; }
+.avatar-paneel { --av: 56px; }
+.avatar-groot { --av: 76px; }
+
+/* ---------- Portretten ---------- */
+.portretten .personen-uitleg { margin-bottom: 18px; }
+.portretten-lijst { position: relative; display: flex; flex-direction: column; gap: 22px; padding-block: 6px 30px; }
+.portretten-lijst::before { content: ""; position: absolute; top: 0; bottom: 0; left: 40px; width: 2px; margin-left: -1px; background: var(--lijn); }
+.portretten-lijst .decennium { justify-content: flex-start; padding-left: 8px; }
+.portretten-lijst .decennium span { padding-left: 6px; }
+.portret-jaar { --kaart-midden: 47px; display: grid; grid-template-columns: 80px 1fr; align-items: start; }
+.portret-jaar .jaarknoop { grid-column: 1; justify-self: center; margin-top: calc(var(--kaart-midden) - 12px); }
+.portret-jaar.is-gedimd .jaarknoop { opacity: .35; }
+.portret-rij { position: relative; display: flex; flex-wrap: wrap; gap: 12px; min-width: 0; }
+.portret-rij::before { content: ""; position: absolute; left: -40px; top: var(--kaart-midden); width: 40px; height: 2px; margin-top: -1px; background: var(--lijn-sterk); }
+.portret {
+  display: flex; align-items: center; gap: 14px; min-width: 0; max-width: 100%;
+  padding: 8px 20px 8px 8px; border: 1px solid var(--lijn); border-radius: 999px; background: var(--vlak);
+  text-align: left; transition: border-color .15s, box-shadow .15s, opacity .2s;
+}
+.portret:hover { border-color: var(--lijn-sterk); box-shadow: var(--schaduw); }
+.portret.is-actief { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.portret.is-gedimd { opacity: .25; }
+.portret-tekst { display: grid; gap: 2px; min-width: 0; }
+.portret-naam { font: 600 19px/1.15 var(--f-display); overflow-wrap: anywhere; }
+.portret-jaren { font: 12.5px var(--f-cijfer); color: var(--gedempt); font-variant-numeric: tabular-nums; }
+
+.credits { margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--lijn); font-size: 13px; color: var(--gedempt); }
+.credits summary { cursor: pointer; color: var(--inkt); font-weight: 500; }
+.credits p { max-width: 70ch; }
+.credits ul { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 3px; }
+.credits a { color: var(--accent); }
+.credits b { color: var(--inkt); font-weight: 500; }
 
 /* ---------- Paneel ---------- */
 .paneel {
@@ -303,7 +348,8 @@ main { padding-block: 28px 64px; }
 .p-tekst { margin: 0; font-size: 14.5px; line-height: 1.55; }
 .p-sectie { margin: 0 0 8px; font: 500 11px/1 var(--f-cijfer); letter-spacing: .12em; text-transform: uppercase; color: var(--gedempt); }
 .p-personen { display: grid; gap: 12px; }
-.p-persoon { padding: 12px 14px; background: var(--papier); border-radius: 6px; display: grid; gap: 3px; }
+.p-persoon { padding: 12px 14px; background: var(--papier); border-radius: 6px; display: flex; align-items: flex-start; gap: 14px; }
+.p-persoon-tekst { display: grid; gap: 3px; min-width: 0; }
 .p-naam { margin: 0; font-weight: 600; font-size: 15.5px; }
 .p-meta { margin: 0; font: 12px var(--f-cijfer); color: var(--gedempt); font-variant-numeric: tabular-nums; }
 .p-functie { margin: 2px 0 0; font-size: 14px; }
@@ -350,6 +396,12 @@ main { padding-block: 28px 64px; }
   .telling { margin-left: 0; flex-basis: 100%; }
   .zoek { max-width: none; }
   .tick.oneven span { display: none; }
+  .portretten-lijst::before { left: 28px; }
+  .portret-jaar { --kaart-midden: 39px; grid-template-columns: 56px 1fr; }
+  .portret-rij::before { left: -28px; width: 28px; }
+  .avatar-groot { --av: 60px; }
+  .portret { padding-right: 16px; gap: 12px; }
+  .portret-naam { font-size: 17px; }
 }
 @media (max-width: 700px) {
   .paneel {

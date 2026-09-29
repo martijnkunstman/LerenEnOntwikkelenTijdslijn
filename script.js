@@ -112,6 +112,33 @@
   const itemLink = (o) =>
     `<button type="button" class="item-link" data-open="${esc(o.id)}"><span class="il-jaar">${o.jaar}</span><span class="il-begrip">${esc(o.begrip)}</span></button>`;
 
+  /* ---------- Portretfoto's ---------- */
+  function initialen(p) {
+    const delen = String(p.naam || '').split(/\s+/).filter(Boolean);
+    const voor = delen[0] ? delen[0][0] : '';
+    const achter = (p.achternaam || delen[delen.length - 1] || '')[0] || '';
+    return esc((voor + achter).toUpperCase());
+  }
+  // Toont de foto als ronde uitsnede rond het gezicht (focus in procenten, zoom t.o.v. de korte zijde).
+  // Zonder foto, of als de foto niet laadt, blijven de initialen zichtbaar.
+  function avatar(p, klasse = '') {
+    const f = p.foto;
+    let img = '';
+    if (f && f.url && f.breedte && f.hoogte) {
+      const a = f.breedte / f.hoogte;
+      const z = f.zoom || 1;
+      const W = a >= 1 ? z * a : z;
+      const H = a >= 1 ? z : z / a;
+      const fx = ((f.focus && f.focus[0]) ?? 50) / 100;
+      const fy = ((f.focus && f.focus[1]) ?? 35) / 100;
+      const L = Math.min(0, Math.max(1 - W, 0.5 - fx * W));
+      const T = Math.min(0, Math.max(1 - H, 0.5 - fy * H));
+      img = `<img src="${esc(f.url)}" alt="" loading="lazy" decoding="async"
+        style="width:${(W * 100).toFixed(2)}%;height:${(H * 100).toFixed(2)}%;left:${(L * 100).toFixed(2)}%;top:${(T * 100).toFixed(2)}%">`;
+    }
+    return `<span class="avatar ${klasse}" aria-hidden="true"><span class="avatar-ini">${initialen(p)}</span>${img}</span>`;
+  }
+
   /* ---------- Kop ---------- */
   function renderCijfers() {
     const jaren = M.items.map((i) => i.jaar);
@@ -247,8 +274,8 @@
       spoor += items.map((i) => `<button type="button" class="leven-stip${isDuo(i) ? ' is-duo' : ''}" data-open="${esc(i.id)}" style="left:${pct(i.jaar)}%"
         title="${i.jaar} · ${esc(i.begrip)}" aria-label="${esc(p.naam)}, ${i.jaar}: ${esc(i.begrip)}"></button>`).join('');
       return `<div class="leven-rij" data-p="${esc(p.id)}">
-        <div class="leven-naam"><span class="naam">${esc(p.naam)}</span>
-          <span class="leven-begrippen">${items.map((i) => `<button type="button" class="begrip-link" data-open="${esc(i.id)}">${esc(i.begrip)}</button>`).join(', ')}</span></div>
+        <div class="leven-naam">${avatar(p, 'avatar-klein')}<div class="leven-naam-tekst"><span class="naam">${esc(p.naam)}</span>
+          <span class="leven-begrippen">${items.map((i) => `<button type="button" class="begrip-link" data-open="${esc(i.id)}">${esc(i.begrip)}</button>`).join(', ')}</span></div></div>
         <div class="leven-spoor">${spoor}</div>
       </div>`;
     }).join('');
@@ -256,6 +283,59 @@
     $('#levens').innerHTML = `<div class="levens-raster" aria-hidden="true">${raster}</div>${asRij}${rijen}${asRij}`;
     pasFilterToe();
     markeerActief();
+  }
+
+  /* ---------- Portretten ---------- */
+  function renderPortretten() {
+    let html = '';
+    let decennium = null;
+    let vorigJaar = null;
+    let rij = [];
+    const sluitJaar = () => {
+      if (vorigJaar === null) return;
+      html += `<section class="portret-jaar" data-jaar="${vorigJaar}" aria-label="${vorigJaar}">
+        <div class="jaarknoop"><span>${vorigJaar}</span></div>
+        <div class="portret-rij">${rij.join('')}</div>
+      </section>`;
+      rij = [];
+    };
+    M.items.forEach((it) => {
+      if (it.jaar !== vorigJaar) {
+        sluitJaar();
+        const dec = Math.floor(it.jaar / 10) * 10;
+        if (dec !== decennium) {
+          decennium = dec;
+          html += `<div class="decennium" aria-hidden="true"><span>${decLabel(dec)}</span></div>`;
+        }
+        vorigJaar = it.jaar;
+      }
+      it.personenObj.forEach((p) => {
+        rij.push(`<button type="button" class="portret" data-open="${esc(it.id)}" data-p="${esc(p.id)}" data-item="${esc(it.id)}"
+          aria-label="${esc(p.naam)}, ${esc(levensTekst(p))}">
+          ${avatar(p, 'avatar-groot')}
+          <span class="portret-tekst"><span class="portret-naam">${esc(p.naam)}</span><span class="portret-jaren">${esc(levensTekst(p))}</span></span>
+        </button>`);
+      });
+    });
+    sluitJaar();
+    $('#portretten-lijst').innerHTML = html;
+    renderCredits();
+    pasFilterToe();
+    markeerActief();
+  }
+
+  function renderCredits() {
+    const metFoto = [...M.personen.values()].filter((p) => p.foto && p.foto.url && M.perPersoon.has(p.id))
+      .sort((a, b) => (a.achternaam || a.naam).localeCompare(b.achternaam || b.naam, 'nl'));
+    const zonder = M.perPersoon.size - metFoto.length;
+    const regels = metFoto.map((p) => {
+      const f = p.foto;
+      const lic = f.licentie_url ? `<a href="${esc(f.licentie_url)}" target="_blank" rel="noopener">${esc(f.licentie)}</a>` : esc(f.licentie || '');
+      return `<li><b>${esc(p.naam)}</b>: foto ${esc(f.maker || 'onbekend')}, ${lic}, via <a href="${esc(f.bron)}" target="_blank" rel="noopener">Wikimedia Commons</a></li>`;
+    }).join('');
+    $('#credits').innerHTML = `<summary>Fotoverantwoording (${metFoto.length} foto's)</summary>
+      <p>Alle foto's komen van Wikimedia Commons en vallen onder een vrije licentie of het publieke domein. Voor ${zonder} denkers is geen vrij portret gevonden; zij staan met initialen.</p>
+      <ul>${regels}</ul>`;
   }
 
   /* ---------- Filteren ---------- */
@@ -280,16 +360,16 @@
     });
     $$('.jaarblok').forEach((b) => b.classList.toggle('is-gedimd', $$('.kaart', b).every((k) => k.classList.contains('is-gedimd'))));
 
-    let np = 0;
-    $$('.leven-rij').forEach((r) => {
-      const p = M.personen.get(r.dataset.p);
-      const items = M.perPersoon.get(p.id);
+    const persoonOK = new Map();
+    M.perPersoon.forEach((items, pid) => {
+      const p = M.personen.get(pid);
       const f = staat.filter === 'alle' || (staat.filter === 'duo' ? items.some(isDuo) : items.length > 1);
       const tekst = norm([p.naam, p.functie, p.geboortejaar, p.overlijdensjaar, ...items.map((i) => `${i.jaar} ${i.begrip} ${i.begrip_vertaling}`)].join(' '));
-      const ok = f && zoekOK(tekst);
-      if (ok) np++;
-      r.classList.toggle('is-gedimd', !ok);
+      persoonOK.set(pid, f && zoekOK(tekst));
     });
+    const np = [...persoonOK.values()].filter(Boolean).length;
+    $$('.leven-rij, .portret').forEach((r) => r.classList.toggle('is-gedimd', !persoonOK.get(r.dataset.p)));
+    $$('.portret-jaar').forEach((b) => b.classList.toggle('is-gedimd', $$('.portret', b).every((k) => k.classList.contains('is-gedimd'))));
 
     const actief = staat.zoek || staat.filter !== 'alle';
     const totaal = staat.weergave === 'tijdlijn' ? M.items.length : M.perPersoon.size;
@@ -308,10 +388,13 @@
       const leeftijd = p.geboortejaar ? it.jaar - p.geboortejaar : null;
       const andere = (M.perPersoon.get(p.id) || []).filter((o) => o.id !== it.id);
       return `<div class="p-persoon">
-        <p class="p-naam">${esc(p.naam)}</p>
-        <p class="p-meta">${levensTekst(p)}${leeftijd !== null ? ` · ${leeftijd} jaar in ${it.jaar}` : ''}</p>
-        ${p.functie ? `<p class="p-functie">${esc(p.functie)}</p>` : ''}
-        ${andere.length ? `<p class="p-ook">Ook op de tijdlijn: ${andere.map(itemLink).join('')}</p>` : ''}
+        ${avatar(p, 'avatar-paneel')}
+        <div class="p-persoon-tekst">
+          <p class="p-naam">${esc(p.naam)}</p>
+          <p class="p-meta">${levensTekst(p)}${leeftijd !== null ? ` · ${leeftijd} jaar in ${it.jaar}` : ''}</p>
+          ${p.functie ? `<p class="p-functie">${esc(p.functie)}</p>` : ''}
+          ${andere.length ? `<p class="p-ook">Ook op de tijdlijn: ${andere.map(itemLink).join('')}</p>` : ''}
+        </div>
       </div>`;
     }).join('');
 
@@ -348,8 +431,9 @@
 
   function markeerActief() {
     $$('.kaart.is-actief, .kaart.is-verwant').forEach((k) => k.classList.remove('is-actief', 'is-verwant'));
-    $$('.leven-rij.is-actief').forEach((r) => r.classList.remove('is-actief'));
+    $$('.leven-rij.is-actief, .portret.is-actief').forEach((r) => r.classList.remove('is-actief'));
     if (!staat.open) return;
+    $$(`.portret[data-item="${CSS.escape(staat.open)}"]`).forEach((r) => r.classList.add('is-actief'));
     const it = M.itemMap.get(staat.open);
     const kaart = document.getElementById(it.id);
     if (kaart) kaart.classList.add('is-actief');
@@ -405,16 +489,17 @@
   }
 
   /* ---------- Weergave ---------- */
+  const WEERGAVEN = ['tijdlijn', 'portretten', 'personen'];
   function zetWeergave(w) {
     staat.weergave = w;
-    const tijdlijn = w === 'tijdlijn';
-    $('#tab-tijdlijn').setAttribute('aria-selected', String(tijdlijn));
-    $('#tab-personen').setAttribute('aria-selected', String(!tijdlijn));
-    $('#tijdlijn').hidden = !tijdlijn;
-    $('#personen').hidden = tijdlijn;
-    $('#liniaal-balk').hidden = !tijdlijn;
-    $('#legenda').hidden = !tijdlijn;
-    if (!tijdlijn && !$('#levens').children.length) renderPersonen();
+    WEERGAVEN.forEach((v) => {
+      $(`#tab-${v}`).setAttribute('aria-selected', String(v === w));
+      $(`#${v}`).hidden = v !== w;
+    });
+    $('#liniaal-balk').hidden = w !== 'tijdlijn';
+    $('#legenda').hidden = w !== 'tijdlijn';
+    if (w === 'personen' && !$('#levens').children.length) renderPersonen();
+    if (w === 'portretten' && !$('#portretten-lijst').children.length) renderPortretten();
     pasFilterToe();
   }
 
@@ -433,14 +518,19 @@
         pasFilterToe();
       }
     });
-    $('#tab-tijdlijn').addEventListener('click', () => zetWeergave('tijdlijn'));
-    $('#tab-personen').addEventListener('click', () => zetWeergave('personen'));
+    WEERGAVEN.forEach((v) => $(`#tab-${v}`).addEventListener('click', () => zetWeergave(v)));
     $('.weergave').addEventListener('keydown', (e) => {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-      const volgende = staat.weergave === 'tijdlijn' ? 'personen' : 'tijdlijn';
+      const i = WEERGAVEN.indexOf(staat.weergave) + (e.key === 'ArrowRight' ? 1 : -1);
+      const volgende = WEERGAVEN[(i + WEERGAVEN.length) % WEERGAVEN.length];
       zetWeergave(volgende);
       $(`#tab-${volgende}`).focus();
     });
+    // Foto die niet laadt (offline, of geblokkeerd): verwijder hem, zodat de initialen zichtbaar blijven.
+    document.addEventListener('error', (e) => {
+      const t = e.target;
+      if (t && t.tagName === 'IMG' && t.parentElement && t.parentElement.classList.contains('avatar')) t.remove();
+    }, true);
     $('#zoekveld').addEventListener('input', (e) => { staat.zoek = e.target.value.trim(); pasFilterToe(); });
     $('#sorteer').addEventListener('change', (e) => { staat.sorteer = e.target.value; renderPersonen(); });
     document.addEventListener('keydown', (e) => {
@@ -468,7 +558,7 @@
     volgHuidigJaar();
 
     const hash = decodeURIComponent(location.hash.slice(1));
-    if (hash === 'personen') zetWeergave('personen');
+    if (hash === 'personen' || hash === 'portretten') zetWeergave(hash);
     else if (M.itemMap.has(hash)) openDetail(hash, { focus: false });
   }
 
