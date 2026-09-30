@@ -658,8 +658,8 @@
     const staand = (houder.clientWidth || 1000) < web.hoogte;
     const W = staand ? 820 : 1200;
     const H = staand ? 1200 : 820;
-    const rx = staand ? 250 : 440;
-    const ry = staand ? 420 : 300;
+    const rx = staand ? 340 : 540;
+    const ry = staand ? 620 : 370;
     const centra = themas.map((t, i) => {
       const hoek = -Math.PI / 2 + (i * 2 * Math.PI) / themas.length;
       return { x: W / 2 + Math.cos(hoek) * rx, y: H / 2 + Math.sin(hoek) * ry };
@@ -705,7 +705,7 @@
       .force('lading', d3.forceManyBody())
       .force('x', d3.forceX())
       .force('y', d3.forceY())
-      .force('botsing', rechthoekBotsing(8, 0.8))
+      .force('botsing', rechthoekBotsing(28, 0.8))
       .stop();
     Object.assign(web, { sim, centra, midden: { x: W / 2, y: H / 2 }, gEilanden });
     stelKrachtenIn(web.themas);
@@ -761,9 +761,9 @@
     const { sim, centra, midden } = web;
     const zelfdeThema = (l) => l.source.thema === l.target.thema;
     sim.force('link')
-      .distance((l) => (metThemas ? (zelfdeThema(l) ? 60 : 220) : 95))
+      .distance((l) => (metThemas ? (zelfdeThema(l) ? 110 : 280) : 150))
       .strength((l) => (metThemas ? (zelfdeThema(l) ? 0.3 : 0.015) : 0.22));
-    sim.force('lading').strength(metThemas ? -120 : -200).distanceMax(metThemas ? 260 : 420);
+    sim.force('lading').strength(metThemas ? -200 : -300).distanceMax(metThemas ? 340 : 560);
     sim.force('x').x((d) => (metThemas ? centra[d.thema].x : midden.x)).strength(metThemas ? 0.3 : 0.05);
     sim.force('y').y((d) => (metThemas ? centra[d.thema].y : midden.y)).strength(metThemas ? 0.38 : 0.07);
   }
