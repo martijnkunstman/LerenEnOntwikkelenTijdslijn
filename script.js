@@ -15,7 +15,27 @@
   const norm = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
   let M = null;
-  const staat = { weergave: 'tijdlijn', zoek: '', sorteer: 'begrip', open: null, terugFocus: null };
+  const staat = { weergave: 'tijdlijn', zoek: '', sorteer: 'begrip', open: null, terugFocus: null, extra: false };
+  let RUW = null;
+  const EXTRA_SLEUTEL = 'tijdlijn-extra';
+
+  // Zonder de schakelaar Extra: laat alles weg wat met 'extra': true is gemarkeerd (niet uit het boek)
+  function filterExtra(ruw, metExtra) {
+    if (metExtra) return ruw;
+    const items = (ruw.items || []).filter((i) => !i.extra);
+    const ids = new Set(items.map((i) => i.id));
+    const personen = (ruw.personen || []).filter((p) => !p.extra);
+    const relaties = (ruw.relaties || []).filter((r) => !r.extra && ids.has(r.van) && ids.has(r.naar));
+    let ba = ruw.begripsanalyse;
+    if (ba) {
+      ba = {
+        ...ba,
+        relaties: (ba.relaties || []).filter((r) => !r.extra && ids.has(r.van) && ids.has(r.naar)),
+        themas: (ba.themas || []).map((t) => ({ ...t, items: (t.items || []).filter((id) => ids.has(id)) })),
+      };
+    }
+    return { ...ruw, items, personen, relaties, begripsanalyse: ba };
+  }
 
   /* ---------- Data ---------- */
   async function laadData() {
@@ -108,8 +128,15 @@
     if (p.geboortejaar) return `geboren ${p.geboortejaar}`;
     return 'levensjaren onbekend';
   }
+  const EXTRA_LABEL = '<span class="label label-extra" title="Aanvulling, niet uit het boek">Extra</span>';
+  const groepLabel = (it) => {
+    const n = it.personen.length;
+    if (n < 2) return '';
+    return `<span class="label label-duo">${n === 2 ? 'Duo' : n === 3 ? 'Trio' : 'Groep'}</span>`;
+  };
+  const labelsHTML = (it) => `${groepLabel(it)}${it.extra ? EXTRA_LABEL : ''}`;
   const itemLink = (o) =>
-    `<button type="button" class="item-link" data-open="${esc(o.id)}"><span class="il-jaar">${o.jaar}</span><span class="il-begrip">${esc(o.begrip)}</span></button>`;
+    `<button type="button" class="item-link" data-open="${esc(o.id)}"><span class="il-jaar">${o.jaar}</span><span class="il-begrip">${esc(o.begrip)}</span>${o.extra ? EXTRA_LABEL : ''}</button>`;
 
   /* ---------- Portretfoto's ---------- */
   function initialen(p) {
@@ -146,8 +173,8 @@
       (M.perPersoon.get(pid) || []).forEach((o) => { if (o.id !== it.id) ook.push({ p, o }); });
     });
     const toonVertaling = it.begrip_vertaling && norm(it.begrip_vertaling) !== norm(it.begrip);
-    return `<article class="kaart${isDuo(it) ? ' is-duo' : ''}" id="${esc(it.id)}" data-id="${esc(it.id)}">
-      ${isDuo(it) ? '<div class="kaart-kop"><span class="label label-duo">Duo</span></div>' : ''}
+    return `<article class="kaart${isDuo(it) ? ' is-duo' : ''}${it.extra ? ' is-extra' : ''}" id="${esc(it.id)}" data-id="${esc(it.id)}">
+      ${labelsHTML(it) ? `<div class="kaart-kop">${labelsHTML(it)}</div>` : ''}
       <h3 class="begrip"><button type="button" class="kaart-open" data-open="${esc(it.id)}">${esc(it.begrip)}</button></h3>
       ${toonVertaling ? `<p class="vertaling">${esc(it.begrip_vertaling)}</p>` : ''}
       <ul class="namen">${it.personenObj.map((p) => `<li><span class="naam">${esc(p.naam)}</span><span class="leven">${levensjaren(p)}</span></li>`).join('')}</ul>
@@ -191,15 +218,17 @@
     M.items.forEach((it) => {
       const n = perJaar.get(it.jaar) || 0;
       perJaar.set(it.jaar, n + 1);
-      html += `<button type="button" class="stip${isDuo(it) ? ' is-duo' : ''}" data-ga="${esc(it.id)}" data-jaar="${it.jaar}"
+      html += `<button type="button" class="stip${isDuo(it) ? ' is-duo' : ''}${it.extra ? ' is-extra' : ''}" data-ga="${esc(it.id)}" data-jaar="${it.jaar}"
         style="left:${pct(it.jaar + 0.5)}%;--n:${n}" title="${it.jaar} · ${esc(it.begrip)}" aria-label="${it.jaar}: ${esc(it.begrip)}"></button>`;
     });
     html += '<div class="liniaal-cursor" id="liniaal-cursor" hidden></div>';
     $('#liniaal').innerHTML = html;
   }
 
+  let jaarWaarnemer = null;
   function volgHuidigJaar() {
     if (!('IntersectionObserver' in window)) return;
+    if (jaarWaarnemer) jaarWaarnemer.disconnect();
     const cursor = $('#liniaal-cursor');
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
@@ -213,6 +242,7 @@
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
     $$('.jaarblok').forEach((b) => io.observe(b));
+    jaarWaarnemer = io;
   }
 
   /* ---------- Levenslijnen ---------- */
@@ -254,10 +284,10 @@
       } else {
         spoor += `<span class="leven-onbekend" style="right:${100 - pct(Math.min(...items.map((i) => i.jaar)))}%">levensjaren onbekend</span>`;
       }
-      spoor += items.map((i) => `<button type="button" class="leven-stip${isDuo(i) ? ' is-duo' : ''}" data-open="${esc(i.id)}" style="left:${pct(i.jaar)}%"
+      spoor += items.map((i) => `<button type="button" class="leven-stip${isDuo(i) ? ' is-duo' : ''}${i.extra ? ' is-extra' : ''}" data-open="${esc(i.id)}" style="left:${pct(i.jaar)}%"
         title="${i.jaar} · ${esc(i.begrip)}" aria-label="${esc(p.naam)}, ${i.jaar}: ${esc(i.begrip)}"></button>`).join('');
       return `<div class="leven-rij" data-p="${esc(p.id)}">
-        <div class="leven-naam">${avatar(p, 'avatar-klein')}<div class="leven-naam-tekst"><span class="naam">${esc(p.naam)}</span>
+        <div class="leven-naam">${avatar(p, 'avatar-klein')}<div class="leven-naam-tekst"><span class="naam">${esc(p.naam)}${p.extra ? ` ${EXTRA_LABEL}` : ''}</span>
           <span class="leven-begrippen">${items.map((i) => `<button type="button" class="begrip-link" data-open="${esc(i.id)}">${esc(i.begrip)}</button>`).join(', ')}</span></div></div>
         <div class="leven-spoor">${spoor}</div>
       </div>`;
@@ -293,10 +323,10 @@
         vorigJaar = it.jaar;
       }
       it.personenObj.forEach((p) => {
-        rij.push(`<button type="button" class="portret" data-open="${esc(it.id)}" data-p="${esc(p.id)}" data-item="${esc(it.id)}"
+        rij.push(`<button type="button" class="portret${p.extra ? ' is-extra' : ''}" data-open="${esc(it.id)}" data-p="${esc(p.id)}" data-item="${esc(it.id)}"
           aria-label="${esc(p.naam)}, ${esc(levensTekst(p))}">
           ${avatar(p, 'avatar-groot')}
-          <span class="portret-tekst"><span class="portret-naam">${esc(p.naam)}</span><span class="portret-jaren">${esc(levensTekst(p))}</span></span>
+          <span class="portret-tekst"><span class="portret-naam">${esc(p.naam)}</span><span class="portret-jaren">${esc(levensTekst(p))}${p.extra ? ` ${EXTRA_LABEL}` : ''}</span></span>
         </button>`);
       });
     });
@@ -338,7 +368,7 @@
         <ul class="az-items">${items.map((it) => {
           const toonVertaling = it.begrip_vertaling && norm(it.begrip_vertaling) !== norm(it.begrip);
           return `<li><button type="button" class="az-item" data-open="${esc(it.id)}" data-id="${esc(it.id)}">
-            <span class="az-begrip">${esc(it.begrip)}</span>
+            <span class="az-begrip">${esc(it.begrip)}${labelsHTML(it) ? ` ${labelsHTML(it)}` : ''}</span>
             ${toonVertaling ? `<span class="az-vertaling">${esc(it.begrip_vertaling)}</span>` : ''}
             ${it.omschrijving ? `<span class="az-omschrijving">${esc(it.omschrijving)}</span>` : ''}
             <span class="az-namen">${it.personenObj.map((p) => esc(p.naam)).join(' &amp; ')}</span>
@@ -416,14 +446,14 @@
       items.forEach((it) => diagram.kolomVan.set(it.id, kolom));
       return `<section class="diagram-kolom" aria-label="${esc(t.naam)}">
         <h3 class="diagram-thema">${esc(t.naam)}</h3>
-        <div class="diagram-knopen">${items.map((it) => `<button type="button" class="dnode" data-id="${esc(it.id)}" data-open="${esc(it.id)}">${esc(it.begrip)}</button>`).join('')}</div>
+        <div class="diagram-knopen">${items.map((it) => `<button type="button" class="dnode${it.extra ? ' is-extra' : ''}" data-id="${esc(it.id)}" data-open="${esc(it.id)}"${it.extra ? ' title="Extra: aanvulling, niet uit het boek"' : ''}>${esc(it.begrip)}</button>`).join('')}</div>
       </section>`;
     }).join('');
     $('#diagram-vlak').style.setProperty('--kolommen', volgorde.length);
     $('#diagram-vlak').innerHTML = `<svg class="diagram-lijnen" id="diagram-lijnen" aria-hidden="true"></svg><div class="diagram-kolommen">${kolommen}</div>`;
 
     // Legenda met aan/uit-knoppen per soort verband
-    $('#diagram-legenda').innerHTML = soortLegendaHTML();
+    $('#diagram-legenda').innerHTML = soortLegendaHTML('diagram');
 
     diagram.klaar = true;
     pasFilterToe();
@@ -557,8 +587,13 @@
   // en naam; woorden zijn groter naarmate een begrip meer verbanden heeft.
   const web = { klaar: false, sim: null, hover: null, zoom: null, svg: null, laag: null, knopen: [], hoogte: 600, themas: true };
 
-  function soortLegendaHTML() {
+  function soortLegendaHTML(voor) {
     const A = M.analyse;
+    const extraNoot = M.items.some((i) => i.extra)
+      ? `<span class="d-extra-noot">${voor === 'web'
+        ? '<i class="d-extra-voorbeeld">Schuin</i>'
+        : '<svg viewBox="0 0 28 16" width="28" height="16" aria-hidden="true"><rect x="1" y="1" width="26" height="14" rx="3" class="d-extra-rand"/></svg>'}<span>Extra: aanvulling, niet uit het boek</span></span>`
+      : '';
     const telling = new Map();
     A.relaties.forEach((r) => telling.set(r.type, (telling.get(r.type) || 0) + 1));
     return Object.entries(A.types).filter(([type]) => telling.has(type)).map(([type, t]) => `
@@ -566,7 +601,7 @@
         <svg viewBox="0 0 40 12" width="40" height="12" aria-hidden="true"><line x1="2" y1="6" x2="${t.richting === 'tweeweg' ? 38 : 32}" y2="6" class="rand-lijn"/>
           ${type === 'belemmert' ? '<line x1="35" y1="1" x2="35" y2="11" class="rem-streep"/>' : t.richting === 'tweeweg' ? '' : '<path d="M31,1.5 L39,6 L31,10.5 z" class="pijlkop"/>'}</svg>
         <span>${esc(t.label)}</span><span class="d-aantal">${telling.get(type)}</span>
-      </button>`).join('');
+      </button>`).join('') + extraNoot;
   }
 
   function markerDefs(voorvoegsel) {
@@ -641,7 +676,7 @@
     if (!A || !A.relaties.length) { houder.innerHTML = '<p class="melding">Deze gegevens bevatten nog geen begripsanalyse.</p>'; return; }
     const d3 = window.d3;
     if (!d3) { houder.innerHTML = '<p class="melding">Het woordweb heeft de bibliotheek D3 nodig (lib/d3.min.js), maar die kon niet worden geladen.</p>'; return; }
-    $('#web-legenda').innerHTML = soortLegendaHTML();
+    $('#web-legenda').innerHTML = soortLegendaHTML('web');
 
     const themas = A.themas.map((t) => ({ ...t, items: t.items.filter((id) => M.itemMap.has(id)) })).filter((t) => t.items.length);
     const themaVan = new Map();
@@ -656,10 +691,12 @@
     // Thema-middelpunten op een ellips, liggend of staand naar de vorm van het vlak; wordt later passend geschaald
     web.hoogte = Math.round(Math.max(460, Math.min(860, window.innerHeight * (window.innerWidth < 760 ? 0.66 : 0.78))));
     const staand = (houder.clientWidth || 1000) < web.hoogte;
-    const W = staand ? 820 : 1200;
-    const H = staand ? 1200 : 820;
-    const rx = staand ? 340 : 540;
-    const ry = staand ? 620 : 370;
+    // Meer begrippen (met Extra aan) krijgen meer ruimte, zodat de eilanden niet overlappen
+    const ruimte = Math.sqrt(Math.max(1, knopen.length / 50));
+    const W = (staand ? 820 : 1200) * ruimte;
+    const H = (staand ? 1200 : 820) * ruimte;
+    const rx = (staand ? 340 : 540) * ruimte;
+    const ry = (staand ? 620 : 370) * ruimte;
     const centra = themas.map((t, i) => {
       const hoek = -Math.PI / 2 + (i * 2 * Math.PI) / themas.length;
       return { x: W / 2 + Math.cos(hoek) * rx, y: H / 2 + Math.sin(hoek) * ry };
@@ -676,7 +713,7 @@
 
     const grootte = (d) => 13 + ((Math.sqrt(Math.max(d.graad, 1)) - 1) / (Math.sqrt(maxG) - 1)) * 11;
     const knoopSel = gKnopen.selectAll('g').data(knopen).join('g')
-      .attr('class', 'wnode').attr('data-id', (d) => d.id).attr('data-open', (d) => d.id)
+      .attr('class', (d) => `wnode${d.it.extra ? ' is-extra' : ''}`).attr('data-id', (d) => d.id).attr('data-open', (d) => d.id)
       .attr('tabindex', 0).attr('role', 'button')
       .attr('aria-label', (d) => `${d.it.begrip}, ${d.graad} ${d.graad === 1 ? 'verband' : 'verbanden'}`);
     const tekst = knoopSel.append('text').attr('class', 'wlabel').attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
@@ -908,7 +945,7 @@
     const vorige = M.items[it.volg - 1];
     const volgende = M.items[it.volg + 1];
     return `<div class="p-kop">
-        <p class="p-boven"><span class="p-jaar">${it.jaar}</span>${duo ? '<span class="label label-duo">Duo</span>' : ''}</p>
+        <p class="p-boven"><span class="p-jaar">${it.jaar}</span>${labelsHTML(it)}</p>
         <button type="button" class="p-sluit" aria-label="Sluiten"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></button>
       </div>
       <div class="p-titel">
@@ -1029,6 +1066,7 @@
         return;
       }
       if (e.target.closest('#web-themas')) { zetWebThemas(!web.themas); return; }
+      if (e.target.closest('#extra-knop')) { zetExtra(!staat.extra); return; }
       const wz = e.target.closest('[data-webzoom]');
       if (wz) {
         if (wz.dataset.webzoom === 'in') zoomWeb(1.3);
@@ -1129,11 +1167,53 @@
     if (donkerSysteem && donkerSysteem.addEventListener) donkerSysteem.addEventListener('change', werkThemaKnopBij);
   }
 
+  /* ---------- Schakelaar Extra ---------- */
+  function werkExtraBij() {
+    const knop = $('#extra-knop');
+    if (knop) knop.setAttribute('aria-checked', String(staat.extra));
+    const heeftExtra = M.items.some((i) => i.extra);
+    const heeftTrio = M.items.some((i) => i.personen.length > 2);
+    $('#legenda-extra').hidden = !heeftExtra;
+    $('#legenda-trio').hidden = !heeftTrio;
+  }
+
+  function zetExtra(aan) {
+    staat.extra = aan;
+    try { localStorage.setItem(EXTRA_SLEUTEL, aan ? '1' : '0'); } catch (e) { /* geen opslag beschikbaar */ }
+    M = bouwModel(filterExtra(RUW, aan));
+    // Alle weergaven opnieuw opbouwen met de nieuwe set gegevens
+    renderTijdlijn();
+    renderLiniaal();
+    volgHuidigJaar();
+    $('#levens').innerHTML = '';
+    $('#portretten-lijst').innerHTML = '';
+    $('#az-lijst').innerHTML = '';
+    $('#az-index').innerHTML = '';
+    diagram.klaar = false;
+    diagram.hover = null;
+    $('#diagram-vlak').innerHTML = '';
+    if (web.sim) { web.sim.on('tick', null).on('end.passend', null); web.sim.stop(); }
+    web.klaar = false;
+    web.hover = null;
+    $('#web-vlak').innerHTML = '';
+    werkExtraBij();
+    const open = staat.open;
+    zetWeergave(staat.weergave);
+    if (open && M.itemMap.has(open)) openDetail(open, { focus: false, scroll: false });
+    else if (open) sluitDetail();
+    pasFilterToe();
+    markeerActief();
+  }
+
   async function start() {
     koppelThema();
     try {
-      const data = await laadData();
-      M = bouwModel(data);
+      RUW = await laadData();
+      try { staat.extra = localStorage.getItem(EXTRA_SLEUTEL) === '1'; } catch (e) { /* geen opslag beschikbaar */ }
+      // Een link naar een extra begrip zet Extra aan, zonder die keuze te bewaren.
+      const doel = decodeURIComponent(location.hash.slice(1));
+      if (!staat.extra && RUW.items.some((it) => it.extra && it.id === doel)) staat.extra = true;
+      M = bouwModel(filterExtra(RUW, staat.extra));
     } catch (err) {
       const m = $('#melding');
       m.textContent = err.message;
@@ -1143,6 +1223,7 @@
     renderTijdlijn();
     renderLiniaal();
     koppel();
+    werkExtraBij();
     pasFilterToe();
     volgHuidigJaar();
 

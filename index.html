@@ -19,6 +19,14 @@
 <div class="wrap">
   <header class="kop">
     <h1>Leren en ontwikkelen</h1>
+    <div class="instellingen">
+      <button type="button" class="schakel" id="extra-knop" role="switch" aria-checked="false" title="Toon personen en begrippen die later zijn toegevoegd en niet uit het boek komen"><span class="schakel-baan" aria-hidden="true"><span class="schakel-knop"></span></span>Extra</button>
+      <button type="button" class="thema-knop" id="thema-knop" aria-label="Schakel naar donkere weergave">
+        <svg class="icoon-maan" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M16.5 12.4A7 7 0 0 1 7.6 3.5a7 7 0 1 0 8.9 8.9z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        <svg class="icoon-zon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <span class="thema-tekst">Donker</span>
+      </button>
+    </div>
   </header>
 
   <div class="bediening">
@@ -36,15 +44,12 @@
       <input id="zoekveld" type="search" placeholder="Zoek begrip, persoon of jaar" autocomplete="off" spellcheck="false">
     </div>
     <p class="telling" id="telling" aria-live="polite"></p>
-    <button type="button" class="thema-knop" id="thema-knop" aria-label="Schakel naar donkere weergave">
-      <svg class="icoon-maan" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M16.5 12.4A7 7 0 0 1 7.6 3.5a7 7 0 1 0 8.9 8.9z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
-      <svg class="icoon-zon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-      <span class="thema-tekst">Donker</span>
-    </button>
   </div>
 
   <ul class="legenda" id="legenda">
     <li><span class="label label-duo">Duo</span><span>twee personen bij één begrip</span></li>
+    <li id="legenda-trio" hidden><span class="label label-duo">Trio</span><span>drie personen bij één begrip</span></li>
+    <li id="legenda-extra" hidden><span class="label label-extra">Extra</span><span>aanvulling, niet uit het boek</span></li>
   </ul>
 </div>
 
@@ -70,7 +75,7 @@
     <div class="web-balk">
       <div class="diagram-legenda" id="web-legenda" role="group" aria-label="Soorten verbanden tonen of verbergen"></div>
       <div class="web-zoom" role="group" aria-label="Weergave van het woordweb">
-        <button type="button" class="web-schakel" id="web-themas" role="switch" aria-checked="true"><span class="schakel-baan" aria-hidden="true"><span class="schakel-knop"></span></span>Thema's groeperen</button>
+        <button type="button" class="schakel schakel-web" id="web-themas" role="switch" aria-checked="true"><span class="schakel-baan" aria-hidden="true"><span class="schakel-knop"></span></span>Thema's groeperen</button>
         <button type="button" class="web-knop" data-webzoom="in" aria-label="Inzoomen">+</button>
         <button type="button" class="web-knop" data-webzoom="uit" aria-label="Uitzoomen">−</button>
         <button type="button" class="web-knop web-knop-tekst" data-webzoom="passend">Passend maken</button>

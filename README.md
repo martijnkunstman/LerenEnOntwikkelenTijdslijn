@@ -1,6 +1,6 @@
 # Tijdlijn leren en ontwikkelen
 
-Een interactieve visualisatie van de tijdlijn van leren en ontwikkelen: de begrippen, de personen erachter en de verbanden tussen de begrippen. De gegevens zijn een transcriptie van de tijdlijn uit het boek, zonder portretten.
+Een interactieve visualisatie van de tijdlijn van leren en ontwikkelen: de begrippen, de personen erachter en de verbanden tussen de begrippen. De gegevens zijn een transcriptie van de tijdlijn uit het boek, zonder portretten. Daarnaast zijn er 22 begrippen en 29 personen toegevoegd die niet in het boek staan. Die zie je alleen als de schakelaar **Extra** aan staat.
 
 Gemaakt met gewone HTML, CSS en JavaScript, zonder build-stap. Alleen de weergave Woordweb gebruikt een bibliotheek: [D3](https://d3js.org). Die staat in de map `lib`, zodat alles ook zonder internet werkt.
 
@@ -8,7 +8,7 @@ Gemaakt met gewone HTML, CSS en JavaScript, zonder build-stap. Alleen de weergav
 
 - **Tijdlijn**: alle begrippen hangen aan één verticale lijn met jaartallen, gegroepeerd per decennium.
   - Begrippen uit hetzelfde jaar hangen samen aan één horizontale lijn naar dat jaartal.
-  - **Duo's**, twee personen bij één begrip, hebben een eigen label.
+  - **Duo's**, twee personen bij één begrip, hebben een eigen label. Met Extra aan zijn er ook **trio's**, drie personen bij één begrip.
 - **Liniaal**: een balk bovenaan die blijft staan tijdens het scrollen. Hij toont alle begrippen op schaal en laat zien waar je bent. Klik op een stip om naar dat begrip te gaan.
 - **Detailpaneel**: klik op een begrip voor:
   - een korte omschrijving en wat het begrip betekent voor leren en ontwikkelen;
@@ -23,7 +23,8 @@ Gemaakt met gewone HTML, CSS en JavaScript, zonder build-stap. Alleen de weergav
 - **Diagram**: de inhoudelijke verbanden tussen de begrippen, met pijlen, in vijf kolommen per thema. Wijs een begrip aan om zijn verbanden te zien, of klik voor het detailpaneel. Wijs een lijn aan voor de toelichting. Met de knoppen boven het diagram zet je soorten verbanden aan of uit.
 - **Woordweb**: de begrippen als woorden in een netwerk dat zichzelf ordent, gemaakt met D3. Hoe groter het woord, hoe meer verbanden. Begrippen uit hetzelfde thema liggen bij elkaar op een eiland. Met de schakelaar "Thema's groeperen" zet je dat uit; dan bepalen alleen de verbanden hoe de begrippen liggen. Wijs een woord aan om de verbanden te zien of klik voor details. Je kunt woorden verslepen, het web verschuiven en zoomen met de knoppen, met Ctrl en het scrollwiel, of met twee vingers.
 - **Zoeken**: zoek op begrip, naam, functie of jaar.
-- **Licht en donker**: met de knop naast de zoekbalk wissel je tussen een lichte en een donkere weergave. Je keuze wordt in je browser bewaard; zonder keuze volgt de pagina de instelling van je computer.
+- **Extra**: met de schakelaar rechtsboven toon of verberg je de aanvullingen die niet uit het boek komen: 22 begrippen, 29 personen en hun verbanden. De schakelaar staat standaard uit en werkt in alle weergaven. Aanvullingen hebben het label Extra en een gestippelde rand; in de liniaal zijn het open rondjes en in het woordweb schuine woorden. Je keuze wordt in je browser bewaard.
+- **Licht en donker**: met de knop rechtsboven wissel je tussen een lichte en een donkere weergave. Je keuze wordt in je browser bewaard; zonder keuze volgt de pagina de instelling van je computer.
 
 De pagina werkt op desktop en mobiel, en in licht en donker thema.
 
@@ -64,6 +65,8 @@ Alle gegevens staan in `tijdlijn.json`, in drie lijsten:
   Beide teksten staan in het detailpaneel.
 - **`relaties`**: koppelingen tussen items via `van` en `naar` (item-id's). Alle relaties hebben het type `gedeelde_lijn`: beide items hangen aan dezelfde lijn naar hetzelfde jaartal. `van` en `naar` zijn uitwisselbaar.
 
+Personen, items en relaties die niet uit het boek komen, hebben het veld `"extra": true`. De pagina toont ze alleen als de schakelaar Extra aan staat. Een relatie met `extra` hoort bij minstens één extra item. Zie ook `meta.aanvullingen`.
+
 Voorbeeld:
 
 ```json
@@ -77,7 +80,7 @@ Voorbeeld:
 
 Pas je `tijdlijn.json` aan, zet de wijziging dan ook in `data.js`. Anders ziet de pagina de wijziging niet als je hem direct vanaf schijf opent. `data.js` bevat dezelfde JSON, na `window.TIJDLIJN = `. Via een webserver is dit niet nodig.
 
-Zoeken, groeperen, duo's, personen die vaker voorkomen en de volgorde worden allemaal automatisch uit de gegevens afgeleid.
+Zoeken, groeperen, duo's, trio's, personen die vaker voorkomen en de volgorde worden allemaal automatisch uit de gegevens afgeleid.
 
 ## Begripsanalyse
 
@@ -90,7 +93,7 @@ Onderaan `tijdlijn.json` staat het blok `begripsanalyse`. Daarin staan de inhoud
   - `belemmert`: het ene begrip kan het andere in de weg staan.
   - `sluit_aan_bij`: de begrippen zijn verwant of vullen elkaar aan. Deze relatie werkt twee kanten op.
 - **`themas`**: vijf inhoudelijke groepen waarin elk begrip precies één keer voorkomt. Die helpen om een diagram overzichtelijk in te delen.
-- **`relaties`**: de verbanden zelf, met `van`, `naar`, `type`, `richting` en een korte `toelichting`.
+- **`relaties`**: de verbanden zelf, met `van`, `naar`, `type`, `richting` en een korte `toelichting`. Verbanden met een extra begrip hebben ook `"extra": true`, en de extra begrippen staan ook in de lijsten van de `themas`.
 
 Voorbeeld:
 
@@ -124,11 +127,11 @@ Het veld `foto` bij een persoon ziet er zo uit:
 - `zoom` bepaalt hoe ver er wordt ingezoomd: 1 betekent dat de korte zijde van de foto precies in de cirkel past.
 - `bron`, `maker` en `licentie` zijn nodig voor de naamsvermelding. Die staat onder de weergave Personen, bij "Fotoverantwoording".
 
-Voor 29 personen is geen foto met een vrije licentie gevonden; daar staat `"foto": null`. Vind je een foto met een vrije licentie, vul dan het veld in en werk ook `data.js` bij.
+Van de 56 personen uit het boek hebben er 27 een foto, van de 29 extra personen 14. Voor de andere personen is geen foto met een vrije licentie gevonden; daar staat `"foto": null`. Vind je een foto met een vrije licentie, vul dan het veld in en werk ook `data.js` bij.
 
 ## Deep links
 
-- `index.html#t-1974-schon-argyris` opent de pagina met het detailpaneel van dat begrip.
+- `index.html#t-1974-schon-argyris` opent de pagina met het detailpaneel van dat begrip. Bij een extra begrip, zoals `index.html#t-1934-vygotsky`, gaat Extra dan vanzelf aan.
 - `index.html#portretten` opent de pagina in de weergave Personen.
 - `index.html#personen` opent de pagina in de weergave Levenslijnen.
 - `index.html#begrippen` opent de pagina in de weergave Begrippen A–Z.

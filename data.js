@@ -15,6 +15,7 @@ window.TIJDLIJN = {
     "betekenis": "Beide items hangen aan dezelfde verbindingslijn naar hetzelfde jaartal. 'van' en 'naar' zijn uitwisselbaar."
    }
   },
+  "aanvullingen": "Personen, items en relaties met 'extra': true zijn later toegevoegd en komen niet uit het boek. De pagina toont ze alleen als de schakelaar Extra aan staat.",
   "afleidbaar": [
    "Duo's: items met meer dan één persoon-id.",
    "Dezelfde persoon op meerdere momenten: items met dezelfde persoon-id."
@@ -875,6 +876,478 @@ window.TIJDLIJN = {
     "licentie": "CC BY-SA 2.0",
     "licentie_url": "https://creativecommons.org/licenses/by-sa/2.0"
    }
+  },
+  {
+   "id": "p-vygotsky",
+   "naam": "Lev Vygotsky",
+   "achternaam": "Vygotsky",
+   "geboortejaar": 1896,
+   "overlijdensjaar": 1934,
+   "functie": "Russisch-Sovjet psycholoog, grondlegger van de cultureel-historische psychologie",
+   "extra": true,
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Lev-Semyonovich-Vygotsky-1896-1934.jpg/330px-Lev-Semyonovich-Vygotsky-1896-1934.jpg",
+    "breedte": 735,
+    "hoogte": 1014,
+    "focus": [
+     50,
+     28
+    ],
+    "zoom": 1.4,
+    "bron": "https://commons.wikimedia.org/wiki/File:Lev-Semyonovich-Vygotsky-1896-1934.jpg",
+    "maker": "Onbekend",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
+  },
+  {
+   "id": "p-piaget",
+   "naam": "Jean Piaget",
+   "achternaam": "Piaget",
+   "geboortejaar": 1896,
+   "overlijdensjaar": 1980,
+   "functie": "Zwitsers ontwikkelingspsycholoog (Genève)",
+   "extra": true,
+   "foto": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Jean_Piaget_in_Ann_Arbor_%28cropped%29.png",
+    "breedte": 193,
+    "hoogte": 241,
+    "focus": [
+     50,
+     32
+    ],
+    "zoom": 1.3,
+    "bron": "https://commons.wikimedia.org/wiki/File:Jean_Piaget_in_Ann_Arbor_(cropped).png",
+    "maker": "Onbekend (jaarboek University of Michigan)",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
+  },
+  {
+   "id": "p-maslow",
+   "naam": "Abraham Maslow",
+   "achternaam": "Maslow",
+   "geboortejaar": 1908,
+   "overlijdensjaar": 1970,
+   "functie": "Amerikaans psycholoog, humanistische psychologie",
+   "extra": true,
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Photo_of_Abraham_Harold_Maslow_by_William_Carter_%28cropped%29.jpg/330px-Photo_of_Abraham_Harold_Maslow_by_William_Carter_%28cropped%29.jpg",
+    "breedte": 1263,
+    "hoogte": 1684,
+    "focus": [
+     50,
+     30
+    ],
+    "zoom": 1.5,
+    "bron": "https://commons.wikimedia.org/wiki/File:Photo_of_Abraham_Harold_Maslow_by_William_Carter_(cropped).jpg",
+    "maker": "William Carter",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
+  },
+  {
+   "id": "p-kirkpatrick",
+   "naam": "Donald Kirkpatrick",
+   "achternaam": "Kirkpatrick",
+   "geboortejaar": 1924,
+   "overlijdensjaar": 2014,
+   "functie": "Amerikaans hoogleraar, evaluatie van opleidingen (University of Wisconsin)",
+   "extra": true,
+   "foto": null
+  },
+  {
+   "id": "p-knowles",
+   "naam": "Malcolm Knowles",
+   "achternaam": "Knowles",
+   "geboortejaar": 1913,
+   "overlijdensjaar": 1997,
+   "functie": "Amerikaans volwasseneneducator",
+   "extra": true,
+   "foto": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Malcolm_Shepherd_Knowles_%281913-1997%29_portrait.png",
+    "breedte": 273,
+    "hoogte": 362,
+    "focus": [
+     55,
+     28
+    ],
+    "zoom": 1.5,
+    "bron": "https://commons.wikimedia.org/wiki/File:Malcolm_Shepherd_Knowles_(1913-1997)_portrait.png",
+    "maker": "Onbekend",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
+  },
+  {
+   "id": "p-revans",
+   "naam": "Reg Revans",
+   "achternaam": "Revans",
+   "geboortejaar": 1907,
+   "overlijdensjaar": 2003,
+   "functie": "Brits hoogleraar management, grondlegger van action learning",
+   "extra": true,
+   "foto": null
+  },
+  {
+   "id": "p-leontjev",
+   "naam": "Aleksej Leontjev",
+   "achternaam": "Leontjev",
+   "geboortejaar": 1903,
+   "overlijdensjaar": 1979,
+   "functie": "Russisch-Sovjet psycholoog (Staatsuniversiteit Moskou)",
+   "extra": true,
+   "foto": null
+  },
+  {
+   "id": "p-luria",
+   "naam": "Alexander Luria",
+   "achternaam": "Luria",
+   "geboortejaar": 1902,
+   "overlijdensjaar": 1977,
+   "functie": "Russisch-Sovjet neuropsycholoog",
+   "extra": true,
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Alexander_Luria.jpg/330px-Alexander_Luria.jpg",
+    "breedte": 600,
+    "hoogte": 753,
+    "focus": [
+     55,
+     32
+    ],
+    "zoom": 1.4,
+    "bron": "https://commons.wikimedia.org/wiki/File:Alexander_Luria.jpg",
+    "maker": "Onbekend (foto uit de jaren 1940)",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
+  },
+  {
+   "id": "p-wood",
+   "naam": "David Wood",
+   "achternaam": "Wood",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Brits ontwikkelingspsycholoog (University of Nottingham)",
+   "extra": true,
+   "foto": null
+  },
+  {
+   "id": "p-bruner",
+   "naam": "Jerome Bruner",
+   "achternaam": "Bruner",
+   "geboortejaar": 1915,
+   "overlijdensjaar": 2016,
+   "functie": "Amerikaans cognitief psycholoog en onderwijskundige (Harvard)",
+   "extra": true,
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Jerome_Bruner_1936.png/250px-Jerome_Bruner_1936.png",
+    "breedte": 662,
+    "hoogte": 976,
+    "focus": [
+     50,
+     32
+    ],
+    "zoom": 1.2,
+    "bron": "https://commons.wikimedia.org/wiki/File:Jerome_Bruner_1936.png",
+    "maker": "Onbekend",
+    "licentie": "Publiek domein",
+    "licentie_url": null
+   }
+  },
+  {
+   "id": "p-ross",
+   "naam": "Gail Ross",
+   "achternaam": "Ross",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Onderzoeker, medeauteur van het artikel over scaffolding (1976)",
+   "extra": true,
+   "foto": null
+  },
+  {
+   "id": "p-bandura",
+   "naam": "Albert Bandura",
+   "achternaam": "Bandura",
+   "geboortejaar": 1925,
+   "overlijdensjaar": 2021,
+   "functie": "Canadees-Amerikaans psycholoog (Stanford)",
+   "extra": true,
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Albert_Bandura_Psychologist.jpg/250px-Albert_Bandura_Psychologist.jpg",
+    "breedte": 2982,
+    "hoogte": 4223,
+    "focus": [
+     50,
+     34
+    ],
+    "zoom": 1.2,
+    "bron": "https://commons.wikimedia.org/wiki/File:Albert_Bandura_Psychologist.jpg",
+    "maker": "bandura@stanford.edu",
+    "licentie": "CC BY-SA 4.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/4.0"
+   }
+  },
+  {
+   "id": "p-mezirow",
+   "naam": "Jack Mezirow",
+   "achternaam": "Mezirow",
+   "geboortejaar": 1923,
+   "overlijdensjaar": 2014,
+   "functie": "Amerikaans socioloog en volwasseneneducator (Columbia University)",
+   "extra": true,
+   "foto": null
+  },
+  {
+   "id": "p-h-dreyfus",
+   "naam": "Hubert Dreyfus",
+   "achternaam": "Dreyfus",
+   "geboortejaar": 1929,
+   "overlijdensjaar": 2017,
+   "functie": "Amerikaans filosoof (UC Berkeley)",
+   "extra": true,
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Hubert_Dreyfus.jpg/500px-Hubert_Dreyfus.jpg",
+    "breedte": 2136,
+    "hoogte": 2848,
+    "focus": [
+     58,
+     22
+    ],
+    "zoom": 2,
+    "bron": "https://commons.wikimedia.org/wiki/File:Hubert_Dreyfus.jpg",
+    "maker": "Jörg Noller",
+    "licentie": "CC BY-SA 3.0 de",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+   }
+  },
+  {
+   "id": "p-s-dreyfus",
+   "naam": "Stuart Dreyfus",
+   "achternaam": "Dreyfus",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans ingenieur en operations researcher (UC Berkeley)",
+   "extra": true,
+   "foto": null
+  },
+  {
+   "id": "p-kegan",
+   "naam": "Robert Kegan",
+   "achternaam": "Kegan",
+   "geboortejaar": 1946,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans ontwikkelingspsycholoog (Harvard)",
+   "extra": true,
+   "foto": null
+  },
+  {
+   "id": "p-sweller",
+   "naam": "John Sweller",
+   "achternaam": "Sweller",
+   "geboortejaar": 1946,
+   "overlijdensjaar": null,
+   "functie": "Australisch onderwijspsycholoog (University of New South Wales)",
+   "extra": true,
+   "foto": null
+  },
+  {
+   "id": "p-collins",
+   "naam": "Allan Collins",
+   "achternaam": "Collins",
+   "geboortejaar": 1937,
+   "overlijdensjaar": 2026,
+   "functie": "Amerikaans cognitiewetenschapper (Northwestern University)",
+   "extra": true,
+   "foto": null
+  },
+  {
+   "id": "p-js-brown",
+   "naam": "John Seely Brown",
+   "achternaam": "Brown",
+   "geboortejaar": 1940,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans onderzoeker, voormalig hoofd van Xerox PARC",
+   "extra": true,
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/JSBJI4.jpg/960px-JSBJI4.jpg",
+    "breedte": 2927,
+    "hoogte": 1969,
+    "focus": [
+     62,
+     36
+    ],
+    "zoom": 1.8,
+    "bron": "https://commons.wikimedia.org/wiki/File:JSBJI4.jpg",
+    "maker": "Joi Ito",
+    "licentie": "CC BY 2.0",
+    "licentie_url": "https://creativecommons.org/licenses/by/2.0"
+   }
+  },
+  {
+   "id": "p-newman",
+   "naam": "Susan Newman",
+   "achternaam": "Newman",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Onderzoeker, medeauteur van het artikel over cognitive apprenticeship (1989)",
+   "extra": true,
+   "foto": null
+  },
+  {
+   "id": "p-senge",
+   "naam": "Peter Senge",
+   "achternaam": "Senge",
+   "geboortejaar": 1947,
+   "overlijdensjaar": null,
+   "functie": "Amerikaans systeemwetenschapper (MIT)",
+   "extra": true,
+   "foto": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Peter_Senge_at_Quest_to_Learn.jpg",
+    "breedte": 306,
+    "hoogte": 405,
+    "focus": [
+     48,
+     19
+    ],
+    "zoom": 2,
+    "bron": "https://commons.wikimedia.org/wiki/File:Peter_Senge_at_Quest_to_Learn.jpg",
+    "maker": "Beyond My Ken",
+    "licentie": "CC BY-SA 4.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/4.0"
+   }
+  },
+  {
+   "id": "p-nonaka",
+   "naam": "Ikujiro Nonaka",
+   "achternaam": "Nonaka",
+   "geboortejaar": 1935,
+   "overlijdensjaar": 2025,
+   "functie": "Japans organisatiekundige (Hitotsubashi University)",
+   "extra": true,
+   "foto": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Ikujiro_Nonaka.jpg",
+    "breedte": 320,
+    "hoogte": 427,
+    "focus": [
+     50,
+     36
+    ],
+    "zoom": 1.4,
+    "bron": "https://commons.wikimedia.org/wiki/File:Ikujiro_Nonaka.jpg",
+    "maker": "Japan Academy (日本学士院)",
+    "licentie": "CC BY 4.0",
+    "licentie_url": "https://creativecommons.org/licenses/by/4.0"
+   }
+  },
+  {
+   "id": "p-takeuchi",
+   "naam": "Hirotaka Takeuchi",
+   "achternaam": "Takeuchi",
+   "geboortejaar": 1946,
+   "overlijdensjaar": null,
+   "functie": "Japans organisatiekundige (Hitotsubashi University, Harvard)",
+   "extra": true,
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Hirotaka_Takeuchi_-_World_Economic_Forum_Annual_Meeting_Davos_2009.jpg/500px-Hirotaka_Takeuchi_-_World_Economic_Forum_Annual_Meeting_Davos_2009.jpg",
+    "breedte": 4096,
+    "hoogte": 2675,
+    "focus": [
+     45,
+     32
+    ],
+    "zoom": 1.6,
+    "bron": "https://commons.wikimedia.org/wiki/File:Hirotaka_Takeuchi_-_World_Economic_Forum_Annual_Meeting_Davos_2009.jpg",
+    "maker": "World Economic Forum",
+    "licentie": "CC BY-SA 2.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/2.0"
+   }
+  },
+  {
+   "id": "p-black",
+   "naam": "Paul Black",
+   "achternaam": "Black",
+   "geboortejaar": 1930,
+   "overlijdensjaar": 2026,
+   "functie": "Brits natuurkundige en onderwijsonderzoeker (King's College London)",
+   "extra": true,
+   "foto": null
+  },
+  {
+   "id": "p-wiliam",
+   "naam": "Dylan Wiliam",
+   "achternaam": "Wiliam",
+   "geboortejaar": null,
+   "overlijdensjaar": null,
+   "functie": "Welsh onderwijskundige, toetsing en evaluatie (UCL Institute of Education)",
+   "extra": true,
+   "foto": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Dylan_Wiliam_LISE2006_portrait.jpg/960px-Dylan_Wiliam_LISE2006_portrait.jpg",
+    "breedte": 1727,
+    "hoogte": 2600,
+    "focus": [
+     50,
+     20
+    ],
+    "zoom": 3,
+    "bron": "https://commons.wikimedia.org/wiki/File:Dylan_Wiliam_LISE2006_portrait.jpg",
+    "maker": "Douglas A. Lockard",
+    "licentie": "CC BY-SA 3.0",
+    "licentie_url": "https://creativecommons.org/licenses/by-sa/3.0"
+   }
+  },
+  {
+   "id": "p-eraut",
+   "naam": "Michael Eraut",
+   "achternaam": "Eraut",
+   "geboortejaar": 1940,
+   "overlijdensjaar": null,
+   "functie": "Brits onderwijskundige, professioneel leren (University of Sussex)",
+   "extra": true,
+   "foto": null
+  },
+  {
+   "id": "p-korthagen",
+   "naam": "Fred Korthagen",
+   "achternaam": "Korthagen",
+   "geboortejaar": 1949,
+   "overlijdensjaar": null,
+   "functie": "Nederlands onderwijskundige, lerarenopleiding (Universiteit Utrecht)",
+   "extra": true,
+   "foto": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Fred_Korthagen_%28cropped%29.png",
+    "breedte": 614,
+    "hoogte": 921,
+    "focus": [
+     52,
+     16
+    ],
+    "zoom": 3.5,
+    "bron": "https://commons.wikimedia.org/wiki/File:Fred_Korthagen_(cropped).png",
+    "maker": "Beroepscoaches",
+    "licentie": "CC BY 3.0",
+    "licentie_url": "https://creativecommons.org/licenses/by/3.0"
+   }
+  },
+  {
+   "id": "p-ruijters",
+   "naam": "Manon Ruijters",
+   "achternaam": "Ruijters",
+   "geboortejaar": 1967,
+   "overlijdensjaar": null,
+   "functie": "Nederlands onderwijskundige en adviseur, leren in organisaties",
+   "extra": true,
+   "foto": null
+  },
+  {
+   "id": "p-biesta",
+   "naam": "Gert Biesta",
+   "achternaam": "Biesta",
+   "geboortejaar": 1957,
+   "overlijdensjaar": null,
+   "functie": "Nederlands pedagoog en onderwijsfilosoof",
+   "extra": true,
+   "foto": null
   }
  ],
  "items": [
@@ -1434,6 +1907,277 @@ window.TIJDLIJN = {
    ],
    "omschrijving": "Systematische vertekeningen in ons oordeel, doordat we vaak vertrouwen op snel, intuïtief denken (Systeem 1) in plaats van traag, beredeneerd denken (Systeem 2).",
    "uitleg": "Ook ervaren professionals maken denkfouten. Bewustzijn ervan, feedback en gestructureerde reflectie helpen om betere beslissingen te nemen en scherper te leren van ervaring."
+  },
+  {
+   "id": "t-1934-vygotsky",
+   "jaar": 1934,
+   "begrip": "Zone van naaste ontwikkeling",
+   "begrip_vertaling": "Zone of proximal development",
+   "personen": [
+    "p-vygotsky"
+   ],
+   "extra": true,
+   "omschrijving": "Het verschil tussen wat een lerende zelfstandig kan en wat hij kan met hulp van een meer ervaren ander.",
+   "uitleg": "Wat iemand vandaag met hulp kan, kan hij morgen alleen. Begeleiding werkt het best als ze zich richt op wat net buiten bereik ligt."
+  },
+  {
+   "id": "t-1936-piaget",
+   "jaar": 1936,
+   "begrip": "Cognitieve ontwikkeling",
+   "begrip_vertaling": "Cognitive development",
+   "personen": [
+    "p-piaget"
+   ],
+   "extra": true,
+   "omschrijving": "Kinderen bouwen hun kennis actief op door te handelen en te ontdekken, in opeenvolgende fasen. Nieuwe ervaringen worden ingepast in bestaande denkschema's of dwingen tot aanpassing ervan.",
+   "uitleg": "Leren is actief construeren, geen passief opnemen. Deze constructivistische kijk ligt onder veel ervaringsgericht en onderzoekend leren."
+  },
+  {
+   "id": "t-1943-maslow",
+   "jaar": 1943,
+   "begrip": "Behoeftehiërarchie",
+   "begrip_vertaling": "Hierarchy of needs",
+   "personen": [
+    "p-maslow"
+   ],
+   "extra": true,
+   "omschrijving": "Menselijke behoeften zijn geordend van basaal naar hoger: lichamelijke behoeften, veiligheid, erbij horen, waardering en zelfactualisatie.",
+   "uitleg": "Wie zich onveilig of niet gezien voelt, komt minder toe aan leren en groeien. Het model is populair, maar de strikte volgorde wordt door onderzoek niet bevestigd."
+  },
+  {
+   "id": "t-1959-kirkpatrick",
+   "jaar": 1959,
+   "begrip": "Vier evaluatieniveaus",
+   "begrip_vertaling": "Four levels of evaluation",
+   "personen": [
+    "p-kirkpatrick"
+   ],
+   "extra": true,
+   "omschrijving": "Een model om opleidingen te evalueren op vier niveaus: reactie, leren, gedrag en resultaten.",
+   "uitleg": "Het helpt om verder te kijken dan tevredenheid na afloop: gebruiken mensen het geleerde in hun werk, en levert dat iets op voor de organisatie?"
+  },
+  {
+   "id": "t-1970-knowles",
+   "jaar": 1970,
+   "begrip": "Andragogie",
+   "begrip_vertaling": "Andragogy",
+   "personen": [
+    "p-knowles"
+   ],
+   "extra": true,
+   "omschrijving": "De kunst en wetenschap van het helpen van volwassenen bij het leren, uitgaande van hun zelfsturing, hun ervaring en hun behoefte aan direct bruikbare kennis.",
+   "uitleg": "Volwassenen leren het best als ze invloed hebben op wat en hoe ze leren, en als het leren aansluit bij hun ervaring en bij vragen uit hun werk of leven."
+  },
+  {
+   "id": "t-1971-revans",
+   "jaar": 1971,
+   "begrip": "Action learning",
+   "begrip_vertaling": "Actieleren",
+   "personen": [
+    "p-revans"
+   ],
+   "extra": true,
+   "omschrijving": "Leren in kleine groepen die met echte, onopgeloste vraagstukken aan de slag gaan, waarbij goede vragen belangrijker zijn dan kennis overdragen.",
+   "uitleg": "Revans vatte het samen als L = P + Q: leren is bestaande kennis plus kritisch vragen. Mensen ontwikkelen zich het meest door samen echte problemen aan te pakken."
+  },
+  {
+   "id": "t-1975-leontjev",
+   "jaar": 1975,
+   "begrip": "Activiteitstheorie",
+   "begrip_vertaling": "Activity theory",
+   "personen": [
+    "p-leontjev"
+   ],
+   "extra": true,
+   "omschrijving": "Menselijk handelen begrijp je vanuit de activiteit waarin het plaatsvindt: een geheel van doelgerichte handelingen, gedreven door een motief en gemedieerd door hulpmiddelen.",
+   "uitleg": "Leren is niet los te zien van de activiteit en de gemeenschap waarin het gebeurt. Engeström bouwde hierop voort met zijn werk over expansief leren en grensoverschrijding."
+  },
+  {
+   "id": "t-1976-luria",
+   "jaar": 1976,
+   "begrip": "Cultuur en denken",
+   "begrip_vertaling": "Culture and cognition",
+   "personen": [
+    "p-luria"
+   ],
+   "extra": true,
+   "omschrijving": "Hoe mensen denken, redeneren en indelen hangt samen met hun culturele omgeving, zoals scholing en werk. Luria liet dit zien met veldonderzoek in Centraal-Azië.",
+   "uitleg": "Denkvaardigheden liggen niet vast, maar ontwikkelen zich door onderwijs en sociale praktijken. Wat mensen leren, vormt ook hoe ze leren denken."
+  },
+  {
+   "id": "t-1976-wood-bruner-ross",
+   "jaar": 1976,
+   "begrip": "Scaffolding",
+   "begrip_vertaling": "Tijdelijke ondersteuning",
+   "personen": [
+    "p-wood",
+    "p-bruner",
+    "p-ross"
+   ],
+   "extra": true,
+   "omschrijving": "Tijdelijke ondersteuning door een meer ervaren ander, waarmee een lerende een taak uitvoert die hij nog niet alleen kan. De steun wordt afgebouwd naarmate hij meer zelf kan.",
+   "uitleg": "Goede begeleiding neemt niet over, maar biedt net genoeg structuur en haalt die stap voor stap weg."
+  },
+  {
+   "id": "t-1977-bandura",
+   "jaar": 1977,
+   "begrip": "Self-efficacy",
+   "begrip_vertaling": "Zelfeffectiviteit",
+   "personen": [
+    "p-bandura"
+   ],
+   "extra": true,
+   "omschrijving": "Het vertrouwen dat je een bepaalde taak met succes kunt uitvoeren. Het groeit vooral door eigen succeservaringen, door anderen te zien slagen en door aanmoediging.",
+   "uitleg": "Wie in eigen kunnen gelooft, zet door bij tegenslag en kiest voor uitdaging. Haalbare successen en goede voorbeelden versterken dat vertrouwen."
+  },
+  {
+   "id": "t-1978-mezirow",
+   "jaar": 1978,
+   "begrip": "Transformatief leren",
+   "begrip_vertaling": "Transformative learning",
+   "personen": [
+    "p-mezirow"
+   ],
+   "extra": true,
+   "omschrijving": "Leren waarbij volwassenen hun vanzelfsprekende referentiekaders kritisch onderzoeken en veranderen, vaak na een ervaring die niet in hun bestaande beeld past.",
+   "uitleg": "Diep leren gaat verder dan kennis toevoegen: het verandert hoe je naar jezelf en de wereld kijkt. Kritische reflectie en dialoog zijn daarbij de motor."
+  },
+  {
+   "id": "t-1980-dreyfus",
+   "jaar": 1980,
+   "begrip": "Van beginner tot expert",
+   "begrip_vertaling": "Novice to expert",
+   "personen": [
+    "p-h-dreyfus",
+    "p-s-dreyfus"
+   ],
+   "extra": true,
+   "omschrijving": "Vaardigheid ontwikkelt zich in vijf stadia, van beginner via gevorderde beginner, bekwaam en vaardig tot expert: van regels volgen naar intuïtief handelen in de situatie.",
+   "uitleg": "Beginners hebben regels en structuur nodig, experts juist ruimte voor eigen oordeel. Opleiden vraagt daarom per stadium een andere aanpak."
+  },
+  {
+   "id": "t-1982-kegan",
+   "jaar": 1982,
+   "begrip": "Ontwikkeling van volwassenen",
+   "begrip_vertaling": "Adult development",
+   "personen": [
+    "p-kegan"
+   ],
+   "extra": true,
+   "omschrijving": "Volwassenen blijven zich ontwikkelen in de manier waarop ze betekenis geven: van afhankelijk van de verwachtingen van anderen naar zelfsturend en uiteindelijk zelftransformerend denken.",
+   "uitleg": "Veel eisen in het werk vragen een complexere manier van denken dan mensen al hebben. Ontwikkelen is dan niet meer weten, maar anders leren kijken."
+  },
+  {
+   "id": "t-1988-sweller",
+   "jaar": 1988,
+   "begrip": "Cognitieve belasting",
+   "begrip_vertaling": "Cognitive load",
+   "personen": [
+    "p-sweller"
+   ],
+   "extra": true,
+   "omschrijving": "Het werkgeheugen kan maar weinig nieuwe informatie tegelijk verwerken. Instructie moet onnodige belasting beperken, zodat er ruimte is om kennis op te bouwen.",
+   "uitleg": "Beginners leren meer van uitgewerkte voorbeelden en stapsgewijze uitleg dan van zelf ontdekken. Naarmate de expertise groeit, kan de begeleiding afnemen."
+  },
+  {
+   "id": "t-1989-collins-brown-newman",
+   "jaar": 1989,
+   "begrip": "Cognitive apprenticeship",
+   "begrip_vertaling": "Cognitief leerlingschap",
+   "personen": [
+    "p-collins",
+    "p-js-brown",
+    "p-newman"
+   ],
+   "extra": true,
+   "omschrijving": "Het meester-gezelmodel toegepast op denkvaardigheden: de expert maakt zijn denken zichtbaar, coacht, biedt steun die wordt afgebouwd en laat de lerende steeds meer zelf verwoorden en verkennen.",
+   "uitleg": "Veel expertise zit in denkprocessen die je niet ziet. Door hardop te denken en samen te oefenen maken professionals hun vakmanschap overdraagbaar."
+  },
+  {
+   "id": "t-1990-senge",
+   "jaar": 1990,
+   "begrip": "Systeemdenken",
+   "begrip_vertaling": "Systems thinking",
+   "personen": [
+    "p-senge"
+   ],
+   "extra": true,
+   "omschrijving": "De vijfde discipline die persoonlijk meesterschap, mentale modellen, gedeelde visie en teamleren verbindt: kijken naar samenhang en wisselwerking in plaats van naar losse onderdelen.",
+   "uitleg": "Organisaties leren alleen als mensen hun aannames onderzoeken, samen leren en de samenhang in het geheel zien. Senge maakte de lerende organisatie wereldwijd bekend."
+  },
+  {
+   "id": "t-1995-nonaka-takeuchi",
+   "jaar": 1995,
+   "begrip": "Kennisspiraal",
+   "begrip_vertaling": "Knowledge spiral (SECI model)",
+   "personen": [
+    "p-nonaka",
+    "p-takeuchi"
+   ],
+   "extra": true,
+   "omschrijving": "Nieuwe kennis ontstaat in organisaties door een spiraal van omzettingen tussen stilzwijgende en expliciete kennis: socialisatie, externalisatie, combinatie en internalisatie.",
+   "uitleg": "Vernieuwing vraagt dat mensen hun ervaringskennis delen en verwoorden, zodat anderen erop kunnen voortbouwen. Samenwerken, dialoog en experiment zijn daarvoor nodig."
+  },
+  {
+   "id": "t-1998-black-wiliam",
+   "jaar": 1998,
+   "begrip": "Formatief evalueren",
+   "begrip_vertaling": "Formative assessment",
+   "personen": [
+    "p-black",
+    "p-wiliam"
+   ],
+   "extra": true,
+   "omschrijving": "Tijdens het leren informatie verzamelen over waar de lerende staat, en die direct gebruiken om het onderwijs en het leren bij te sturen.",
+   "uitleg": "Goed formatief evalueren kan leerresultaten flink verbeteren. Het draait om duidelijke doelen, goede vragen en feedback waar de lerende iets mee kan."
+  },
+  {
+   "id": "t-2004-eraut",
+   "jaar": 2004,
+   "begrip": "Leren in het werk",
+   "begrip_vertaling": "Learning at work",
+   "personen": [
+    "p-eraut"
+   ],
+   "extra": true,
+   "omschrijving": "Hoeveel mensen in hun werk leren, hangt af van uitdaging en waarde van het werk, vertrouwen en betrokkenheid, en feedback en steun, en van hoe het werk is ingericht.",
+   "uitleg": "Het meeste leren in organisaties gebeurt ongemerkt tijdens het werk. Leidinggevenden beïnvloeden dat vooral via de taken die ze geven en de steun en feedback die ze bieden."
+  },
+  {
+   "id": "t-2004-korthagen",
+   "jaar": 2004,
+   "begrip": "Kernreflectie",
+   "begrip_vertaling": "Core reflection",
+   "personen": [
+    "p-korthagen"
+   ],
+   "extra": true,
+   "omschrijving": "Reflectie die niet alleen gaat over gedrag en vaardigheden, maar ook over overtuigingen, identiteit en idealen: de binnenste lagen van het zogenoemde ui-model. Ze vertrekt vanuit kernkwaliteiten.",
+   "uitleg": "Professionals worden het sterkst als hun handelen verbonden is met wie ze zijn en wat hen drijft. Reflecteren op kwaliteiten in plaats van tekortkomingen maakt ruimte voor groei."
+  },
+  {
+   "id": "t-2006-ruijters",
+   "jaar": 2006,
+   "begrip": "Leervoorkeuren",
+   "begrip_vertaling": "Learning preferences",
+   "personen": [
+    "p-ruijters"
+   ],
+   "extra": true,
+   "omschrijving": "Vijf manieren waarop professionals het liefst leren: kunstafkijken, participeren, kennis verwerven, oefenen en ontdekken.",
+   "uitleg": "Een voorkeur zegt iets over wat iemand aanspreekt, niet over wat hij kan. Wie leervoorkeuren kent, kan leren beter afstemmen en bewust ook andere manieren uitproberen."
+  },
+  {
+   "id": "t-2010-biesta",
+   "jaar": 2010,
+   "begrip": "Doeldomeinen van onderwijs",
+   "begrip_vertaling": "Domains of educational purpose",
+   "personen": [
+    "p-biesta"
+   ],
+   "extra": true,
+   "omschrijving": "Onderwijs heeft drie doeldomeinen: kwalificatie (kennis en vaardigheden), socialisatie (ingroeien in tradities en praktijken) en subjectificatie (zelfstandig en verantwoordelijk mens worden).",
+   "uitleg": "Wie alleen meet wat meetbaar is, verliest de vraag naar goed onderwijs uit het oog. Ook in organisaties gaat leren niet alleen over vaardigheden, maar ook over vorming en eigen oordeel."
   }
  ],
  "relaties": [
@@ -1569,6 +2313,134 @@ window.TIJDLIJN = {
    "richting": "tweeweg",
    "van": "t-1999-wierdsma",
    "naar": "t-1999-edmondson"
+  },
+  {
+   "id": "r-20",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1970-freidson",
+   "naar": "t-1970-knowles",
+   "extra": true
+  },
+  {
+   "id": "r-21",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1975-csikszentmihalyi",
+   "naar": "t-1975-leontjev",
+   "extra": true
+  },
+  {
+   "id": "r-22",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1976-luria",
+   "naar": "t-1976-wood-bruner-ross",
+   "extra": true
+  },
+  {
+   "id": "r-23",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1977-bourdieu",
+   "naar": "t-1977-bandura",
+   "extra": true
+  },
+  {
+   "id": "r-24",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1978-mcclelland",
+   "naar": "t-1978-mezirow",
+   "extra": true
+  },
+  {
+   "id": "r-25",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1988-west-gersick",
+   "naar": "t-1988-sweller",
+   "extra": true
+  },
+  {
+   "id": "r-26",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1990-checkland",
+   "naar": "t-1990-senge",
+   "extra": true
+  },
+  {
+   "id": "r-27",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1990-caine",
+   "naar": "t-1990-senge",
+   "extra": true
+  },
+  {
+   "id": "r-28",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-1998-wenger",
+   "naar": "t-1998-black-wiliam",
+   "extra": true
+  },
+  {
+   "id": "r-29",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-2004-schwartz",
+   "naar": "t-2004-eraut",
+   "extra": true
+  },
+  {
+   "id": "r-30",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-2004-spillane",
+   "naar": "t-2004-eraut",
+   "extra": true
+  },
+  {
+   "id": "r-31",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-2004-schwartz",
+   "naar": "t-2004-korthagen",
+   "extra": true
+  },
+  {
+   "id": "r-32",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-2004-spillane",
+   "naar": "t-2004-korthagen",
+   "extra": true
+  },
+  {
+   "id": "r-33",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-2004-eraut",
+   "naar": "t-2004-korthagen",
+   "extra": true
+  },
+  {
+   "id": "r-34",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-2006-dweck",
+   "naar": "t-2006-ruijters",
+   "extra": true
+  },
+  {
+   "id": "r-35",
+   "type": "gedeelde_lijn",
+   "richting": "tweeweg",
+   "van": "t-2006-shaffer",
+   "naar": "t-2006-ruijters",
+   "extra": true
   }
  ],
  "begripsanalyse": {
@@ -1615,7 +2487,12 @@ window.TIJDLIJN = {
      "t-2004-schwartz",
      "t-2005-kunneman",
      "t-2006-shaffer",
-     "t-2011-kahneman"
+     "t-2011-kahneman",
+     "t-1978-mezirow",
+     "t-1980-dreyfus",
+     "t-1982-kegan",
+     "t-2004-korthagen",
+     "t-2010-biesta"
     ]
    },
    {
@@ -1635,7 +2512,14 @@ window.TIJDLIJN = {
      "t-1991-seligman",
      "t-1996-ericsson",
      "t-2006-dweck",
-     "t-2007-hattie"
+     "t-2007-hattie",
+     "t-1936-piaget",
+     "t-1943-maslow",
+     "t-1970-knowles",
+     "t-1977-bandura",
+     "t-1988-sweller",
+     "t-1998-black-wiliam",
+     "t-2006-ruijters"
     ]
    },
    {
@@ -1649,7 +2533,14 @@ window.TIJDLIJN = {
      "t-1998-wenger",
      "t-2001-billett",
      "t-2002-bereiter-scardamalia",
-     "t-2008-sennett"
+     "t-2008-sennett",
+     "t-1934-vygotsky",
+     "t-1975-leontjev",
+     "t-1976-luria",
+     "t-1976-wood-bruner-ross",
+     "t-1989-collins-brown-newman",
+     "t-1995-nonaka-takeuchi",
+     "t-2004-eraut"
     ]
    },
    {
@@ -1683,7 +2574,10 @@ window.TIJDLIJN = {
      "t-1997-stacey",
      "t-2000-smith-lewis",
      "t-2004-spillane",
-     "t-2007-scharmer"
+     "t-2007-scharmer",
+     "t-1959-kirkpatrick",
+     "t-1971-revans",
+     "t-1990-senge"
     ]
    }
   ],
@@ -2199,6 +3093,456 @@ window.TIJDLIJN = {
     "van": "t-1933-dewey",
     "naar": "t-2011-kahneman",
     "toelichting": "Reflectie helpt om denkfouten te herkennen en te corrigeren."
+   },
+   {
+    "id": "b-65",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1934-vygotsky",
+    "naar": "t-1975-leontjev",
+    "toelichting": "Leontjev werkte de cultureel-historische benadering van Vygotsky uit tot de activiteitstheorie.",
+    "extra": true
+   },
+   {
+    "id": "b-66",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1934-vygotsky",
+    "naar": "t-1976-luria",
+    "toelichting": "Luria's onderzoek naar cultuur en denken kwam voort uit zijn samenwerking met Vygotsky.",
+    "extra": true
+   },
+   {
+    "id": "b-67",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1934-vygotsky",
+    "naar": "t-1991-lave",
+    "toelichting": "Gesitueerd leren bouwt voort op Vygotsky's idee dat leren sociaal en cultureel is ingebed.",
+    "extra": true
+   },
+   {
+    "id": "b-68",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1934-vygotsky",
+    "naar": "t-1976-wood-bruner-ross",
+    "toelichting": "Scaffolding wordt vaak gezien als uitwerking van de zone van naaste ontwikkeling.",
+    "extra": true
+   },
+   {
+    "id": "b-69",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1934-vygotsky",
+    "naar": "t-1936-piaget",
+    "toelichting": "Beide zien leren als actief opbouwen van kennis; Piaget legt de nadruk op het individu, Vygotsky op de sociale omgeving.",
+    "extra": true
+   },
+   {
+    "id": "b-70",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1975-leontjev",
+    "naar": "t-1987-engestrom",
+    "toelichting": "Engeström bouwde zijn werk over expansief leren en grensoverschrijding op de activiteitstheorie.",
+    "extra": true
+   },
+   {
+    "id": "b-71",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1976-luria",
+    "naar": "t-1990-caine",
+    "toelichting": "Luria legde de basis voor de neuropsychologie, waarop breingericht leren voortbouwt.",
+    "extra": true
+   },
+   {
+    "id": "b-72",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1976-luria",
+    "naar": "t-1977-bourdieu",
+    "toelichting": "Beide laten zien hoe de sociale omgeving vormt hoe mensen denken en handelen.",
+    "extra": true
+   },
+   {
+    "id": "b-73",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1936-piaget",
+    "naar": "t-1984-kolb",
+    "toelichting": "Kolb baseerde zijn leercyclus mede op Piagets theorie van cognitieve ontwikkeling.",
+    "extra": true
+   },
+   {
+    "id": "b-74",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1936-piaget",
+    "naar": "t-1982-kegan",
+    "toelichting": "Kegan bouwde met zijn theorie over de ontwikkeling van volwassenen voort op Piaget.",
+    "extra": true
+   },
+   {
+    "id": "b-75",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1943-maslow",
+    "naar": "t-1985-deci-ryan",
+    "toelichting": "Beide verklaren motivatie vanuit psychologische basisbehoeften.",
+    "extra": true
+   },
+   {
+    "id": "b-76",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1943-maslow",
+    "naar": "t-1978-mcclelland",
+    "toelichting": "Beide beschrijven motivatie in termen van behoeften, zoals waardering en prestatie.",
+    "extra": true
+   },
+   {
+    "id": "b-77",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1959-kirkpatrick",
+    "naar": "t-1998-black-wiliam",
+    "toelichting": "Beide gaan over evalueren: Kirkpatrick achteraf op vier niveaus, formatief evalueren tijdens het leren.",
+    "extra": true
+   },
+   {
+    "id": "b-78",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1959-kirkpatrick",
+    "naar": "t-2001-billett",
+    "toelichting": "Het derde niveau vraagt of het geleerde terugkomt in het werk: de overdracht naar de werkplek.",
+    "extra": true
+   },
+   {
+    "id": "b-79",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1970-knowles",
+    "naar": "t-1978-mezirow",
+    "toelichting": "Beide gaan over hoe volwassenen leren, vanuit hun eigen ervaring.",
+    "extra": true
+   },
+   {
+    "id": "b-80",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1970-knowles",
+    "naar": "t-1985-deci-ryan",
+    "toelichting": "Zelfsturing en autonomie staan in beide centraal.",
+    "extra": true
+   },
+   {
+    "id": "b-81",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1971-revans",
+    "naar": "t-1991-pedler",
+    "toelichting": "Pedler werkte samen met Revans; action learning is een bouwsteen van de lerende organisatie.",
+    "extra": true
+   },
+   {
+    "id": "b-82",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1933-lewin",
+    "naar": "t-1971-revans",
+    "toelichting": "Beide verbinden leren met handelen in echte situaties.",
+    "extra": true
+   },
+   {
+    "id": "b-83",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1976-wood-bruner-ross",
+    "naar": "t-1989-collins-brown-newman",
+    "toelichting": "Cognitive apprenticeship gebruikt scaffolding en het geleidelijk afbouwen van steun.",
+    "extra": true
+   },
+   {
+    "id": "b-84",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1976-wood-bruner-ross",
+    "naar": "t-1988-sweller",
+    "toelichting": "Beginners hebben veel steun nodig, die kan afnemen naarmate hun expertise groeit.",
+    "extra": true
+   },
+   {
+    "id": "b-85",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1977-bandura",
+    "naar": "t-2006-dweck",
+    "toelichting": "Beide gaan over overtuigingen over je eigen kunnen en het effect daarvan op leren.",
+    "extra": true
+   },
+   {
+    "id": "b-86",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1977-bandura",
+    "naar": "t-1991-seligman",
+    "toelichting": "Vertrouwen in eigen kunnen en optimisme versterken allebei het doorzettingsvermogen.",
+    "extra": true
+   },
+   {
+    "id": "b-87",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1967-freire",
+    "naar": "t-1978-mezirow",
+    "toelichting": "Mezirow liet zich voor transformatief leren inspireren door Freires kritische bewustwording.",
+    "extra": true
+   },
+   {
+    "id": "b-88",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1974-schon-argyris",
+    "naar": "t-1978-mezirow",
+    "toelichting": "Beide vragen om het onderzoeken en veranderen van onderliggende aannames.",
+    "extra": true
+   },
+   {
+    "id": "b-89",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1980-dreyfus",
+    "naar": "t-1996-ericsson",
+    "toelichting": "Beide beschrijven hoe expertise groeit, van regels volgen naar intuïtief handelen.",
+    "extra": true
+   },
+   {
+    "id": "b-90",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1958-polanyi",
+    "naar": "t-1980-dreyfus",
+    "toelichting": "Experts handelen voor een groot deel op stilzwijgende kennis.",
+    "extra": true
+   },
+   {
+    "id": "b-91",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1980-dreyfus",
+    "naar": "t-1983-schon",
+    "toelichting": "Beide bekritiseren het idee dat professioneel handelen neerkomt op het toepassen van regels.",
+    "extra": true
+   },
+   {
+    "id": "b-92",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1950-erikson",
+    "naar": "t-1982-kegan",
+    "toelichting": "Beide beschrijven ontwikkeling als iets dat ook in de volwassenheid doorgaat.",
+    "extra": true
+   },
+   {
+    "id": "b-93",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1978-mezirow",
+    "naar": "t-1982-kegan",
+    "toelichting": "Transformatief leren vraagt vaak een nieuwe manier van betekenis geven.",
+    "extra": true
+   },
+   {
+    "id": "b-94",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1980-dreyfus",
+    "naar": "t-1988-sweller",
+    "toelichting": "Wat beginners helpt, zoals uitgewerkte voorbeelden, kan experts juist hinderen.",
+    "extra": true
+   },
+   {
+    "id": "b-95",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1989-collins-brown-newman",
+    "naar": "t-1991-lave",
+    "toelichting": "Beide zien leren als deelnemen aan een praktijk, zoals een gezel bij een meester.",
+    "extra": true
+   },
+   {
+    "id": "b-96",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1989-collins-brown-newman",
+    "naar": "t-2008-sennett",
+    "toelichting": "Cognitive apprenticeship past het meester-gezelmodel van het vakmanschap toe op denkvaardigheden.",
+    "extra": true
+   },
+   {
+    "id": "b-97",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1974-schon-argyris",
+    "naar": "t-1990-senge",
+    "toelichting": "Senges discipline 'mentale modellen' bouwt voort op het werk van Argyris.",
+    "extra": true
+   },
+   {
+    "id": "b-98",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1990-senge",
+    "naar": "t-1991-pedler",
+    "toelichting": "Senge maakte het idee van de lerende organisatie wereldwijd bekend.",
+    "extra": true
+   },
+   {
+    "id": "b-99",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1988-west-gersick",
+    "naar": "t-1990-senge",
+    "toelichting": "Teamleren is een van de vijf disciplines van Senge.",
+    "extra": true
+   },
+   {
+    "id": "b-100",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1990-senge",
+    "naar": "t-1997-stacey",
+    "toelichting": "Beide kijken naar organisaties als systemen, al denken ze verschillend over de mogelijkheid om te sturen.",
+    "extra": true
+   },
+   {
+    "id": "b-101",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1990-senge",
+    "naar": "t-2007-scharmer",
+    "toelichting": "Scharmer werkte met Senge samen; Theory U komt uit dezelfde beweging.",
+    "extra": true
+   },
+   {
+    "id": "b-102",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1958-polanyi",
+    "naar": "t-1995-nonaka-takeuchi",
+    "toelichting": "Nonaka en Takeuchi bouwden hun kennisspiraal op Polanyi's stilzwijgende kennis.",
+    "extra": true
+   },
+   {
+    "id": "b-103",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1995-nonaka-takeuchi",
+    "naar": "t-1996-kessels",
+    "toelichting": "Beide gaan over het ontwikkelen en benutten van kennis in organisaties.",
+    "extra": true
+   },
+   {
+    "id": "b-104",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1995-nonaka-takeuchi",
+    "naar": "t-2002-bereiter-scardamalia",
+    "toelichting": "Beide beschrijven hoe groepen samen nieuwe kennis maken.",
+    "extra": true
+   },
+   {
+    "id": "b-105",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1998-black-wiliam",
+    "naar": "t-2007-hattie",
+    "toelichting": "Beide laten zien hoe sterk goede feedback tijdens het leren werkt.",
+    "extra": true
+   },
+   {
+    "id": "b-106",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1958-polanyi",
+    "naar": "t-2004-eraut",
+    "toelichting": "Eraut onderzocht de stilzwijgende kennis die professionals in hun werk opdoen.",
+    "extra": true
+   },
+   {
+    "id": "b-107",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-2001-billett",
+    "naar": "t-2004-eraut",
+    "toelichting": "Beide beschrijven hoe de werkplek leren mogelijk maakt of beperkt.",
+    "extra": true
+   },
+   {
+    "id": "b-108",
+    "type": "basis_voor",
+    "richting": "eenweg",
+    "van": "t-1983-schon",
+    "naar": "t-2004-korthagen",
+    "toelichting": "Korthagens reflectiemodellen bouwen voort op de traditie van de reflectieve professional.",
+    "extra": true
+   },
+   {
+    "id": "b-109",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-2004-korthagen",
+    "naar": "t-2005-kunneman",
+    "toelichting": "Beide betrekken waarden, identiteit en idealen bij professioneel handelen.",
+    "extra": true
+   },
+   {
+    "id": "b-110",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1986-cooperrider",
+    "naar": "t-2004-korthagen",
+    "toelichting": "Beide vertrekken vanuit sterke kanten in plaats van vanuit tekorten.",
+    "extra": true
+   },
+   {
+    "id": "b-111",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1984-kolb",
+    "naar": "t-2006-ruijters",
+    "toelichting": "Leervoorkeuren zijn een alternatief voor leerstijlen: het gaat om voorkeur, niet om vaste typen.",
+    "extra": true
+   },
+   {
+    "id": "b-112",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1996-kessels",
+    "naar": "t-2006-ruijters",
+    "toelichting": "Beide richten zich op leren in organisaties en hoe je dat vormgeeft.",
+    "extra": true
+   },
+   {
+    "id": "b-113",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-2005-kunneman",
+    "naar": "t-2010-biesta",
+    "toelichting": "Beide benadrukken de normatieve kant van onderwijs en professioneel handelen.",
+    "extra": true
+   },
+   {
+    "id": "b-114",
+    "type": "sluit_aan_bij",
+    "richting": "tweeweg",
+    "van": "t-1967-freire",
+    "naar": "t-2010-biesta",
+    "toelichting": "Subjectificatie en kritische bewustwording gaan beide over zelfstandig leren denken en oordelen.",
+    "extra": true
    }
   ]
  }
