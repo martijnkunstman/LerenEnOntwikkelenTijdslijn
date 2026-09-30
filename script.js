@@ -913,6 +913,20 @@
   }
 
   /* ---------- Detailpaneel ---------- */
+  // Eén bron in APA-notatie: tekst tussen *sterretjes* wordt cursief, DOI's en andere adressen worden links
+  function bronHTML(bron) {
+    return esc(bron)
+      .replace(/\*([^*]+)\*/g, '<i>$1</i>')
+      .replace(/https?:\/\/[^\s<]*[^\s<.,;)]/g, (url) => `<a href="${url}" target="_blank" rel="noopener">${url}</a>`);
+  }
+
+  function bronnenHTML(it) {
+    const lijst = it.bronnen || [];
+    if (!lijst.length) return '';
+    return `<section class="p-bronnen"><h3 class="p-sectie">${lijst.length === 1 ? 'Bron' : 'Bronnen'}</h3>
+      <ul class="bron-lijst">${lijst.map((b) => `<li>${bronHTML(b)}</li>`).join('')}</ul></section>`;
+  }
+
   function paneelHTML(it) {
     const duo = isDuo(it);
     const toonVertaling = it.begrip_vertaling && norm(it.begrip_vertaling) !== norm(it.begrip);
@@ -957,6 +971,7 @@
       <section><h3 class="p-sectie">${duo ? 'Personen' : 'Persoon'}</h3><div class="p-personen">${personen}</div></section>
       ${verbanden}
       ${verbandenHTML(it)}
+      ${bronnenHTML(it)}
       <nav class="p-nav" aria-label="Vorig en volgend begrip">
         ${vorige ? `<button type="button" data-open="${esc(vorige.id)}"><span class="richting">← ${vorige.jaar}</span><span class="doel">${esc(vorige.begrip)}</span></button>` : ''}
         ${volgende ? `<button type="button" class="volgende" data-open="${esc(volgende.id)}"><span class="richting">${volgende.jaar} →</span><span class="doel">${esc(volgende.begrip)}</span></button>` : ''}

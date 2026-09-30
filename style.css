@@ -512,6 +512,10 @@ main { padding-block: 28px 64px; }
 .v-blok + .v-blok { margin-top: 12px; }
 .v-kop { margin: 0 0 4px; font-size: 13px; color: var(--gedempt); }
 .v-toelichting { margin: 1px 0 6px; font-size: 13px; line-height: 1.45; color: var(--gedempt); }
+.bron-lijst { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.bron-lijst li { padding-left: 1.6em; text-indent: -1.6em; font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+.bron-lijst a { color: var(--gedempt); text-decoration-color: var(--lijn-sterk); text-underline-offset: 2px; }
+.bron-lijst a:hover { color: var(--accent); text-decoration-color: currentColor; }
 
 /* ---------- Voeter ---------- */
 .voet { padding-block: 0 40px; font-size: 13px; color: var(--gedempt); }

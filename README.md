@@ -16,6 +16,7 @@ Gemaakt met gewone HTML, CSS en JavaScript, zonder build-stap. Alleen de weergav
   - de andere begrippen uit hetzelfde jaar;
   - andere begrippen van dezelfde persoon;
   - de inhoudelijke verbanden met andere begrippen, met toelichting;
+  - de bronnen: de belangrijkste publicaties over het begrip, in APA-notatie, met een link naar de DOI als die er is;
   - een knop naar het vorige en volgende begrip.
 - **Personen**: alle personen onder elkaar op de tijdlijn, met portretfoto en levensjaren, zonder begrippen. Klik op een persoon voor het begrip.
 - **Levenslijnen**: de levensloop van elke persoon, met een stip op het jaar van het begrip. Je kunt sorteren op jaar van het begrip, geboortejaar of achternaam.
@@ -60,9 +61,10 @@ Alle gegevens staan in `tijdlijn.json`, in drie lijsten:
 - **`personen`**: unieke personen met `id`, `naam`, `achternaam`, `geboortejaar`, `overlijdensjaar`, `functie` en `foto`. Onbekende jaren zijn `null`.
 - **`items`**: één blok op de tijdlijn met `id`, `jaar`, `begrip`, `begrip_vertaling` en een lijst `personen` met persoon-id's. Een item met twee persoon-id's is een duo. Daarnaast heeft elk item:
   - `omschrijving`: wat het begrip inhoudt;
-  - `uitleg`: wat het begrip betekent voor leren en ontwikkelen.
+  - `uitleg`: wat het begrip betekent voor leren en ontwikkelen;
+  - `bronnen`: een lijst met de belangrijkste publicaties over het begrip, in APA-notatie (7e editie, met Nederlandse aanduidingen zoals `Red.` en `Vert.`). Tekst tussen `*sterretjes*` staat cursief. Het jaar van een bron kan afwijken van het jaar op de tijdlijn.
 
-  Beide teksten staan in het detailpaneel.
+  Deze teksten staan in het detailpaneel. De bronnen zijn later toegevoegd en komen niet uit het boek; zie ook `meta.bronnen`.
 - **`relaties`**: koppelingen tussen items via `van` en `naar` (item-id's). Alle relaties hebben het type `gedeelde_lijn`: beide items hangen aan dezelfde lijn naar hetzelfde jaartal. `van` en `naar` zijn uitwisselbaar.
 
 Personen, items en relaties die niet uit het boek komen, hebben het veld `"extra": true`. De pagina toont ze alleen als de schakelaar Extra aan staat. Een relatie met `extra` hoort bij minstens één extra item. Zie ook `meta.aanvullingen`.
@@ -74,7 +76,10 @@ Voorbeeld:
   "id": "t-1983-schon", "jaar": 1983, "begrip": "Reflective practitioner",
   "begrip_vertaling": "Reflectieve beroepsbeoefenaar", "personen": ["p-schon"],
   "omschrijving": "Een professional die reflecteert tijdens het handelen (reflection-in-action) en achteraf op het handelen (reflection-on-action).",
-  "uitleg": "Professionele kennis zit niet alleen in theorie, maar ontstaat in het omgaan met unieke, onzekere praktijksituaties. Opleiden betekent daarom ook leren reflecteren in de praktijk."
+  "uitleg": "Professionele kennis zit niet alleen in theorie, maar ontstaat in het omgaan met unieke, onzekere praktijksituaties. Opleiden betekent daarom ook leren reflecteren in de praktijk.",
+  "bronnen": [
+    "Schön, D. A. (1983). *The reflective practitioner: How professionals think in action*. Basic Books."
+  ]
 }
 ```
 
