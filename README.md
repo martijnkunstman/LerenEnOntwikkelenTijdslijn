@@ -21,8 +21,9 @@ Gemaakt met gewone HTML, CSS en JavaScript, zonder build-stap. Alleen de weergav
 - **Levenslijnen**: de levensloop van elke persoon, met een stip op het jaar van het begrip. Je kunt sorteren op jaar van het begrip, geboortejaar of achternaam.
 - **Begrippen A–Z**: alle begrippen onder elkaar in alfabetische volgorde, per beginletter, met vertaling, omschrijving en personen, zonder jaartallen. Met de letterknoppen spring je naar een beginletter.
 - **Diagram**: de inhoudelijke verbanden tussen de begrippen, met pijlen, in vijf kolommen per thema. Wijs een begrip aan om zijn verbanden te zien, of klik voor het detailpaneel. Wijs een lijn aan voor de toelichting. Met de knoppen boven het diagram zet je soorten verbanden aan of uit.
-- **Woordweb**: de begrippen als woorden in een netwerk dat zichzelf ordent, gemaakt met D3. Hoe groter het woord, hoe meer verbanden. Begrippen uit hetzelfde thema liggen bij elkaar op een eiland. Wijs een woord aan om de verbanden te zien of klik voor details. Je kunt woorden verslepen, het web verschuiven en zoomen met de knoppen, met Ctrl en het scrollwiel, of met twee vingers.
+- **Woordweb**: de begrippen als woorden in een netwerk dat zichzelf ordent, gemaakt met D3. Hoe groter het woord, hoe meer verbanden. Begrippen uit hetzelfde thema liggen bij elkaar op een eiland. Met de schakelaar "Thema's groeperen" zet je dat uit; dan bepalen alleen de verbanden hoe de begrippen liggen. Wijs een woord aan om de verbanden te zien of klik voor details. Je kunt woorden verslepen, het web verschuiven en zoomen met de knoppen, met Ctrl en het scrollwiel, of met twee vingers.
 - **Zoeken**: zoek op begrip, naam, functie of jaar.
+- **Licht en donker**: met de knop naast de zoekbalk wissel je tussen een lichte en een donkere weergave. Je keuze wordt in je browser bewaard; zonder keuze volgt de pagina de instelling van je computer.
 
 De pagina werkt op desktop en mobiel, en in licht en donker thema.
 

@@ -88,6 +88,14 @@ h1 {
 .zoek input::placeholder { color: var(--gedempt); }
 .zoek input:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: transparent; }
 .telling { margin: 0 0 0 auto; font: 13px var(--f-cijfer); color: var(--gedempt); font-variant-numeric: tabular-nums; }
+.thema-knop {
+  display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 12px 0 10px;
+  border: 1px solid var(--lijn); border-radius: 8px; background: var(--vlak); color: var(--inkt); font-size: 13px;
+}
+.thema-knop:hover { border-color: var(--lijn-sterk); }
+.thema-knop .icoon-zon { display: none; }
+.thema-knop.is-donker .icoon-zon { display: block; }
+.thema-knop.is-donker .icoon-maan { display: none; }
 
 .legenda {
   list-style: none; margin: 0; padding: 0 0 18px; display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 13px; color: var(--gedempt);
@@ -435,7 +443,22 @@ main { padding-block: 28px 64px; }
 .woordwebweergave .personen-uitleg { margin-bottom: 14px; max-width: 75ch; }
 .web-balk { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 10px 16px; margin-bottom: 12px; }
 .web-balk .diagram-legenda { margin-bottom: 0; }
-.web-zoom { display: inline-flex; gap: 6px; }
+.web-zoom { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.web-schakel {
+  display: inline-flex; align-items: center; gap: 9px; height: 34px; padding: 0 12px 0 8px; margin-right: 6px;
+  border: 1px solid var(--lijn); border-radius: 8px; background: var(--vlak); font-size: 13px; color: var(--inkt);
+}
+.web-schakel:hover { border-color: var(--lijn-sterk); }
+.schakel-baan {
+  position: relative; width: 30px; height: 18px; border-radius: 999px; background: var(--lijn-sterk);
+  transition: background-color .15s;
+}
+.schakel-knop {
+  position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--vlak);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .25); transition: transform .15s;
+}
+.web-schakel[aria-checked="true"] .schakel-baan { background: var(--accent); }
+.web-schakel[aria-checked="true"] .schakel-knop { transform: translateX(12px); }
 .web-knop {
   min-width: 34px; height: 34px; padding: 0 10px; border: 1px solid var(--lijn); border-radius: 8px;
   background: var(--vlak); font-size: 17px; line-height: 1; color: var(--inkt);
@@ -486,8 +509,8 @@ main { padding-block: 28px 64px; }
   .jaarknoop span { font-size: 12px; padding: 4px 7px 3px; }
   .decennium { justify-content: flex-start; }
   .decennium span { padding-left: 4px; }
-  .telling { margin-left: 0; flex-basis: 100%; }
-  .zoek { max-width: none; }
+  .telling { margin-left: 0; flex: 1 1 auto; }
+  .zoek { max-width: none; flex-basis: 100%; }
   .tick.oneven span { display: none; }
   .tab-lang { display: none; }
   .weergave { flex-wrap: wrap; }

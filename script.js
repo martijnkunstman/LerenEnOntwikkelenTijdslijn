@@ -555,7 +555,7 @@
   /* ---------- Woordweb (D3) ---------- */
   // Begrippen als woorden in een netwerk dat zichzelf ordent. Thema's worden groepjes met een eigen eiland
   // en naam; woorden zijn groter naarmate een begrip meer verbanden heeft.
-  const web = { klaar: false, sim: null, hover: null, zoom: null, svg: null, laag: null, knopen: [], hoogte: 600 };
+  const web = { klaar: false, sim: null, hover: null, zoom: null, svg: null, laag: null, knopen: [], hoogte: 600, themas: true };
 
   function soortLegendaHTML() {
     const A = M.analyse;
@@ -700,14 +700,16 @@
     linkSel.append('path').attr('class', 'rand-raak');
     linkSel.append('path').attr('class', 'rand-lijn').attr('marker-end', (l) => (l.pijl ? `url(#wkop-${l.r.type})` : null));
 
-    const zelfdeThema = (l) => l.source.thema === l.target.thema;
     const sim = d3.forceSimulation(knopen)
-      .force('link', d3.forceLink(links).id((d) => d.id).distance((l) => (zelfdeThema(l) ? 60 : 220)).strength((l) => (zelfdeThema(l) ? 0.3 : 0.015)))
-      .force('lading', d3.forceManyBody().strength(-120).distanceMax(260))
-      .force('x', d3.forceX((d) => centra[d.thema].x).strength(0.3))
-      .force('y', d3.forceY((d) => centra[d.thema].y).strength(0.38))
+      .force('link', d3.forceLink(links).id((d) => d.id))
+      .force('lading', d3.forceManyBody())
+      .force('x', d3.forceX())
+      .force('y', d3.forceY())
       .force('botsing', rechthoekBotsing(8, 0.8))
       .stop();
+    Object.assign(web, { sim, centra, midden: { x: W / 2, y: H / 2 }, gEilanden });
+    stelKrachtenIn(web.themas);
+    gEilanden.style('display', web.themas ? null : 'none');
     for (let i = 0; i < 450; i++) sim.tick();
 
     const lijn = d3.line().curve(d3.curveCatmullRomClosed.alpha(0.5));
@@ -733,6 +735,7 @@
       });
     };
     sim.on('tick', tekenWeb);
+    web.teken = tekenWeb;
     tekenWeb();
 
     const zoom = d3.zoom().scaleExtent([0.25, 4])
@@ -750,6 +753,39 @@
     pasSoortenToe();
     pasFilterToe();
     markeerActief();
+  }
+
+  // Krachten in het woordweb. Met thema's: begrippen trekken naar het middelpunt van hun thema en
+  // verbanden binnen een thema zijn sterker. Zonder thema's: alleen de verbanden en een lichte trek naar het midden.
+  function stelKrachtenIn(metThemas) {
+    const { sim, centra, midden } = web;
+    const zelfdeThema = (l) => l.source.thema === l.target.thema;
+    sim.force('link')
+      .distance((l) => (metThemas ? (zelfdeThema(l) ? 60 : 220) : 95))
+      .strength((l) => (metThemas ? (zelfdeThema(l) ? 0.3 : 0.015) : 0.22));
+    sim.force('lading').strength(metThemas ? -120 : -200).distanceMax(metThemas ? 260 : 420);
+    sim.force('x').x((d) => (metThemas ? centra[d.thema].x : midden.x)).strength(metThemas ? 0.3 : 0.05);
+    sim.force('y').y((d) => (metThemas ? centra[d.thema].y : midden.y)).strength(metThemas ? 0.38 : 0.07);
+  }
+
+  function zetWebThemas(metThemas) {
+    web.themas = metThemas;
+    const knop = $('#web-themas');
+    if (knop) knop.setAttribute('aria-checked', String(metThemas));
+    if (!web.klaar) return;
+    stelKrachtenIn(metThemas);
+    web.gEilanden.style('display', metThemas ? null : 'none');
+    const { sim } = web;
+    if (minderBeweging) {
+      sim.stop();
+      sim.alpha(1);
+      for (let i = 0; i < 450; i++) sim.tick();
+      web.teken();
+      pasWebPassend(false);
+      return;
+    }
+    sim.on('end.passend', () => { sim.on('end.passend', null); pasWebPassend(true); });
+    sim.alpha(1).restart();
   }
 
   // Schaal en verschuif het woordweb zodat alles in beeld past
@@ -992,6 +1028,7 @@
         zetWebFocus();
         return;
       }
+      if (e.target.closest('#web-themas')) { zetWebThemas(!web.themas); return; }
       const wz = e.target.closest('[data-webzoom]');
       if (wz) {
         if (wz.dataset.webzoom === 'in') zoomWeb(1.3);
@@ -1059,7 +1096,41 @@
   }
 
   /* ---------- Start ---------- */
+  /* ---------- Licht en donker ---------- */
+  // Zonder eigen keuze volgt de pagina de instelling van het systeem. Een keuze met de knop wordt bewaard.
+  const THEMA_SLEUTEL = 'tijdlijn-thema';
+  const donkerSysteem = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  function huidigThema() {
+    const t = document.documentElement.getAttribute('data-theme');
+    if (t === 'dark' || t === 'light') return t;
+    return donkerSysteem && donkerSysteem.matches ? 'dark' : 'light';
+  }
+  function werkThemaKnopBij() {
+    const knop = $('#thema-knop');
+    if (!knop) return;
+    const donker = huidigThema() === 'dark';
+    knop.classList.toggle('is-donker', donker);
+    knop.setAttribute('aria-label', donker ? 'Schakel naar lichte weergave' : 'Schakel naar donkere weergave');
+    $('.thema-tekst', knop).textContent = donker ? 'Licht' : 'Donker';
+  }
+  function koppelThema() {
+    try {
+      const t = localStorage.getItem(THEMA_SLEUTEL);
+      if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* geen opslag beschikbaar */ }
+    werkThemaKnopBij();
+    const knop = $('#thema-knop');
+    if (knop) knop.addEventListener('click', () => {
+      const nieuw = huidigThema() === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', nieuw);
+      try { localStorage.setItem(THEMA_SLEUTEL, nieuw); } catch (e) { /* geen opslag beschikbaar */ }
+      werkThemaKnopBij();
+    });
+    if (donkerSysteem && donkerSysteem.addEventListener) donkerSysteem.addEventListener('change', werkThemaKnopBij);
+  }
+
   async function start() {
+    koppelThema();
     try {
       const data = await laadData();
       M = bouwModel(data);
